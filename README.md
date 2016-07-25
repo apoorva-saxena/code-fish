@@ -1,10 +1,42 @@
+# The Global Code Network
+
+Final Project at Makers Academy.
+
+## Team
+
+- Apoorva Saxena
+- Riya Pabari
+- Toby Muir-Little
+- Carlos Hernandez
+
 ## User Stories
 
 ### MVP
 
 ```
 As a user 
-So that I can use X
+So that I can find someone to help me with a coding topic
+I can send a request to the community for help
+```
+
+```
+As a user 
+So that I can help other users
+I will see all requests for help from other users
+```
+
+```
+As a user 
+So that I can discuss a topic with another user
+A live chat starts after I accept a request for help
+```
+
+
+### Nice To Haves
+
+```
+As a user 
+So that I can use The Global Code Network
 I can sign up / sign in / sign out
 ```
 
@@ -34,20 +66,8 @@ I can add tags for topics that I would like to learn
 
 ```
 As a user 
-So that I can find someone to help me with a coding topic
-I can send a request to the community for help
-```
-
-```
-As a user 
-So that I can help other users
+So that I can provide targeted help to users
 I will see requests from other users for topics that I am proficient in
-```
-
-```
-As a user 
-So that I can discuss a topic with another user
-A live chat starts once I have accepted a request for help
 ```
 
 ```
@@ -67,6 +87,7 @@ As a user
 So that I can see how valuable I am to the community
 I can see a dashboard with the number of kudos that I have received
 ```
+
 
 ### Futher Features
 
