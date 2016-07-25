@@ -84,12 +84,6 @@ I can see users on my contact list when I log in
 
 ```
 As a user 
-So that I can reconnect with users
-I can choose to add a user to my contact list
-```
-
-```
-As a user 
 So that I can see relevant previous conversations
 I can search all historical chats by topic tag
 ```
