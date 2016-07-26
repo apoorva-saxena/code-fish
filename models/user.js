@@ -4,7 +4,7 @@ var bcrypt = require('bcryptjs');
 var UserSchema = mongoose.Schema({
   username: {type: String, index: true},
   password: String,
-  email: String,
+  email: String
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);
@@ -19,4 +19,3 @@ module.exports.createUser = function(newUser, callback) {
     });
   });
 };
-add 

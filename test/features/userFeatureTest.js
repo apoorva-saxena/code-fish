@@ -2,9 +2,6 @@ var app = require('../../app');
 var Browser = require('zombie');
 var http = require('http');
 
-//
-// Browser.localhost('localhost', 3001);
-
 describe('User visits signup page', function() {
 
   var browser = new Browser();
@@ -19,7 +16,6 @@ describe('User visits signup page', function() {
 
     before(function(done) {
       browser.visit('/users/signup', done);
-
     });
 
     it('Should see the sign up page', function() {
@@ -31,9 +27,9 @@ describe('User visits signup page', function() {
         .fill('username', 'hello123')
         .fill('email', 'hello@hello.com')
         .fill('password', 'hello123')
-        .fill('passwordconfirmation')
+        .fill('passwordconfirmation', 'hello123')
         .pressButton('Sign Up');
-      browser.assert.success();
+      browser.assert.text('flash_msg', 'You are registered and can now log in');
     });
 
   });

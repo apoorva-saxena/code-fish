@@ -6,6 +6,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+var flash = require('express-flash');
+var expressValidator = require('express-validator');
+var expressLayouts = require('express-ejs-layouts');
+var session = require('express-session');
 
 mongoose.connect('mongodb://localhost/globalCodeNetwork');
 
@@ -27,6 +31,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressValidator());
+app.use(expressLayouts);
+
+app.use(session({
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true
+}));
+
+app.use(flash());
+
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
