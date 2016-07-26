@@ -8,8 +8,8 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var flash = require('express-flash');
 var expressValidator = require('express-validator');
-var expressLayouts = require('express-ejs-layouts');
 var session = require('express-session');
+var exphbs = require('express-handlebars');
 
 mongoose.connect('mongodb://localhost/globalCodeNetwork');
 
@@ -22,7 +22,8 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -32,7 +33,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressValidator());
-app.use(expressLayouts);
 
 app.use(session({
   secret: 'secret',
