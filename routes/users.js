@@ -18,7 +18,7 @@ router.post('/signup', function(req, res, next) {
   var password = req.body.password;
   var passwordconfirmation = req.body.passwordconfirmation;
 
-  req.checkBody('username', 'Name is required').notEmpty();
+  req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('email', 'Email is required').notEmpty();
   req.checkBody('email', 'Email is not valid').isEmail();
   req.checkBody('password', 'Password is required').notEmpty();

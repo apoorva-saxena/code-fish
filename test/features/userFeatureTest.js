@@ -19,24 +19,42 @@ describe('User visits signup page', function() {
 
   describe('Submits form', function() {
 
-    beforeEach(function(done) {
-      browser.visit('/users/signup', done);
-    });
+    // beforeEach(function(done) {
+    //   browser.visit('/users/signup', done);
+    // });
 
     it('Should see the sign up page', function() {
+      browser.fetch('/users/signup').then(function() {
       browser.assert.text('h2', 'Sign up');
     });
+  });
 
     it('Should be successful', function() {
-      browser.visit('/users/signup', function() {
-      browser.fill('username', 'hello123')
-        .fill('email', 'hello@hello.com')
-        .fill('password', 'hello123')
-        .fill('passwordconfirmation', 'hello123')
-        .pressButton('Sign Up');
-      browser.assert.text('flash_msg', 'You are registered and can now log in');
-    });
-    });
+        browser.fetch('/users/signup').then(function() {
+        browser.fill('username', 'hello123')
+          .fill('email', 'hello@hello.com')
+          .fill('password', 'hello123')
+          .fill('passwordconfirmation', 'hello123')
+          .pressButton('Sign Up', function(){
+        browser.assert.text('flash_msg', 'You are registered and can now log in');
+        });
+      });
+      });
+
+
+    it('Should not be successful', function() {
+        browser.fetch('/users/signup').then(function() {
+        browser.fill('username', '')
+          .fill('email', 'hello@hello.com')
+          .fill('password', 'hello123')
+          .fill('passwordconfirmation', 'hello123')
+          .pressButton('Sign Up', function(){
+        browser.assert.text('flash_msg', 'Username is required');
+        });
+      });
+      });
+
+
   });
 
 });

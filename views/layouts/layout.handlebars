@@ -7,7 +7,20 @@
   </head>
   <body>
     <div class='flash_msg'>
-      {{{success_msg}}}
+      {{#if success_msg}}
+      {{{success_msg}}}<br>
+      {{/if}}
+      {{#if error_msg}}
+      {{{error_msg}}}<br>
+      {{/if}}
+      {{#if error}}
+      {{{error}}}<br>
+      {{/if}}
+      {{#if errors}}
+        {{#each errors}}
+          {{msg}}<br>
+        {{/each}}
+      {{/if}}
     </div>
       {{{body}}}
   </body>
