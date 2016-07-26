@@ -12,21 +12,23 @@ describe('User visits signup page', function() {
   before(function(done) {
     server = http.createServer(app).listen(3001);
     browser = new Browser({site: 'http://localhost:3001'});
-    done();
+    browser.visit('/', done);
   });
 
   describe('Submits form', function() {
 
     before(function(done) {
+      browser.visit('/users/signup', done);
+
+    });
+
+    it('Should be successful', function() {
       browser
         .fill('username', 'hello123')
         .fill('email', 'hello@hello.com')
         .fill('password', 'hello123')
         .fill('passwordconfirmation')
-        .pressButton('Sign Up', done);
-    });
-
-    it('Should be successful', function() {
+        .pressButton('Sign Up');
       browser.assert.success();
     });
 
