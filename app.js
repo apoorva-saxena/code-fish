@@ -4,9 +4,15 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost/globalCodeNetwork');
+
+var db = mongoose.connection;
 var routes = require('./routes/index');
 var users = require('./routes/users');
+
 
 var app = express();
 
