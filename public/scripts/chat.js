@@ -24,5 +24,14 @@ socket.on('chat message', function(msg){
 socket.on('new room', function(data){
   console.log(data.roomID);
   console.log('appending string process running');
-  $('#rooms').append($('<li>').text(data.roomID));
+  $('#rooms').append($('<li>').text(data.description));
+});
+
+socket.on('update available rooms', function(data) {
+  console.log(data);
+  for (var i = 0 ; i < data.rooms.length;i++){
+    currentRoom = data.rooms[i];
+    console.log(currentRoom.sockets);
+    $('#rooms').append($('<li>').text(currentRoom.sockets));
+  }
 });

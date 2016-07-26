@@ -21,6 +21,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
+var rooms = [];
 
 
 /**
@@ -32,7 +33,9 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+
+  socket.emit('update available rooms', {rooms: socket.adapter.rooms});
+  console.log(socket.adapter.rooms);
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
   });
@@ -43,11 +46,14 @@ io.on('connection', function(socket){
   socket.on('host room', function(data){
     console.log(data);
     var roomID = Math.floor(Math.random() * 1000);
-    console.log('called host room');
-    socket.join(roomID, function(){
-      console.log('ran join process');
+    console.log('==============================================');
 
-      io.emit('new room', {roomID: roomID});
+      console.log(socket.adapter);
+    socket.join(roomID, function(){
+      rooms.push(roomID);
+      console.log(socket.adapter);
+
+      io.emit('new room', {roomID: roomID, description: data.description});
 
       var blob = {
         id: roomID,
