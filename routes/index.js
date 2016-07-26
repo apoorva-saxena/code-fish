@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -21,5 +22,8 @@ router.post('/requests/new', function(req, res, next) {
 router.get('/chats/new', function(req, res, next) {
   res.render('chats/new');
 });
+
+
+
 
 module.exports = router;
