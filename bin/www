@@ -41,19 +41,20 @@ io.on('connection', function(socket){
   });
 
   socket.on('host room', function(data){
+    console.log(data);
     var roomID = Math.floor(Math.random() * 1000);
-
+    console.log('called host room');
     socket.join(roomID, function(){
-      socket.emit('new room', {roomID: roomID});
+      console.log('ran join process');
 
-      var request = {
+      io.emit('new room', {roomID: roomID});
+
+      var blob = {
         id: roomID,
         description: data.description
       };
     });
   });
-
-
 });
 
 
