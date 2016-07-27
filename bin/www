@@ -31,18 +31,18 @@ io.on('connection', function(socket){
       };
 
       socket.broadcast.emit('update available rooms', {rooms: rooms});
-
     });
   });
 
   socket.on('join room', function(data){
     socket.join(data.roomID);
-    io.emit('person joined', {roomID: data.roomID});
+    io.to(data.roomID).emit('person joined', {roomID: data.roomID});
+
+    socket.broadcast.emit('update available rooms', {rooms: rooms});
   });
 
-
-  socket.on('chat message', function(msg) {
-    io.emit('chat message', msg);
+  socket.on('chat message', function(data) {
+    io.to(data.roomID).emit('chat message', data);
   });
 
 });
