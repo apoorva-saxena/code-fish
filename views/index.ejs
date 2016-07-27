@@ -5,19 +5,43 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Global Code Network</h1>
-    <p>Welcome</p>
 
-    <a href="/requests/new">Ask for help</a>
-    <br>
-    Current requests
-    <ul id="rooms">
+    <div class="main">
+      <h1>Global Code Network</h1>
+      <div id="content"></div>
+    </div>
 
-    </ul>
+    <div class="sidebar">
+      <div id="join-rooms"></div>
+    </div>
 
+    <script id="intro-template" type="text/template">
+      <p>Welcome</p>
+      <button id="help-button">Ask for help</button>
+      <br>
+      <p>Current requests:<p>
+    </script>
 
-    <!-- <script src="http://localhost:3000/socket.io/socket.io.js"></script> -->
+    <script id="new-help-request-template" type="text/template">
+      <p>What do you need help with?</p>
+      <form id="help-request-form" action="">
+        <input id="request-description" type="text-area" name="description" />
+      </form>
+        <button id="sub">sub</button>
+    </script>
+
+    <script id="loading-template" type="text/template">
+      <p>Waiting for a someone from the community to repond to your request...</p>
+    </script>
+
+    <script id="chat-template" type="text/template"></script>
+
+    <script id="end-chat-template" type="text/template"></script>
+
+    
+  
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="/scripts/chat.js"></script>
+    <script src="/scripts/main.js"></script>
   </body>
 </html>

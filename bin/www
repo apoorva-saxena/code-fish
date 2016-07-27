@@ -1,73 +1,47 @@
-#!/usr/bin/env node
-
-/**
- * Module dependencies.
- */
-
 var app = require('../app');
 var debug = require('debug')('GlobalCodeNetwork:server');
 var http = require('http');
 
-/**
- * Get port from environment and store in Express.
- */
-
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-var rooms = [];
-
-
-/**
- * Listen on provided port, on all network interfaces.
- */
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+var rooms = [];
+
 io.on('connection', function(socket){
 
-  socket.emit('update available rooms', {rooms: socket.adapter.rooms});
-  console.log(socket.adapter.rooms);
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-
-  socket.on('host room', function(data){
-    console.log(data);
+  socket.emit('update available rooms', {rooms: rooms});
+  
+  socket.on('host room', function(data) {
     var roomID = Math.floor(Math.random() * 1000);
-    console.log('==============================================');
 
-      console.log(socket.adapter);
-    socket.join(roomID, function(){
+    socket.join(roomID, function() {
       rooms.push(roomID);
-      console.log(socket.adapter);
+      socket.emit('new room');
 
-      io.emit('new room', {roomID: roomID, description: data.description});
-
-      var blob = {
+      var helpRequest = {
         id: roomID,
         description: data.description
       };
+
+      socket.broadcast.emit('update available rooms', {rooms: rooms})
+
     });
   });
+
+  socket.on('chat message', function(msg) {
+    io.emit('chat message', msg);
+  });
+
 });
 
 
-
-/**
- * Normalize a port into a number, string, or false.
- */
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
@@ -84,10 +58,6 @@ function normalizePort(val) {
 
   return false;
 }
-
-/**
- * Event listener for HTTP server "error" event.
- */
 
 function onError(error) {
   if (error.syscall !== 'listen') {
@@ -112,10 +82,6 @@ function onError(error) {
       throw error;
   }
 }
-
-/**
- * Event listener for HTTP server "listening" event.
- */
 
 function onListening() {
   var addr = server.address();
