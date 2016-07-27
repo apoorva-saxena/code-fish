@@ -3,8 +3,8 @@ var app = require('../../app');
 var Browser = require('zombie');
 var http = require('http');
 var expect = require('chai').expect;
-var server = http.createServer(app);
-require('socket.io').listen(server);
+// var server = http.createServer(app);
+// require('socket.io').listen(server);
 
 var browser1;
 var browser2;
@@ -12,9 +12,9 @@ var browser2;
 describe('chat feature', function() {
 
   beforeEach(function(done) {
-    server.listen(3001);
-    browser1 = new Browser({ site: "http://localhost:3001"});
-    browser2 = new Browser({ site: "http://localhost:3001"});
+    // app.listen(3001);
+    browser1 = new Browser({ site: "http://localhost:3000"});
+    browser2 = new Browser({ site: "http://localhost:3000"});
     done();
   });
 
@@ -29,7 +29,7 @@ describe('chat feature', function() {
   });
 
   afterEach(function(done) {
-    server.close();
+    // server.close();
     done();
   });
 
@@ -40,7 +40,7 @@ describe('chat feature', function() {
 
       expect(browser1.text()).to.contain('Currently no requests');
       done();
-    },1500);
+    },0);
 
     }) ;
 
