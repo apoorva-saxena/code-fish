@@ -29,4 +29,20 @@ describe('User visits signup page', function() {
       browser.assert.text('h2', 'Sign up');
     });
   });
+
+  describe('successful sign up', function() {
+
+    beforeEach(function(done) {
+      browser.fill('username', 'testusername')
+      .fill('email', 'test@email.com')
+      .fill('password', 'testpassword')
+      .fill('passwordconfirmation', 'testpassword')
+      .pressButton('Sign Up', done);
+    });
+
+    it('successful when all details entered correctly', function() {
+      browser.assert.text('div.flash_msg', 'You are registered and can now log in');
+    });
+  });
+
 });
