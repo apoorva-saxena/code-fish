@@ -5,7 +5,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
 
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     res.send('respond with a resource');
@@ -53,46 +52,39 @@ router.get('/signin', function(req, res, next) {
 });
 
 passport.use(new LocalStrategy(
-  // {
-  //       username: 'email',
-  //       password: 'password'
-  //   },
     function(username, password, done) {
-        User.getUserByEmail(username, function(err, user) {
-            console.log(user)
+        User.getUserByUsername(username, function(err, user) {
             if (err) throw err;
             if (!user) {
+                console.log('user not returned')
                 return done(null, false, {
                     message: 'Unknown User'
                 });
             }
+            console.log('user returned')
             User.comparePassword(password, user.password, function(err, isMatch) {
-                console.log('|||||')
-                console.log(password)
-                console.log(user.password)
-                console.log(err)
                 if (err) throw err;
-                if (isMatch)
+                if (isMatch) {
+                    console.log('matched the passwords!')
                     return done(null, user);
-                else {
+                } else {
                     return done(null, false, {
                         message: 'Invalid password'
                     });
                 }
             });
         });
-    }
-));
+    }));
 
 router.post('/signin',
     passport.authenticate('local', {
-        sucessRedirect: '/',
+        successRedirect: '/',
         failureRedirect: '/users/signin',
         failureFlash: true
     }),
     function(req, res) {
+        console.log('redirecting')
         res.redirect('/');
     });
-
 
 module.exports = router;
