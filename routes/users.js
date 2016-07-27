@@ -4,20 +4,6 @@ var User = require('../models/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -69,11 +55,35 @@ router.get('/signin', function(req, res, next) {
   res.render('users/signin');
 });
 
-router.post('/signin', function(req, res, next) {
-  passport.authenticate('local', { failureFlash: 'Wrong credentials'
-});
 
-  // req.flash('success_msg', 'You are logged in');
-});
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    session: false
+  },
+  function(username, password, done) {
+    User.getUserByEmail(username, function(err, user){
+      if(err) throw err;
+      if(!user) {
+        return done(null, false, {message: 'Unknown User'});
+      }
+    User.comparePassword(password, user.password, function(err, isMatch){
+      if(err) throw err;
+      if(isMatch)
+        return done(null, user);
+      else {
+        return done(null, false, {message: 'Invalid password'});
+      }
+    });
+  });
+  }
+));
+
+
+
+router.post('/signin', passport.authenticate('local', { sucessRedirect:'/', failureRedirect:'/users/signin', failureFlash: true}),
+  function(req, res){
+    res.redirect('/');
+  });
+
 
 module.exports = router;

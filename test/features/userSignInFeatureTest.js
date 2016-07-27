@@ -59,7 +59,7 @@ describe('User visits login page', function() {
     });
 
     it('throw error if email and password does not match', function(){
-      browser.assert.text('div', 'Wrong credentials');
+      browser.assert.text('div', 'Unknown User');
     });
   });
 });
