@@ -52,4 +52,9 @@ router.get('/signin', function(req, res, next) {
   res.render('users/signin');
 });
 
+router.post('/signin', function(req, res, next) {
+  req.flash('success_msg', 'You are logged in');
+  res.redirect('/');
+});
+
 module.exports = router;
