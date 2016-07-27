@@ -1,5 +1,7 @@
 # The Global Code Network
 
+[![Build Status](https://travis-ci.org/riyapabari/GlobalCodeNetwork.svg?branch=9-chat-room)](https://travis-ci.org/riyapabari/GlobalCodeNetwork)
+
 Final Project at Makers Academy.
 
 ## Team
