@@ -48,4 +48,8 @@ router.post('/signup', function(req, res, next) {
 
 });
 
+router.get('/signin', function(req, res, next) {
+  res.render('users/signin');
+});
+
 module.exports = router;
