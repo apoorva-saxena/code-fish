@@ -10,7 +10,6 @@
     "bcryptjs": "^2.3.0",
     "body-parser": "~1.15.1",
     "cookie-parser": "^1.4.3",
-    "coveralls": "^2.11.11",
     "debug": "~2.2.0",
     "express": "~4.13.4",
     "express-flash": "0.0.2",
@@ -28,6 +27,7 @@
     "coveralls": "^2.11.11",
     "mocha": "^2.5.3",
     "mocha-lcov-reporter": "^1.2.0",
-    "zombie": "^4.2.1"
+    "zombie": "^4.2.1",
+    "istanbul": "~0.2.4"
   }
 }
