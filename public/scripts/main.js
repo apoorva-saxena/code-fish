@@ -8,8 +8,8 @@ $('#help-button').click(function() {
   $('#content').html($('#new-help-request-template').html());
   $('#help-request-form').submit(function(e) {
     e.preventDefault();
-    $('#content').html($('#loading-template').html());
     socket.emit('host room', { requestDescription: $('#request-description').val() });
+    $('#content').html($('#loading-template').html());
   });
 });
 

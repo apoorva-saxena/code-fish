@@ -6,14 +6,26 @@ var expect = require('chai').expect;
 var server = http.createServer(app);
 require('socket.io').listen(server);
 
-var browser;
+var browser1;
+var browser2;
 
-describe('', function() {
+describe('chat feature', function() {
 
   beforeEach(function(done) {
     server.listen(3001);
-    browser = new Browser({ site: "http://localhost:3001"});
-    browser.visit('/', done);
+    browser1 = new Browser({ site: "http://localhost:3001"});
+    browser2 = new Browser({ site: "http://localhost:3001"});
+    done();
+  });
+
+  beforeEach(function(done) {
+    browser1.visit('/', done);
+
+  });
+
+  beforeEach(function(done) {
+    browser2.visit('/', done);
+
   });
 
   afterEach(function(done) {
@@ -21,10 +33,16 @@ describe('', function() {
     done();
   });
 
-  describe('chat feature', function() {
-    it('has no requests to start with', function() {
-      browser.assert.text('div.main', 'Global Code Network Welcome Ask for help Current requests:');
-    });
+  describe('page load', function() {
+    it('has no requests to start with', function(done) {
+      setTimeout(function(){
+
+
+      expect(browser1.text()).to.contain('Currently no requests');
+      done();
+    },1500);
+
+    }) ;
 
     // it('initiates a chat between two people', function() {
     //   browser.pressButton('Ask for help');
