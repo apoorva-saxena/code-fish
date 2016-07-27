@@ -21,16 +21,16 @@ describe('chat feature', function() {
     browser2.visit('/', done);
   });
 
-  // describe('page load', function() {
+  describe('page load', function() {
     
     it('has no requests to start with', function() {
       expect(browser1.text()).to.contain('Currently no requests');
     });
 
-
-    // it('initiates a chat between two people', function() {
-    //   browser.pressButton('Ask for help');
-    // });
-  // });
+    it('allows user to send a request for help', function() {
+      browser1.pressButton('Ask for help');
+      expect(browser1.text()).to.contain('Waiting for someone');
+    });
+  });
 
 });
