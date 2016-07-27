@@ -1,6 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -53,8 +70,10 @@ router.get('/signin', function(req, res, next) {
 });
 
 router.post('/signin', function(req, res, next) {
-  req.flash('success_msg', 'You are logged in');
-  res.redirect('/');
+  passport.authenticate('local', { failureFlash: 'Wrong credentials'
+});
+
+  // req.flash('success_msg', 'You are logged in');
 });
 
 module.exports = router;

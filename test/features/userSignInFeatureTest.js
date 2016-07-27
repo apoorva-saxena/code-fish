@@ -14,11 +14,9 @@ var browser;
 describe('User visits login page', function() {
 
   beforeEach(function(done) {
-    console.log("=============1")
     server.listen(3001);
     browser = new Browser({ site: "http://localhost:3001"});
     browser.visit('/users/signin', done);
-    console.log("==============2")
   });
   afterEach(function(done) {
     // mongoose.connection.db.dropDatabase();
@@ -27,27 +25,41 @@ describe('User visits login page', function() {
 
   describe("User can Signin", function() {
     beforeEach(function(done){
-      console.log('==============3')
       var newUser = new User({
         username: "test1",
         email: "test1@test.com",
         password: "test123"
       });
-      console.log('================4')
-      console.log(newUser);
       newUser.save();
 
-      console.log('=================5')
       browser.fill('email', 'test1@test.com')
       .fill('password', 'test123')
       .pressButton('Sign in', done);
-      console.log('===================6')
     });
 
-    it('should be successful', function() {
-      console.log("==================7")
+    it('should receive success message', function() {
       browser.assert.text('div', 'You are logged in');
-      console.log("===================8")
+    });
+
+  });
+
+  describe("User cannot Sign in", function(){
+
+    beforeEach(function(done){
+      var newUser = new User({
+        username: "test1",
+        email: "test1@test.com",
+        password: "test123"
+      });
+      newUser.save();
+
+      browser.fill('email', 'wrongemail@test.com')
+      .fill('password', 'test123')
+      .pressButton('Sign in', done);
+    });
+
+    it('throw error if email and password does not match', function(){
+      browser.assert.text('div', 'Wrong credentials');
     });
   });
 });
