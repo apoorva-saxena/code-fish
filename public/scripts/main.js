@@ -1,29 +1,29 @@
 (function(exports) {
-
+$('#content').html($('#intro-template').html());
 var socket = io();
 
-$('#content').html($('#intro-template').html());
+
 
 $('#help-button').click(function() {
   console.log('button clicked');
   $('#content').html($('#new-help-request-template').html());
 });
 
-$('#sub').click(function() {
-  console.log('running');
-  // $('#content').html($('#loading-template').html());
-  // socket.emit('host room', { requestDescription: $('#request-description').val() });
-  // return false;
+$('body').on('submit', '#help-request-form', function(e) {
+  e.preventDefault();
+  $('#content').html($('#loading-template').html());
+  socket.emit('host room', { requestDescription: $('#request-description').val() });
 });
 
 socket.on('update available rooms', function(data) {
+  $('#join-rooms').empty();
   if (data.rooms.length > 0) {
     for (var i = 0 ; i < data.rooms.length ; i++) {
       $('#join-rooms').append('<button class="join-button">' + data.rooms[i] + '</button>');
     }
   }
   else {
-    $('#join-rooms').append('<p>Currently no requests</p>');
+    $('#join-rooms').html('<p>Currently no requests</p>');
   }
 });
 
@@ -42,4 +42,5 @@ socket.on('new room', function(){
 
 
 exports.socket = socket;
+
 })(this);

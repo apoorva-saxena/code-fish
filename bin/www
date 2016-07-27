@@ -17,7 +17,7 @@ var rooms = [];
 io.on('connection', function(socket){
 
   socket.emit('update available rooms', {rooms: rooms});
-  
+
   socket.on('host room', function(data) {
     var roomID = Math.floor(Math.random() * 1000);
 
@@ -30,7 +30,7 @@ io.on('connection', function(socket){
         description: data.description
       };
 
-      socket.broadcast.emit('update available rooms', {rooms: rooms})
+      socket.broadcast.emit('update available rooms', {rooms: rooms});
 
     });
   });
