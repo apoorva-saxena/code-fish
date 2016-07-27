@@ -4,6 +4,9 @@ var app = require('../../app');
 var Browser = require('zombie');
 var http = require('http');
 var server = http.createServer(app);
+var mongoose = require('mongoose');
+
+
 
 var browser;
 
@@ -16,7 +19,9 @@ describe('User visits signup page', function() {
     browser.visit('/users/signup', done);
   });
   afterEach(function(done) {
+    mongoose.connection.db.dropDatabase();
     server.close(done);
+
   });
 
   describe('Should see the signup page', function() {

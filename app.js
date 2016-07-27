@@ -10,15 +10,21 @@ var flash = require('express-flash');
 var expressValidator = require('express-validator');
 var session = require('express-session');
 var exphbs = require('express-handlebars');
+var app = express();
+var config = require('./_config');
 
-mongoose.connect('mongodb://localhost/globalCodeNetwork');
+
+mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
+  if(err) {
+    console.log('Error connecting to the database. ' + err);
+  } else {
+    console.log('Connected to Database: ' + config.mongoURI[app.settings.env]);
+  }
+});
 
 var db = mongoose.connection;
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
-
-var app = express();
 
 
 // view engine setup
