@@ -37,6 +37,7 @@ io.on('connection', function(socket){
 
   socket.on('join room', function(data){
     socket.join(data.roomID);
+    io.emit('person joined', {roomID: data.roomID});
   });
 
 

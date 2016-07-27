@@ -34,6 +34,12 @@ $('body').on('click', '.join-button', function() {
   $('#content').html($('#chat-template').html());
 });
 
+socket.on('person joined', function(data){
+  socket.roomID = data.roomID;
+  $('#content').html($('#chat-template').html());
+
+});
+
 $('#chatbox').submit(function(){
   socket.emit('chat message', $('#m').val());
 $('#m').val('');
