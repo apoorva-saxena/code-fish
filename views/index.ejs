@@ -34,7 +34,12 @@
       <p>Waiting for a someone from the community to repond to your request...</p>
     </script>
 
-    <script id="chat-template" type="text/template"></script>
+    <script id="chat-template" type="text/template">
+      <ul id="messages"></ul>
+      <form id="chatbox" action="">
+        <input id="m" autocomplete="off" /><button>Send</button>
+      </form>
+    </script>
     <script id="end-chat-template" type="text/template"></script>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>

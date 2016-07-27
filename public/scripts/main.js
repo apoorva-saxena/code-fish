@@ -5,14 +5,12 @@ var socket = io();
 
 
 $('#help-button').click(function() {
-  console.log('button clicked');
   $('#content').html($('#new-help-request-template').html());
-});
-
-$('body').on('submit', '#help-request-form', function(e) {
+  $('#help-request-form').submit(function(e) {
   e.preventDefault();
   $('#content').html($('#loading-template').html());
   socket.emit('host room', { requestDescription: $('#request-description').val() });
+});
 });
 
 socket.on('update available rooms', function(data) {
@@ -31,14 +29,19 @@ socket.on('new room', function(){
   $('#content').html($('#loading-template').html());
 });
 
-// $('#chatbox').submit(function(){
-//   socket.emit('chat message', $('#m').val());
-// $('#m').val('');
-//   return false;
-// });
-// socket.on('chat message', function(msg){
-//   $('#messages').append($('<li>').text(msg));
-// });
+$('body').on('click', '.join-button', function() {
+  socket.emit('join room', {roomID: $(this).text()});
+  $('#content').html($('#chat-template').html());
+});
+
+$('#chatbox').submit(function(){
+  socket.emit('chat message', $('#m').val());
+$('#m').val('');
+  return false;
+});
+socket.on('chat message', function(msg){
+  $('#messages').append($('<li>').text(msg));
+});
 
 
 exports.socket = socket;

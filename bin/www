@@ -35,6 +35,11 @@ io.on('connection', function(socket){
     });
   });
 
+  socket.on('join room', function(data){
+    socket.join(data.roomID);
+  });
+
+
   socket.on('chat message', function(msg) {
     io.emit('chat message', msg);
   });
