@@ -14,7 +14,7 @@ describe('User visits login page', function() {
 
   beforeEach(function(done) {
     browser = new Browser({ site: "http://localhost:3000"});
-    browser.visit('/users/signin', done);
+    browser.visit('/sessions/new', done);
   });
   afterEach(function(done) {
     // mongoose.connection.db.dropDatabase();

@@ -29,7 +29,7 @@ router.post('/new', function(req, res, next) {
     var errors = req.validationErrors();
 
     if (errors) {
-        res.render('users/signup', {
+        res.render('users/new', {
             errors: errors
         });
     } else {

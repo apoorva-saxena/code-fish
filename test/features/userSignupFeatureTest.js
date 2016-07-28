@@ -14,7 +14,7 @@ describe('User visits signup page', function() {
 
   beforeEach(function(done) {
     browser = new Browser({ site: "http://localhost:3000"});
-    browser.visit('/users/signup', done);
+    browser.visit('/users/new', done);
   });
   afterEach(function(done) {
     // mongoose.connection.db.dropDatabase();
