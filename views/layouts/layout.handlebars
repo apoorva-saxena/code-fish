@@ -2,9 +2,37 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Global Code Network</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    {{{body}}}
+    <div class='navigation'>
+      <nav>
+        {{#if user}}
+        <a href='/'>Homepage</a>
+        <a href='/sessions/destroy'>Sign out</a>
+        {{else}}
+        <a href='/users/new'>Sign up</a>
+        <a href='/sessions/new'>Sign in</a>
+        {{/if}}
+      </nav>
+    </div>
+    <div class='flash_msg'>
+      {{#if success_msg}}
+      {{{success_msg}}}<br>
+      {{/if}}
+      {{#if error_msg}}
+      {{{error_msg}}}<br>
+      {{/if}}
+      {{#if error}}
+      {{{error}}}<br>
+      {{/if}}
+      {{#if errors}}
+        {{#each errors}}
+          {{msg}}<br>
+        {{/each}}
+      {{/if}}
+    </div>
+      {{{body}}}
   </body>
 </html>

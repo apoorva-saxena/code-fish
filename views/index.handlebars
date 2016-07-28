@@ -1,47 +1,38 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Global Code Network</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<div class="main">
+  <h1>Global Code Network</h1>
+  <div id="content"></div>
+</div>
 
-    <div class="main">
-      <h1>Global Code Network</h1>
-      <div id="content"></div>
-    </div>
+<div class="bottom-bar">
+  <h2>Current requests:</h2>
+  <div id="join-rooms"></div>
+</div>
 
-    <div class="bottom-bar">
-      <h2>Current requests:</h2>
-      <div id="join-rooms"></div>
-    </div>
+<script id="intro-template" type="text/template">
+  <h2>Welcome</h2>
+  <button id="help-button">Ask for help</button>
+</script>
 
-    <script id="intro-template" type="text/template">
-      <h2>Welcome</h2>
-      <button id="help-button">Ask for help</button>
-    </script>
+<script id="new-help-request-template" type="text/template">
+  <h2>What do you need help with?</h2>
+  <form id="help-request-form" action="">
+    <input id="request-description" type="text-area" name="description" />
+    <button>Submit</button>
+  </form>
+</script>
 
-    <script id="new-help-request-template" type="text/template">
-      <h2>What do you need help with?</h2>
-      <form id="help-request-form" action="">
-        <input id="request-description" type="text-area" name="description" />
-        <button>Submit</button>
-      </form>
-    </script>
+<script id="loading-template" type="text/template">
+  <p>Waiting for someone from the community to repond to your request...</p>
+</script>
 
-    <script id="loading-template" type="text/template">
-      <p>Waiting for someone from the community to repond to your request...</p>
-    </script>
+<script id="chat-template" type="text/template">
+  <ul id="messages"></ul>
+  <form id="chatbox" action="">
+    <input type="text" class="chatbox-input" id="m" name="chat-input" autocomplete="off" /><button>Send</button>
+  </form>
+</script>
+<script id="end-chat-template" type="text/template"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="/scripts/main.js"></script>
 
-    <script id="chat-template" type="text/template">
-      <ul id="messages"></ul>
-      <form id="chatbox" action="">
-        <input type="text" class="chatbox-input" id="m" name="chat-input" autocomplete="off" /><button>Send</button>
-      </form>
-    </script>
-    <script id="end-chat-template" type="text/template"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="/scripts/main.js"></script>
-  </body>
-</html>
