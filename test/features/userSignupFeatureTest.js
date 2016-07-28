@@ -17,8 +17,7 @@ describe('User visits signup page', function() {
     browser.visit('/users/new', done);
   });
   afterEach(function(done) {
-    // mongoose.connection.db.dropDatabase();
-    // server.close(done);
+    mongoose.connection.db.dropDatabase();
     done();
   });
 

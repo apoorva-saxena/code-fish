@@ -17,7 +17,7 @@ describe('User visits login page', function() {
     browser.visit('/sessions/new', done);
   });
   afterEach(function(done) {
-    // mongoose.connection.db.dropDatabase();
+    mongoose.connection.db.dropDatabase();
     // app.close(done);
     done();
   });

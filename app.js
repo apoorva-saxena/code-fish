@@ -50,9 +50,7 @@ app.use(session({
 app.use(expressValidator());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('test', function() {
-  port = 3001;
-});
+
 
 app.use(session({
   secret: 'secret',
