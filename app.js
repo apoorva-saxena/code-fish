@@ -26,6 +26,7 @@ mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
 
 var db = mongoose.connection;
 var routes = require('./routes/index');
+var sessions = require('./routes/sessions');
 var users = require('./routes/users');
 
 
@@ -71,6 +72,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/sessions', sessions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

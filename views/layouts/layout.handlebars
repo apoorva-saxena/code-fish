@@ -10,10 +10,10 @@
       <nav>
         {{#if user}}
         <a href='/'>Homepage</a>
-        <a href='/users/signout'>Sign out</a>
+        <a href='/sessions/destroy'>Sign out</a>
         {{else}}
-        <a href='/users/signup'>Sign up</a>
-        <a href='/users/signin'>Sign in</a>
+        <a href='/users/new'>Sign up</a>
+        <a href='/sessions/new'>Sign in</a>
         {{/if}}
       </nav>
     </div>

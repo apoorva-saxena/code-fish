@@ -10,11 +10,11 @@ router.get('/', function(req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/signup', function(req, res, next) {
-    res.render('users/signup');
+router.get('/new', function(req, res, next) {
+    res.render('users/new');
 });
 
-router.post('/signup', function(req, res, next) {
+router.post('/new', function(req, res, next) {
     var username = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
@@ -47,51 +47,8 @@ router.post('/signup', function(req, res, next) {
     }
 });
 
-router.get('/signin', function(req, res, next) {
-    res.render('users/signin');
-});
-
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.getUserByUsername(username, function(err, user) {
-            if (err) throw err;
-            if (!user) {
-                return done(null, false, { message: 'Unknown User' });
-            }
-            User.comparePassword(password, user.password, function(err, isMatch) {
-                if (err) throw err;
-                if (isMatch) {
-                    return done(null, user);
-                } else {
-                    return done(null, false, { message: 'Invalid password' });
-                }
-            });
-        });
-    }));
 
 
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-    User.getUserById(id, function(err, user) {
-        done(err, user);
-    });
-});
-
-router.post('/signin',
-    passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/users/signin',
-        failureFlash: true
-    }));
-
-router.get('/signout', function(req, res){
-    req.logout();
-    req.flash('success_msg', 'Successfully signed out');
-    res.redirect('/');
-});
 
 
 
