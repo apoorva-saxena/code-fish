@@ -51,21 +51,23 @@ router.get('/signin', function(req, res, next) {
     res.render('users/signin');
 });
 
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy( {
+  username: 'email'
+},
     function(username, password, done) {
         User.getUserByUsername(username, function(err, user) {
             if (err) throw err;
             if (!user) {
-                console.log('user not returned')
+                console.log('user not returned');
                 return done(null, false, {
                     message: 'Unknown User'
                 });
             }
-            console.log('user returned')
+            console.log('user returned');
             User.comparePassword(password, user.password, function(err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
-                    console.log('matched the passwords!')
+                    console.log('matched the passwords!');
                     return done(null, user);
                 } else {
                     return done(null, false, {
