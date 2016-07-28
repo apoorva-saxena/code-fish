@@ -51,9 +51,7 @@ router.get('/signin', function(req, res, next) {
     res.render('users/signin');
 });
 
-passport.use(new LocalStrategy( {
-  username: 'email'
-},
+passport.use(new LocalStrategy(
     function(username, password, done) {
         User.getUserByUsername(username, function(err, user) {
             if (err) throw err;
@@ -96,7 +94,7 @@ router.post('/signin',
         failureFlash: true
     }),
     function(req, res) {
-        console.log('redirecting')
+        console.log('redirecting');
         res.redirect('/');
     });
 
