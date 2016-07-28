@@ -64,18 +64,12 @@ var rooms = [];
     socket.on('host room', function(data) {
       var roomID = data.requestDescription;
 
-
       socket.join(roomID, function() {
         rooms.push(roomID);
         socket.emit('new room');
-
-        var helpRequest = {
-          id: roomID,
-          description: data.description
-        };
-
         socket.broadcast.emit('update available rooms', {rooms: rooms});
       });
+      
     });
 
     socket.on('join room', function(data){

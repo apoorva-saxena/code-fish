@@ -31,11 +31,12 @@ socket.on('new room', function(){
 
 $('body').on('click', '.join-button', function() {
   socket.emit('join room', {roomID: $(this).text()});
+  $('.bottom-bar').remove();
   $('#content').html($('#chat-template').html());
 });
 
 socket.on('person joined', function(data){
-  socket.roomID = data.roomID;
+  $('.bottom-bar').remove();
   $('#content').html($('#chat-template').html());
   $('#chatbox').submit(function(e){
     e.preventDefault();
