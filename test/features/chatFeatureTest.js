@@ -68,6 +68,6 @@ describe('chat feature', function() {
     //     expect(browser1.text('li')).to.contain('Hello');
     //     done();
     //   });
-    // })
+    // });
   });
 });
