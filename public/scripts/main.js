@@ -40,6 +40,8 @@ socket.on('person joined', function(data){
   $('#content').html($('#chat-template').html());
   $('#chatbox').submit(function(e){
     e.preventDefault();
+    console.log(data);
+    console.log($('#m').val());
     socket.emit('chat message', { roomID: data.roomID, message: $('#m').val()} );
     $('#m').val('');
   });
