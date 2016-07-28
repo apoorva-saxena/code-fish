@@ -6,6 +6,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <div class='navigation'>
+      <nav>
+        {{#if user}}
+        <a href='/'>Homepage</a>
+        <a href='/users/signout'>Sign out</a>
+        {{else}}
+        <a href='/users/signup'>Sign up</a>
+        <a href='/users/signin'>Sign in</a>
+        {{/if}}
+      </nav>
+    </div>
     <div class='flash_msg'>
       {{#if success_msg}}
       {{{success_msg}}}<br>

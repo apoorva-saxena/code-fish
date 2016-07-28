@@ -1,10 +1,9 @@
 process.env.NODE_ENV = 'test';
 var app = require('../../app');
-var User = require('../../models/user');
 var Browser = require('zombie');
-var http = require('http');
-var server = http.createServer(app);
 var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var expect = require('chai').expect;
 
 
 
@@ -14,34 +13,38 @@ var browser;
 describe('User visits login page', function() {
 
   beforeEach(function(done) {
-    server.listen(3001);
-    browser = new Browser({ site: "http://localhost:3001"});
+    browser = new Browser({ site: "http://localhost:3000"});
     browser.visit('/users/signin', done);
   });
   afterEach(function(done) {
     // mongoose.connection.db.dropDatabase();
-    server.close(done);
+    // app.close(done);
+    done();
   });
 
-  describe("User can Signin", function() {
+  describe("User cannot Sign in with the wrong password", function(){
+
     beforeEach(function(done){
       var newUser = new User({
-        username: "test1",
-        email: "test1@test.com",
-        password: "test123"
+        username: "hello",
+        email: "hello@hello.com",
+        password: "fish"
       });
       newUser.save();
 
-      browser.fill('email', 'test1@test.com')
-      .fill('password', 'test123')
-      .pressButton('Sign in', done);
+
+      browser.fill('username', 'hello');
+      browser.fill('password', 'hello');
+      browser.pressButton('Sign in', done);
     });
 
-    it('should receive success message', function() {
-      browser.assert.text('div', 'You are logged in');
-    });
 
+
+    it('error of invalid password', function(){
+      expect(browser.text()).to.contain('Invalid password');
+    });
   });
+
 
   describe("User cannot Sign in", function(){
 
@@ -53,13 +56,13 @@ describe('User visits login page', function() {
       });
       newUser.save();
 
-      browser.fill('email', 'wrongemail@test.com')
+      browser.fill('username', 'wrongusername')
       .fill('password', 'test123')
       .pressButton('Sign in', done);
     });
 
     it('throw error if email and password does not match', function(){
-      browser.assert.text('div', 'Unknown User');
+      expect(browser.text()).to.contain('Unknown User');
     });
   });
 });

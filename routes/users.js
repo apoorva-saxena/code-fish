@@ -56,21 +56,14 @@ passport.use(new LocalStrategy(
         User.getUserByUsername(username, function(err, user) {
             if (err) throw err;
             if (!user) {
-                console.log('user not returned');
-                return done(null, false, {
-                    message: 'Unknown User'
-                });
+                return done(null, false, { message: 'Unknown User' });
             }
-            console.log('user returned');
             User.comparePassword(password, user.password, function(err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
-                    console.log('matched the passwords!');
                     return done(null, user);
                 } else {
-                    return done(null, false, {
-                        message: 'Invalid password'
-                    });
+                    return done(null, false, { message: 'Invalid password' });
                 }
             });
         });
@@ -92,10 +85,14 @@ router.post('/signin',
         successRedirect: '/',
         failureRedirect: '/users/signin',
         failureFlash: true
-    }),
-    function(req, res) {
-        console.log('redirecting');
-        res.redirect('/');
-    });
+    }));
+
+router.get('/signout', function(req, res){
+    req.logout();
+    req.flash('success_msg', 'Successfully signed out');
+    res.redirect('/');
+});
+
+
 
 module.exports = router;

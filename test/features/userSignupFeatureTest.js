@@ -1,10 +1,9 @@
 process.env.NODE_ENV = 'test';
 var app = require('../../app');
-
+var User = require('../../models/user');
 var Browser = require('zombie');
-var http = require('http');
-var server = http.createServer(app);
 var mongoose = require('mongoose');
+var expect = require('chai').expect;
 
 
 
@@ -14,14 +13,13 @@ var browser;
 describe('User visits signup page', function() {
 
   beforeEach(function(done) {
-    server.listen(3001);
-    browser = new Browser({ site: "http://localhost:3001"});
+    browser = new Browser({ site: "http://localhost:3000"});
     browser.visit('/users/signup', done);
   });
   afterEach(function(done) {
-    mongoose.connection.db.dropDatabase();
-    server.close(done);
-
+    // mongoose.connection.db.dropDatabase();
+    // server.close(done);
+    done();
   });
 
   describe('Should see the signup page', function() {

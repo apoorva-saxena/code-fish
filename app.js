@@ -13,6 +13,8 @@ var exphbs = require('express-handlebars');
 var app = express();
 var config = require('./_config');
 var passport = require('passport');
+var http = require('http').Server(app);
+
 
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
   if(err) {
@@ -63,6 +65,7 @@ app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
   next();
 });
 
@@ -108,5 +111,7 @@ app.use(function (req, res, next) {
   res.locals.user = req.user || null;
   next();
 });
+
+http.listen(3000);
 
 module.exports = app;
