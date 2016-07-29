@@ -97,7 +97,7 @@ var rooms = [];
 
   io.on('connection', function(socket){
 
-    socket.emit('update available rooms', {rooms: rooms});
+    socket.emit('update available rooms', {rooms: socket.adapter.rooms});
 
     socket.on('host room', function(data) {
       var roomID = data.requestDescription;
@@ -105,22 +105,40 @@ var rooms = [];
       socket.join(roomID, function() {
         rooms.push(roomID);
         socket.emit('new room');
-        socket.broadcast.emit('update available rooms', {rooms: rooms});
+        socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
       });
-      
+
     });
 
     socket.on('join room', function(data){
       socket.join(data.roomID);
       io.to(data.roomID).emit('person joined', {roomID: data.roomID});
+      console.log("===============");
+      console.log(roomID);
+      console.log(data.roomID);
 
-      socket.broadcast.emit('update available rooms', {rooms: rooms});
+      socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
     });
 
     socket.on('chat message', function(data) {
       io.to(data.roomID).emit('chat message', data);
+
     });
 
   });
+
+  //helper methods
+
+  function filteredRooms(socket) {
+    var rooms = [];
+
+    for(room in socket.adapter.rooms) {
+      if(room.length < 2){
+        console.log(room);
+      rooms.push(room);
+    }
+    }
+    return rooms;
+  }
 
 module.exports = app;

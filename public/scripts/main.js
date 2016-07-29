@@ -14,9 +14,11 @@ $('#help-button').click(function() {
 });
 
 socket.on('update available rooms', function(data) {
+  console.log(data);
   $('#join-rooms').empty();
   if (data.rooms.length > 0) {
     for (var i = 0 ; i < data.rooms.length ; i++) {
+      console.log(data.rooms);
       $('#join-rooms').append('<button class="join-button">' + data.rooms[i] + '</button>');
     }
   }
