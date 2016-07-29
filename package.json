@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "node ./bin/www",
     "test": "./node_modules/.bin/mocha --reporter spec --recursive"
   },
-  
+
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "~1.15.1",
@@ -25,7 +25,7 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0"
   },
-  
+
   "devDependencies": {
     "chai": "^3.5.0",
     "coveralls": "^2.11.11",

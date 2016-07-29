@@ -1,9 +1,12 @@
 process.env.NODE_ENV = 'test';
 var server = require('../../app');
+var User = require('../../models/user');
 var Browser = require('zombie');
+var mongoose = require('mongoose');
 var expect = require('chai').expect;
 
 var browser1, browser2;
+
 
 describe('chat feature', function() {
 
@@ -23,9 +26,10 @@ describe('chat feature', function() {
   });
 
   afterEach(function(done) {
-    server.close();
-    done();
+    mongoose.connection.db.dropDatabase();
+    server.close(done);
   });
+
 
   describe('page load', function() {
 
@@ -33,11 +37,40 @@ describe('chat feature', function() {
       expect(browser1.text('.bottom-bar')).to.contain('Currently no requests');
     });
 
+  });
+
+  describe('page load', function() {
+
+    beforeEach(function(done) {
+      var newUser = new User({
+        username: "hello",
+        email: "hello@hello.com",
+        password: "fish"
+      });
+      newUser.save();
+
+      browser1.visit('/sessions/new').then(function() {
+      browser1.fill('username', 'hello')
+      .fill('password', 'fish')
+      .pressButton('Sign in');
+      });
+      done();
+    });
+
+    beforeEach(function(done){
+      browser1.visit('/');
+      done();
+    });
+
     it('allows user to send a request for help', function() {
-      browser1.pressButton('Ask for help');
+      console.log(browser1.html());
+      browser1.pressButton('Ask for help').then(function(){
       expect(browser1.text('.main')).to.contain('What do you need help with');
+     });
     });
   });
+
+
 
   describe('help request sent', function() {
     beforeEach(function(done){

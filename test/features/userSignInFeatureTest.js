@@ -20,7 +20,6 @@ describe('User visits login page', function() {
   afterEach(function(done) {
     mongoose.connection.db.dropDatabase();
     server.close(done);
-    done();
   });
 
   describe("User cannot Sign in with the wrong password", function(){

@@ -2,16 +2,43 @@
 
 var socket = io();
 
-$('#content').html($('#intro-template').html());
+// var currentUser = function (){
+//   socket.on('current user', function(data) {
+//     if (data.user) {
+//       return (data.user);
+//     }
+//   });
+// };
 
-$('#help-button').click(function() {
-  $('#content').html($('#new-help-request-template').html());
-  $('#help-request-form').submit(function(e) {
-    e.preventDefault();
-    socket.emit('host room', { requestDescription: $('#request-description').val() });
-    $('#content').html($('#loading-template').html());
+$('#content').html($('#intro-template').html());
+socket.on('current user', function(data) {
+
+  $('#help-button').click(function() {
+    if (data.user) {
+    $('#content').html($('#new-help-request-template').html());
+
+    $('#help-request-form').submit(function(e) {
+      e.preventDefault();
+      socket.emit('host room', { requestDescription: $('#request-description').val() });
+      $('#content').html($('#loading-template').html());
+    });
+  } else {
+  console.log('Please sign in');
+   }
+  });
+  $('body').on('click', '.join-button', function() {
+    if (data.user) {
+      socket.emit('join room', {roomID: $(this).text()});
+      $('.bottom-bar').remove();
+      $('#content').html($('#chat-template').html());
+    } else {
+      console.log('Please sign in to join room');
+    }
   });
 });
+
+
+
 
 socket.on('update available rooms', function(data) {
   $('#join-rooms').empty();
@@ -29,18 +56,14 @@ socket.on('new room', function(){
   $('#content').html($('#loading-template').html());
 });
 
-$('body').on('click', '.join-button', function() {
-  socket.emit('join room', {roomID: $(this).text()});
-  $('.bottom-bar').remove();
-  $('#content').html($('#chat-template').html());
-});
+
 
 socket.on('person joined', function(data){
   $('.bottom-bar').remove();
   $('#content').html($('#chat-template').html());
   $('#chatbox').submit(function(e){
     e.preventDefault();
-    socket.emit('chat message', { roomID: data.roomID, message: $('#m').val()} );
+    socket.emit('chat message', { roomID: data.roomID, message: $('#m').val()});
     $('#m').val('');
   });
   socket.on('chat message', function(data){
@@ -49,5 +72,4 @@ socket.on('person joined', function(data){
 });
 
 exports.socket = socket;
-
 })(this);
