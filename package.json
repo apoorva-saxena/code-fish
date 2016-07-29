@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "nyc --require babel-register mocha test/features/*.js",
-    "test-all": "nyc --require babel-register --all mocha test.js",
-    "run": "node test.js"
+    "test": "nyc --require babel-register mocha test/features/*.js"
   },
   "dependencies": {
     "bcryptjs": "^2.3.0",
