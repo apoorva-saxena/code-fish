@@ -14,77 +14,79 @@ describe('chat feature', function() {
     server.listen(3001);
     browser1 = new Browser({ site: "http://localhost:3001"});
     browser2 = new Browser({ site: "http://localhost:3001"});
-    done();
-  });
-
-  beforeEach(function(done) {
-    browser1.visit('/', done);
-  });
-
-  beforeEach(function(done) {
-    browser2.visit('/', done);
+    browser1.visit('/', function(){
+      browser2.visit('/', function() {
+        var newUser = new User({
+          username: "hello",
+          email: "hello@hello.com",
+          password: "fish"
+        });
+        newUser.save(function(){
+          browser1.visit('/sessions/new', function(){
+            browser1.fill('username', 'hello', function() {
+              browser1.fill('password', 'fish', function() {
+                browser1.pressButton('Sign in', function() {
+                  console.log(browser1.html());
+                  done();
+                });
+              });
+            });
+          });
+        });
+      });
+    });
   });
 
   afterEach(function(done) {
-    mongoose.connection.db.dropDatabase();
-    server.close(done);
-  });
-
-
-  describe('page load', function() {
-
-    it('has no requests to start with', function() {
-      expect(browser1.text('.bottom-bar')).to.contain('Currently no requests');
-    });
+    server.close();
+    mongoose.connection.db.dropDatabase(done);
 
   });
 
   describe('page load', function() {
 
-    beforeEach(function(done) {
-      var newUser = new User({
-        username: "hello",
-        email: "hello@hello.com",
-        password: "fish"
+    it('has no requests to start with', function(done) {
+      browser1.visit('/', function() {
+        expect(browser1.text('.bottom-bar')).to.contain('Currently no requests');
+        done();
       });
-      newUser.save();
-
-      browser1.visit('/sessions/new').then(function() {
-      browser1.fill('username', 'hello')
-      .fill('password', 'fish')
-      .pressButton('Sign in');
-      });
-      done();
-    });
-
-    beforeEach(function(done){
-      browser1.visit('/');
-      done();
-    });
-
-    it('allows user to send a request for help', function() {
-      console.log(browser1.html());
-      browser1.pressButton('Ask for help').then(function(){
-      expect(browser1.text('.main')).to.contain('What do you need help with');
-     });
     });
   });
+
+  // describe('page load', function() {
+  //
+
+  //   });
+  //
+  //   beforeEach(function(done){
+  //     browser1.visit('/');
+  //     done();
+  //   });
+  //
+  //   it('allows user to send a request for help', function() {
+  //     console.log(browser1.html());
+  //     browser1.pressButton('Ask for help').then(function(){
+  //     expect(browser1.text('.main')).to.contain('What do you need help with');
+  //    });
+  //   });
+  // });
 
 
 
   describe('help request sent', function() {
-    beforeEach(function(done){
-      browser1.pressButton('Ask for help');
-      browser1.fill('description', 'Javascript testing');
-      browser1.pressButton('Submit', done);
-    });
 
     it('shows waiting for someone message when help request made', function(done) {
-      setTimeout(function() {
-        expect(browser1.text('.main')).to.contain('Waiting for someone');
-        expect(browser2.text('.bottom-bar')).to.contain('Javascript testing');
-        done();
-      },400);
+      browser1.visit('/', function(){
+        browser1.pressButton('Ask for help', function() {
+          browser1.fill('description', 'Javascript testing', function() {
+            browser1.pressButton('Submit', function() {
+              expect(browser1.text('.main')).to.contain('Waiting for someone');
+              expect(browser2.text('.bottom-bar')).to.contain('Javascript testing');
+              done();
+            });
+          });
+        });
+      });
     });
 
     it('displays the chat page for both browsers', function(done) {
