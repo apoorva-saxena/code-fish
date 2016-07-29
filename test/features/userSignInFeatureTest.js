@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'test';
-var app = require('../../app');
+var server = require('../../app');
 var Browser = require('zombie');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -13,12 +13,13 @@ var browser;
 describe('User visits login page', function() {
 
   beforeEach(function(done) {
-    browser = new Browser({ site: "http://localhost:3000"});
+    server.listen(3001);
+    browser = new Browser({ site: "http://localhost:3001"});
     browser.visit('/sessions/new', done);
   });
   afterEach(function(done) {
     mongoose.connection.db.dropDatabase();
-    // app.close(done);
+    server.close(done);
     done();
   });
 
