@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'test';
-var app = require('../../app');
+var server = require('../../app');
 var Browser = require('zombie');
 var expect = require('chai').expect;
 
@@ -8,8 +8,9 @@ var browser1, browser2;
 describe('chat feature', function() {
 
   beforeEach(function(done) {
-    browser1 = new Browser({ site: "http://localhost:3000"});
-    browser2 = new Browser({ site: "http://localhost:3000"});
+    server.listen(3001);
+    browser1 = new Browser({ site: "http://localhost:3001"});
+    browser2 = new Browser({ site: "http://localhost:3001"});
     done();
   });
 
@@ -19,6 +20,11 @@ describe('chat feature', function() {
 
   beforeEach(function(done) {
     browser2.visit('/', done);
+  });
+
+  afterEach(function(done) {
+    server.close();
+    done();
   });
 
   describe('page load', function() {

@@ -61,6 +61,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/sessions', sessions);
@@ -89,9 +91,6 @@ app.use(function(req, res, next) {
 //   });
 // });
 
-http.listen(process.env.PORT || 3000, function(){
-  console.log('listening on *:3000');
-});
 
 var rooms = [];
 
@@ -107,7 +106,7 @@ var rooms = [];
         socket.emit('new room');
         socket.broadcast.emit('update available rooms', {rooms: rooms});
       });
-      
+
     });
 
     socket.on('join room', function(data){
@@ -123,4 +122,4 @@ var rooms = [];
 
   });
 
-module.exports = app;
+module.exports = http;
