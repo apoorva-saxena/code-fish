@@ -3,13 +3,14 @@ var app = require('../../app');
 var Browser = require('zombie');
 var expect = require('chai').expect;
 
-var browser1, browser2;
+var browser1, browser2, browser3;
 
 describe('chat feature', function() {
 
   beforeEach(function(done) {
     browser1 = new Browser({ site: "http://localhost:3000"});
     browser2 = new Browser({ site: "http://localhost:3000"});
+    browser3 = new Browser({ site: "http://localhost:3000"});
     done();
   });
 
@@ -20,6 +21,11 @@ describe('chat feature', function() {
   beforeEach(function(done) {
     browser2.visit('/', done);
   });
+
+  beforeEach(function(done) {
+    browser3.visit('/', done);
+  });
+
 
   describe('page load', function() {
 
@@ -69,5 +75,11 @@ describe('chat feature', function() {
     //     done();
     //   });
     // });
+
+    describe('Only two users should be able to access chat', function() {
+      it('removes button for browser 3', function() {
+        expect(browser3.text('.bottom-bar')).to.not.contain('Javascript testing');
+      });
+    });
   });
 });
