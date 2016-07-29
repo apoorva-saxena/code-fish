@@ -1,12 +1,10 @@
 process.env.NODE_ENV = 'test';
+
 var server = require('../../app');
 var Browser = require('zombie');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var expect = require('chai').expect;
-
-
-
 var browser;
 
 
