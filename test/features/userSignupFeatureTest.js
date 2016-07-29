@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'test';
-var app = require('../../app');
+var server = require('../../app');
 var User = require('../../models/user');
 var Browser = require('zombie');
 var mongoose = require('mongoose');
@@ -13,11 +13,13 @@ var browser;
 describe('User visits signup page', function() {
 
   beforeEach(function(done) {
-    browser = new Browser({ site: "http://localhost:3000"});
+    server.listen(3001);
+    browser = new Browser({ site: "http://localhost:3001"});
     browser.visit('/users/new', done);
   });
   afterEach(function(done) {
     mongoose.connection.db.dropDatabase();
+    server.close();
     done();
   });
 

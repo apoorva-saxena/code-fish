@@ -60,6 +60,8 @@ app.use(function (req, res, next) {
   next();
 });
 
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/sessions', sessions);
@@ -87,6 +89,7 @@ app.use(function(req, res, next) {
 //     error: {}
 //   });
 // });
+
 
 io.on('connection', function(socket){
 
@@ -119,16 +122,16 @@ io.on('connection', function(socket){
 
 function findRoom(socket, roomID){
   return socket.adapter.rooms[roomID];
-};
+}
 
 function filteredRooms(socket){
   var rooms = [];
-  for (room in socket.adapter.rooms){
+  for (var room in socket.adapter.rooms){
     if (room.match(/^Topic/) && findRoom(socket, room).length < 2){
       rooms.push(room);
     }
   }
   return rooms;
-};
+}
 
 module.exports = http;
