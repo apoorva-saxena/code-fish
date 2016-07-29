@@ -30,7 +30,6 @@ var routes = require('./routes/index');
 var sessions = require('./routes/sessions');
 var users = require('./routes/users');
 
-
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
 app.set('view engine', 'handlebars');
@@ -89,56 +88,47 @@ app.use(function(req, res, next) {
 //   });
 // });
 
-http.listen(process.env.PORT || 3000, function(){
-  console.log('listening on *:3000');
-});
+io.on('connection', function(socket){
 
-var rooms = [];
+  socket.emit('update available rooms', {rooms: filteredRooms(socket)});
 
-  io.on('connection', function(socket){
+  socket.on('host room', function(data) {
+    var roomID = 'Topic: ' + data.requestDescription;
 
-    socket.emit('update available rooms', {rooms: socket.adapter.rooms});
-
-    socket.on('host room', function(data) {
-      var roomID = data.requestDescription;
-
-      socket.join(roomID, function() {
-        rooms.push(roomID);
-        socket.emit('new room');
-        socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
-      });
-
-    });
-
-    socket.on('join room', function(data){
-      socket.join(data.roomID);
-      io.to(data.roomID).emit('person joined', {roomID: data.roomID});
-      console.log("===============");
-      console.log(roomID);
-      console.log(data.roomID);
-
+    socket.join(roomID, function() {
+      socket.emit('new room');
       socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
-    });
-
-    socket.on('chat message', function(data) {
-      io.to(data.roomID).emit('chat message', data);
-
     });
 
   });
 
-  //helper methods
+  socket.on('join room', function(data){
+    socket.join(data.roomID);
+    io.to(data.roomID).emit('person joined', {roomID: data.roomID});
+    socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
+  });
 
-  function filteredRooms(socket) {
-    var rooms = [];
+  socket.on('chat message', function(data) {
+    io.to(data.roomID).emit('chat message', data);
 
-    for(room in socket.adapter.rooms) {
-      if(room.length < 2){
-        console.log(room);
+  });
+
+});
+
+//helper methods
+
+function findRoom(socket, roomID){
+  return socket.adapter.rooms[roomID];
+};
+
+function filteredRooms(socket){
+  var rooms = [];
+  for (room in socket.adapter.rooms){
+    if (room.match(/^Topic/) && findRoom(socket, room).length < 2){
       rooms.push(room);
     }
-    }
-    return rooms;
   }
+  return rooms;
+};
 
-module.exports = app;
+module.exports = http;

@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'test';
-var app = require('../../app');
+var server = require('../../app');
 var Browser = require('zombie');
 var expect = require('chai').expect;
 
@@ -8,9 +8,10 @@ var browser1, browser2, browser3;
 describe('chat feature', function() {
 
   beforeEach(function(done) {
-    browser1 = new Browser({ site: "http://localhost:3000"});
-    browser2 = new Browser({ site: "http://localhost:3000"});
-    browser3 = new Browser({ site: "http://localhost:3000"});
+    server.listen(3001);
+    browser1 = new Browser({ site: "http://localhost:3001"});
+    browser2 = new Browser({ site: "http://localhost:3001"});
+    browser3 = new Browser({ site: "http://localhost:3001"});
     done();
   });
 
@@ -26,6 +27,11 @@ describe('chat feature', function() {
     browser3.visit('/', done);
   });
 
+  afterEach(function(done) {
+    server.close();
+    done();
+  });
+
 
   describe('page load', function() {
 
@@ -37,9 +43,11 @@ describe('chat feature', function() {
       browser1.pressButton('Ask for help');
       expect(browser1.text('.main')).to.contain('What do you need help with');
     });
+
   });
 
   describe('help request sent', function() {
+
     beforeEach(function(done){
       browser1.pressButton('Ask for help');
       browser1.fill('description', 'Javascript testing');
@@ -51,17 +59,18 @@ describe('chat feature', function() {
         expect(browser1.text('.main')).to.contain('Waiting for someone');
         expect(browser2.text('.bottom-bar')).to.contain('Javascript testing');
         done();
-      },400);
+      },200);
     });
 
-    it('displays the chat page for both browsers', function(done) {
+    it('displays the chat page for both browsers and removes button for browser 3', function(done) {
       expect(browser2.query('#messages')).not.to.exist;
-      browser2.pressButton('Javascript testing');
+      browser2.pressButton('Topic: Javascript testing');
       expect(browser2.query('#messages')).to.exist;
       setTimeout(function() {
         expect(browser1.query('#messages')).to.exist;
+        expect(browser3.text('.bottom-bar')).to.not.contain('Topic: Javascript testing'); 
         done();
-      },400);
+      },200);
     });
 
     // describe("Chat page has been rendered", function() {
@@ -76,10 +85,6 @@ describe('chat feature', function() {
     //   });
     // });
 
-    describe('Only two users should be able to access chat', function() {
-      it('removes button for browser 3', function() {
-        expect(browser3.text('.bottom-bar')).to.not.contain('Javascript testing');
-      });
-    });
   });
+
 });
