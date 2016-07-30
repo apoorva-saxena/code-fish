@@ -12,6 +12,7 @@ describe('chat feature', function() {
     browser1 = new Browser({ site: "http://localhost:3001"});
     browser2 = new Browser({ site: "http://localhost:3001"});
     browser3 = new Browser({ site: "http://localhost:3001"});
+
     done();
   });
 
@@ -31,7 +32,6 @@ describe('chat feature', function() {
     server.close();
     done();
   });
-
 
   describe('page load', function() {
 
@@ -68,7 +68,7 @@ describe('chat feature', function() {
       expect(browser2.query('#messages')).to.exist;
       setTimeout(function() {
         expect(browser1.query('#messages')).to.exist;
-        expect(browser3.text('.bottom-bar')).to.not.contain('Topic: Javascript testing'); 
+        expect(browser3.text('.bottom-bar')).to.not.contain('Topic: Javascript testing');
         done();
       },200);
     });
