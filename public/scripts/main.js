@@ -10,11 +10,13 @@ var socket = io();
 //   });
 // };
 
+var currentUser;
+
 $('#content').html($('#intro-template').html());
 socket.on('current user', function(data) {
-
+  currentUser = data.user;
   $('#help-button').click(function() {
-    if (data.user) {
+    if (currentUser) {
     $('#content').html($('#new-help-request-template').html());
 
     $('#help-request-form').submit(function(e) {
@@ -36,8 +38,6 @@ socket.on('current user', function(data) {
     }
   });
 });
-
-
 
 
 socket.on('update available rooms', function(data) {
@@ -63,11 +63,12 @@ socket.on('person joined', function(data){
   $('#content').html($('#chat-template').html());
   $('#chatbox').submit(function(e){
     e.preventDefault();
-    socket.emit('chat message', { roomID: data.roomID, message: $('#m').val()});
+    socket.emit('chat message', { roomID: data.roomID, message: $('#m').val(), user: currentUser.username});
     $('#m').val('');
   });
+
   socket.on('chat message', function(data){
-    $('#messages').append($('<li>').text(data.message));
+    $('#messages').append($('<li>').text( data.user + ': ' + data.message));
   });
 });
 
