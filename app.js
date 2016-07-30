@@ -29,7 +29,7 @@ var db = mongoose.connection;
 var routes = require('./routes/index');
 var sessions = require('./routes/sessions');
 var users = require('./routes/users');
-var profiles = require('./routes/profiles');
+// var profiles = require('./routes/profiles');
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));

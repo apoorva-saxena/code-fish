@@ -55,7 +55,7 @@ router.get('/destroy', function(req, res){
 });
 
 router.get('/profile', function(req, res, next) {
-  res.send("hello");
+  res.render("users/profile");
 });
 
 
