@@ -54,6 +54,9 @@ router.get('/destroy', function(req, res){
     res.redirect('/');
 });
 
+router.get('/profile', function(req, res, next) {
+  res.send("hello");
+});
 
 
 module.exports = router;
