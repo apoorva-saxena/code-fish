@@ -47,11 +47,4 @@ router.post('/new', function(req, res, next) {
     }
 });
 
-
-
-
-
-
-
-
 module.exports = router;

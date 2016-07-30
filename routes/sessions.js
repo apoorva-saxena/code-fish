@@ -5,9 +5,6 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
 
-
-
-
 router.get('/new', function(req, res, next) {
     res.render('sessions/new');
 });
@@ -17,14 +14,18 @@ passport.use(new LocalStrategy(
         User.getUserByUsername(username, function(err, user) {
             if (err) throw err;
             if (!user) {
-                return done(null, false, { message: 'Unknown User' });
+                return done(null, false, {
+                    message: 'Unknown User'
+                });
             }
             User.comparePassword(password, user.password, function(err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
                     return done(null, user);
                 } else {
-                    return done(null, false, { message: 'Invalid password' });
+                    return done(null, false, {
+                        message: 'Invalid password'
+                    });
                 }
             });
         });
@@ -32,11 +33,11 @@ passport.use(new LocalStrategy(
 
 
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
-    User.getUserById(id, function(err, user) {
+    User.findById(id, function(err, user) {
         done(err, user);
     });
 });
@@ -48,14 +49,25 @@ router.post('/new',
         failureFlash: true
     }));
 
-router.get('/destroy', function(req, res){
+router.get('/destroy', function(req, res) {
     req.logout();
     req.flash('success_msg', 'Successfully signed out');
     res.redirect('/');
 });
 
 router.get('/profile', function(req, res, next) {
-  res.render('users/profile');
+    User.findById({
+        _id: req.user._id
+    }, function(err, user) {
+        if (err) {
+          console.log('cannot find')
+          return next(err);
+        }
+        console.log(user)
+        res.render('users/profile', {
+            user: user
+        });
+    });
 });
 
 
