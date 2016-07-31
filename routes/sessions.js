@@ -70,5 +70,8 @@ router.get('/profile', function(req, res, next) {
     });
 });
 
+router.get('/edit-profile', function(req, res, next) {
+  res.send('I am in');
+});
 
 module.exports = router;
