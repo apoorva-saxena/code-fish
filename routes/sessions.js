@@ -74,7 +74,6 @@ router.get('/profile', loggedIn, function(req, res, next) {
         if (err) {
             return next(err);
         }
-        console.log(user)
         res.render('sessions/profile', {
             user: user
         });
@@ -86,7 +85,6 @@ router.get('/edit-profile', loggedIn, function(req, res, next) {
 });
 
 router.post('/edit-profile', upload.single('image'), function(req, res, next) {
-    console.log(req.file);
     User.findOne({
         _id: req.user._id
     }, function(err, user) {
