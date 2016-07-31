@@ -86,10 +86,8 @@ console.log(req.file);
     if(req.body.bio) user.bio = req.body.bio;
     if(req.body.firstname) user.firstname = req.body.firstname;
     if(req.body.lastname) user.lastname = req.body.lastname;
-    console.log("======================");
-    console.log(req.body.image);
-    if(req.body.image) user.image = req.body.imge;
-
+    if(req.body.image) user.image = req.file.path;
+  
     user.save(function(err) {
       if(err) return next(err);
       req.flash('success', 'Successfully edited your profile');
