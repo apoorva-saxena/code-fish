@@ -7,41 +7,70 @@
       <img id="homepage-pic" src="./images/desk1.jpg" />
       <span id="homepage-image-text">Get 1:1 live help from coders across the globe</span>
       <div id="help-button-container">
-        <button id="help-button">GET HELP NOW</button>
+        <button id="help-button">Get help now</button>
       </div>
     </div>
 
-    <div id="main">
-      <div id="content"></div>
-    </div>
-
-    <div id="bottom-bar">
-      <h2>Current requests:</h2>
+    <div id="homepage-panel2">
+      <h2>Want to be a Code Coach?</h2>
+      <h3>Accept any of the live requests below to start helping someone learning to code...</h3>
       <div id="join-rooms"></div>
     </div>
 
+    <div id="homepage-panel3">
+      <img id='logo-footer' src='/images/logoV5.png' />
+    </div>
 
   </div>
 </script>
 
 <script id="new-help-request-template" type="text/template">
-  <h2>What do you need help with?</h2>
-  <form id="help-request-form" action="">
-    <input id="request-description" type="text-area" name="description" />
-    <button>Submit</button>
-  </form>
+    <div id="help-form-container">
+
+      <img id="help-form-pic" src="./images/computer.jpg" />
+      
+      <span id="help-form-image-text">I would like help with...</span>
+
+      <div id="request-form-wrapper">
+        <form id="help-request-form" action="">
+          <input id="request-description" type="text-area" name="description" placeholder="e.g. Promises in Javascript" />
+          <div>
+            <button>Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
 </script>
 
 <script id="loading-template" type="text/template">
-  <p>Waiting for someone from the community to repond to your request...</p>
+  <div id="loading-container">
+
+    <div id="loading-image-text">
+      Waiting for a Code Coach to respond to your request...</div>
+    </div>
+
+    <div id="loading-image-container">
+      <img id="loading-image" src="./images/timer.png" />
+    </div>
+    
+  </div>
 </script>
 
 <script id="chat-template" type="text/template">
-  <ul id="messages"></ul>
-  <form id="chatbox" action="">
-    <input type="text" class="chatbox-input" id="m" name="chat-input" autocomplete="off" /><button>Send</button>
-  </form>
+    <div id="chat-container">
+      
+      <div id="chat-wrapper">
+        <ul id="messages"></ul>
+        <form id="chatbox" action="">
+          <input type="text" class="chatbox-input" id="m" name="chat-input" autocomplete="off" />
+          <button>Send</button>
+        </form>
+      </div>
+      
+    </div>
 </script>
+
 <script id="end-chat-template" type="text/template"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>

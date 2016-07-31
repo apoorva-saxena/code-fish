@@ -9,13 +9,13 @@
   <body>
 
     <ul id='nav-bar'>
-        <li class='nav-content-left'><a href='/'><img id='logo' src='/images/logoV5.png' /></a></li>
-        {{#if user}}
-        <li class='nav-content-right'><a href='/sessions/destroy'>SIGN OUT</a></li>
-        {{else}}
-        <li class='nav-content-right'><a href='/users/new'>SIGN UP</a></li>
-        <li class='nav-content-right'><a href='/sessions/new'>SIGN IN</a></li>
-        {{/if}}
+      <li class='nav-content-left'><a href='/'><img id='logo-header' src='/images/logoV5.png' /></a></li>
+      {{#if user}}
+      <li class='nav-content-right'><a href='/sessions/destroy'>SIGN OUT</a></li>
+      {{else}}
+      <li class='nav-content-right'><a href='/users/new'>SIGN UP</a></li>
+      <li class='nav-content-right'><a href='/sessions/new'>SIGN IN</a></li>
+      {{/if}}
     </ul>
 
     <div class='flash_msg'>

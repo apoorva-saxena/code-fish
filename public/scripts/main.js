@@ -21,7 +21,7 @@ socket.on('update available rooms', function(data) {
     }
   }
   else {
-    $('#join-rooms').html('<p>Currently no requests</p>');
+    $('#join-rooms').html('<h4>There are currently no live requests</h4>');
   }
 });
 
