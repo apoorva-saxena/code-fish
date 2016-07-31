@@ -5,7 +5,9 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/'});
+var upload = multer({
+    dest: 'uploads/'
+});
 
 router.get('/new', function(req, res, next) {
     res.render('sessions/new');
@@ -62,10 +64,9 @@ router.get('/profile', function(req, res, next) {
         _id: req.user._id
     }, function(err, user) {
         if (err) {
-
-          return next(err);
+            return next(err);
         }
-
+        console.log(user)
         res.render('sessions/profile', {
             user: user
         });
@@ -73,27 +74,28 @@ router.get('/profile', function(req, res, next) {
 });
 
 router.get('/edit-profile', function(req, res, next) {
-  res.render('sessions/edit-profile');
+    res.render('sessions/edit-profile');
 });
 
 router.post('/edit-profile', upload.single('image'), function(req, res, next) {
-console.log(req.file);
-  User.findOne({ _id: req.user._id}, function(err, user)
-  {
-    if(err) return next(err);
+    console.log(req.file);
+    User.findOne({
+        _id: req.user._id
+    }, function(err, user) {
+        if (err) return next(err);
 
-    if(req.body.email) user.email = req.body.email;
-    if(req.body.bio) user.bio = req.body.bio;
-    if(req.body.firstname) user.firstname = req.body.firstname;
-    if(req.body.lastname) user.lastname = req.body.lastname;
-    if(req.body.image) user.image = req.file.path;
-  
-    user.save(function(err) {
-      if(err) return next(err);
-      req.flash('success', 'Successfully edited your profile');
-      return res.redirect('/sessions/profile');
+        if (req.body.email) user.email = req.body.email;
+        if (req.body.bio) user.bio = req.body.bio;
+        if (req.body.firstname) user.firstname = req.body.firstname;
+        if (req.body.lastname) user.lastname = req.body.lastname;
+        if (req.file.path) user.image = req.file.path;
+
+        user.save(function(err) {
+            if (err) return next(err);
+            req.flash('success', 'Successfully edited your profile');
+            return res.redirect('/sessions/profile');
+        });
     });
-  });
 });
 
 module.exports = router;
