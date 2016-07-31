@@ -71,7 +71,7 @@ router.get('/profile', function(req, res, next) {
 });
 
 router.get('/edit-profile', function(req, res, next) {
-  res.send('I am in');
+  res.render('sessions/edit-profile', { message: req.flash(success) });
 });
 
 module.exports = router;
