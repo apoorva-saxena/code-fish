@@ -85,6 +85,7 @@ router.post('/edit-profile', function(req, res, next) {
     if(req.body.bio) user.bio = req.body.bio;
     if(req.body.firstname) user.firstname = req.body.firstname;
     if(req.body.lastname) user.lastname = req.body.lastname;
+    if(req.body.image) user.image = req.body.imge;
 
     user.save(function(err) {
       if(err) return next(err);
