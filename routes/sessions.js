@@ -4,6 +4,7 @@ var User = require('../models/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
+var multer = require('multer');
 
 router.get('/new', function(req, res, next) {
     res.render('sessions/new');
@@ -60,7 +61,7 @@ router.get('/profile', function(req, res, next) {
         _id: req.user._id
     }, function(err, user) {
         if (err) {
-          
+
           return next(err);
         }
 
@@ -84,6 +85,7 @@ router.post('/edit-profile', function(req, res, next) {
     if(req.body.bio) user.bio = req.body.bio;
     if(req.body.firstname) user.firstname = req.body.firstname;
     if(req.body.lastname) user.lastname = req.body.lastname;
+    console.log("======================")
     console.log(req.body.image);
     if(req.body.image) user.image = req.body.imge;
 
