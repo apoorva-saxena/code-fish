@@ -1,7 +1,10 @@
 <h2>Edit Profile</h2>
 
+
 <div>
-  <form method="post" action="/sessions/edit-profile">
+  <form method="post" action="/sessions/edit-profile" enctype="multipart/form-data">
+    <input type="file" name="fileToUpload" id="fileToUpload">
+        <br>
     <label for="firstname">
       First Name:
       <input type="text" name="firstname" placeholder="First Name">
