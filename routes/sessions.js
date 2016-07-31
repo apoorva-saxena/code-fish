@@ -5,6 +5,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
 var multer = require('multer');
+var upload = multer({ dest: 'uploads/'});
 
 router.get('/new', function(req, res, next) {
     res.render('sessions/new');
@@ -75,8 +76,8 @@ router.get('/edit-profile', function(req, res, next) {
   res.render('sessions/edit-profile');
 });
 
-router.post('/edit-profile', function(req, res, next) {
-
+router.post('/edit-profile', upload.single('image'), function(req, res, next) {
+console.log(req.file);
   User.findOne({ _id: req.user._id}, function(err, user)
   {
     if(err) return next(err);
@@ -85,7 +86,7 @@ router.post('/edit-profile', function(req, res, next) {
     if(req.body.bio) user.bio = req.body.bio;
     if(req.body.firstname) user.firstname = req.body.firstname;
     if(req.body.lastname) user.lastname = req.body.lastname;
-    console.log("======================")
+    console.log("======================");
     console.log(req.body.image);
     if(req.body.image) user.image = req.body.imge;
 
