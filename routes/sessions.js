@@ -64,7 +64,7 @@ router.get('/profile', function(req, res, next) {
           return next(err);
         }
         console.log(user)
-        res.render('users/profile', {
+        res.render('sessions/profile', {
             user: user
         });
     });
