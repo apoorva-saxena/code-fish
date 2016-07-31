@@ -6,7 +6,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
 var multer = require('multer');
 var upload = multer({
-    dest: 'uploads/'
+    dest: 'public/img'
 });
 
 router.get('/new', function(req, res, next) {
@@ -88,7 +88,7 @@ router.post('/edit-profile', upload.single('image'), function(req, res, next) {
         if (req.body.bio) user.bio = req.body.bio;
         if (req.body.firstname) user.firstname = req.body.firstname;
         if (req.body.lastname) user.lastname = req.body.lastname;
-        if (req.file.path) user.image = req.file.path;
+        if (req.file.filename) user.image = req.file.filename;
 
         user.save(function(err) {
             if (err) return next(err);
