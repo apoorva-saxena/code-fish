@@ -74,4 +74,21 @@ router.get('/edit-profile', function(req, res, next) {
   res.render('sessions/edit-profile', { message: req.flash(success) });
 });
 
+router.post('/edit-profile', function(req, res, next) {
+  User.findOne({ _id: req.user._id}, function(err, user) {
+    if(err) return next(err);
+
+    if(req.body.email) user.profile.email = req.body.email;
+    if(req.body.bio) user.profile.bio = req.body.bio;
+    if(req.body.firstname) user.profile.firstname = req.body.firstname;
+    if(req.body.lastname) user.profile.lastname = req.body.lastname;
+
+    user.save(function(err) {
+      if(err) return next(err);
+      req.flash('success', 'Successfully edited your profile');
+      return res.redirect('/edit-profile');
+    });
+  });
+});
+
 module.exports = router;
