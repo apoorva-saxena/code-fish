@@ -9,6 +9,14 @@ var upload = multer({
     dest: 'public/img'
 });
 
+function loggedIn(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 router.get('/new', function(req, res, next) {
     res.render('sessions/new');
 });
@@ -59,7 +67,7 @@ router.get('/destroy', function(req, res) {
     res.redirect('/');
 });
 
-router.get('/profile', function(req, res, next) {
+router.get('/profile', loggedIn, function(req, res, next) {
     User.findById({
         _id: req.user._id
     }, function(err, user) {
@@ -73,7 +81,7 @@ router.get('/profile', function(req, res, next) {
     });
 });
 
-router.get('/edit-profile', function(req, res, next) {
+router.get('/edit-profile', loggedIn, function(req, res, next) {
     res.render('sessions/edit-profile');
 });
 
