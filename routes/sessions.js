@@ -75,13 +75,16 @@ router.get('/edit-profile', function(req, res, next) {
 });
 
 router.post('/edit-profile', function(req, res, next) {
-  User.findOne({ _id: req.user._id}, function(err, user) {
+  console.log(req.user._id);
+  User.findOne({ _id: req.user._id}, function(err, user)
+  {
+    console.log(user.email);
     if(err) return next(err);
 
-    if(req.body.email) user.profile.email = req.body.email;
-    if(req.body.bio) user.profile.bio = req.body.bio;
-    if(req.body.firstname) user.profile.firstname = req.body.firstname;
-    if(req.body.lastname) user.profile.lastname = req.body.lastname;
+    if(req.body.email) user.email = req.body.email;
+    if(req.body.bio) user.bio = req.body.bio;
+    if(req.body.firstname) user.firstname = req.body.firstname;
+    if(req.body.lastname) user.lastname = req.body.lastname;
 
     user.save(function(err) {
       if(err) return next(err);
