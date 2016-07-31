@@ -60,10 +60,10 @@ router.get('/profile', function(req, res, next) {
         _id: req.user._id
     }, function(err, user) {
         if (err) {
-          console.log('cannot find')
+          
           return next(err);
         }
-        console.log(user)
+
         res.render('sessions/profile', {
             user: user
         });
@@ -75,10 +75,9 @@ router.get('/edit-profile', function(req, res, next) {
 });
 
 router.post('/edit-profile', function(req, res, next) {
-  console.log(req.user._id);
+
   User.findOne({ _id: req.user._id}, function(err, user)
   {
-    console.log(user.email);
     if(err) return next(err);
 
     if(req.body.email) user.email = req.body.email;
