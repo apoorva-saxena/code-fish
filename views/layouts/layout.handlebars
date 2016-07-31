@@ -2,21 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Global Code Network</title>
+    <title>CodeCoach</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div class='navigation'>
-      <nav>
+
+    <ul id='nav-bar'>
+        <li class='nav-content-left'><a href='/'><img id='logo' src='/images/logoV5.png' /></a></li>
         {{#if user}}
-        <a href='/'>Homepage</a>
-        <a href='/sessions/destroy'>Sign out</a>
+        <li class='nav-content-right'><a href='/sessions/destroy'>SIGN OUT</a></li>
         {{else}}
-        <a href='/users/new'>Sign up</a>
-        <a href='/sessions/new'>Sign in</a>
+        <li class='nav-content-right'><a href='/users/new'>SIGN UP</a></li>
+        <li class='nav-content-right'><a href='/sessions/new'>SIGN IN</a></li>
         {{/if}}
-      </nav>
-    </div>
+    </ul>
+
     <div class='flash_msg'>
       {{#if success_msg}}
       {{{success_msg}}}<br>
@@ -33,6 +34,8 @@
         {{/each}}
       {{/if}}
     </div>
+
       {{{body}}}
+
   </body>
 </html>

@@ -1,25 +1,106 @@
-html {
-	height: 100%;
-}
+/*NAV-BAR*/
 
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  display: flex;
-	flex-direction: column;
+html, body {
 	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Muli', sans-serif;
+	background-color: #FAFAFA;
 }
 
 a {
-  color: #00B7FF;
+	text-decoration: none;
+  color: black;
+  font-size: 24px;
+  text-align: center;
+	white-space: nowrap;
 }
 
-.main {
+a:hover {
+	color: #517DE7;
+}
+
+#nav-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+	background-color: white;
+	width: 100%;
+	height: 120px;
+	border: 1px #D3D3D3 solid;
+}
+
+#logo {
+	height: 100px;
+	width: auto;
+}
+
+.nav-content-left {
+	margin-top: 10px;
+	margin-right: 60%;
+	margin-left: 10%
+}
+
+.nav-content-right {
+	margin-top: 45px;
+	margin-right: 10%;
+}
+
+/*HOMEPAGE-LAYOUT*/
+
+#homepage-container {
+	display: flex;
+	flex-direction: column;
+	padding-top: 0px;
+}
+
+#homepage-panel1 {
+	position: relative;
+	overflow: hidden;
+}
+
+#homepage-pic {
+	width: 100%;
+	height: auto;
+	opacity: 0.3;
+}
+
+#homepage-image-text {
+	position: absolute;
+	top: 30%;
+	font-size: 100px;
+	color: black;
+	text-align: center;
+	font-weight: bold;
+	width: 100%;
+}
+
+#help-button-container {
+	text-align: center;
+	position: absolute;
+	top: 65%;
+	width: 100%;
+}
+
+button {
+	text-align: center;
+	font-size: 52px;
+	padding: 30px;
+	border-radius: 8px;
+	background-color: #517DE7;
+	color: white;
+}
+
+/*#main {
 	height: 50%;
 	text-align: center;
 }
 
-.bottom-bar {
+#bottom-bar {
 	height: 50%;
 	text-align: center;
 }
@@ -33,18 +114,16 @@ h1 {
 h2 {
 	font-size: 32px;
 	margin: 25px;
-}
-
-button {
-	font-size: 28px;
-	padding: 10px;
-}
+}*/
 
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+/** { margin: 0; padding: 0; box-sizing: border-box; }
 #chatbox { background: #000; padding: 15px; position: fixed; bottom: 0; width: 100%; }
 .chatbox-input { border: 0; padding: 10px; width: 65%; margin-right: 5%; }
 #chatbox-button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 20px; }
 #messages { list-style-type: none; margin: 10; padding: 10; }
 #messages li { padding: 5px 10px; }
 #messages li:nth-child(odd) { background: #eee; }
+*/
