@@ -19,7 +19,9 @@ socket.on('current user', function(data) {
       $('#page-layout').html($('#loading-template').html());
     });
   } else {
-  console.log('Please sign in');
+    $(function() {
+      $('#help-button').popupTooltip('bottom','Please sign in');
+    });
    }
   });
   $('body').on('click', '.join-button', function() {
@@ -27,7 +29,9 @@ socket.on('current user', function(data) {
       socket.emit('join room', {roomID: $(this).text()});
       $('#page-layout').html($('#chat-template').html());
     } else {
-      console.log('Please sign in to join room');
+      $(function() {
+        $('.join-button').popupTooltip('bottom','Please sign in');
+      });
     }
 
   });
@@ -61,7 +65,11 @@ socket.on('person joined', function(data){
   });
 
   socket.on('chat message', function(data){
-    $('#messages').append($('<li>').text( data.username + ': ' + data.message));
+    if (data.username === currentUser.username) {
+      $('#messages').append($('<li class="current-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+    } else {
+      $('#messages').append($('<li class="responding-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+    }
   });
 
 
