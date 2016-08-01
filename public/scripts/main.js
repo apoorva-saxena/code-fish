@@ -4,6 +4,7 @@ var socket = io();
 
 
 var currentUser;
+var timeout;
 
 $('#page-layout').html($('#homepage-template').html());
 socket.on('current user', function(data) {
@@ -62,6 +63,34 @@ socket.on('person joined', function(data){
   socket.on('chat message', function(data){
     $('#messages').append($('<li>').text( data.username + ': ' + data.message));
   });
+
+
+
+  function timeoutFunction() {
+    typing = false;
+    socket.emit("typing", false);
+  }
+
+
+  $('.chatbox-input').keyup(function() {
+    typing = true;
+    socket.emit('typing', 'typing...');
+    clearTimeout(timeout);
+    timeout = setTimeout(timeoutFunction, 1000);
+  });
+
+
+  socket.on('typing', function(data) {
+    if (data) {
+      $('.typing').html(data);
+    } else {
+      $('.typing').html("");
+    }
+  });
+
+
+
+
 });
 
 exports.socket = socket;
