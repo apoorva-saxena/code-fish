@@ -66,14 +66,14 @@ router.get('/:_id', loggedIn, function(req, res, next) {
         if (err) {
             return next(err);
         }
-        res.render('sessions/profile', {
+        res.render('users/profile', {
             user: user
         });
     });
 });
 
 router.get('/:_id/edit', loggedIn, function(req, res, next) {
-    res.render('sessions/edit-profile');
+    res.render('users/edit');
 });
 
 router.post('/:_id/edit', upload.single('image'), function(req, res, next) {
