@@ -64,7 +64,6 @@ socket.on('person joined', function(data){
   });
 
   $('#end-chat-button').click(function() {
-    $('#page-layout').html($('#end-chat-template').html());
     socket.emit('end chat', { roomID: data.roomID, username: currentUser.username});
   });
 
