@@ -27,7 +27,7 @@ describe('User profile', function() {
 
     describe('User not signed in', function() {
         it('has no My profile button', function() {
-            expect(browser.text('.navigation')).to.not.contain('My profile');
+            expect(browser.text('.navigation')).to.not.contain('View profile');
         });
     });
 
@@ -48,7 +48,7 @@ describe('User profile', function() {
             browser.pressButton('Sign in', done);
         });
 
-        it('has My profile button', function() {
+        it('has View profile button', function() {
             console.log("0000000000000000000000001");
             console.log(browser.html());
             expect(browser.text('.navigation')).to.contain('View profile');
