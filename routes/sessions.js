@@ -4,18 +4,6 @@ var User = require('../models/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
-var multer = require('multer');
-var upload = multer({
-    dest: 'public/img'
-});
-
-function loggedIn(req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        res.redirect('/');
-    }
-}
 
 router.get('/new', function(req, res, next) {
     res.render('sessions/new');
@@ -67,43 +55,5 @@ router.get('/destroy', function(req, res) {
     res.redirect('/');
 });
 
-//change to /profile/:_id
-router.get('/profile/:_id', loggedIn, function(req, res, next) {
-    User.findById({
-        _id: req.user._id
-    }, function(err, user) {
-        if (err) {
-            return next(err);
-        }
-        res.render('sessions/profile', {
-            user: user
-        });
-    });
-});
-
-//change to /edit-profile/:_id
-router.get('/edit-profile/:_id', loggedIn, function(req, res, next) {
-    res.render('sessions/edit-profile');
-});
-
-router.post('/edit-profile', upload.single('image'), function(req, res, next) {
-    User.findOne({
-        _id: req.user._id
-    }, function(err, user) {
-        if (err) return next(err);
-
-        if (req.body.email) user.email = req.body.email;
-        if (req.body.bio) user.bio = req.body.bio;
-        if (req.body.firstname) user.firstname = req.body.firstname;
-        if (req.body.lastname) user.lastname = req.body.lastname;
-        if (req.file.filename) user.image = req.file.filename;
-
-        user.save(function(err) {
-            if (err) return next(err);
-            req.flash('success', 'Successfully edited your profile');
-            return res.redirect('/sessions/profile/:_id');
-        });
-    });
-});
 
 module.exports = router;
