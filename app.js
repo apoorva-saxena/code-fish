@@ -119,7 +119,11 @@ io.on('connection', function(socket){
 
   socket.on('chat message', function(data) {
     io.to(data.roomID).emit('chat message', data);
+  });
 
+  socket.on('end chat', function(data) {
+    io.to(data.roomID).emit('person left', data);
+    io.sockets.in(data.roomID).leave(data.roomID);
   });
 
 });

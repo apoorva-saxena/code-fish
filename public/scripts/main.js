@@ -62,6 +62,16 @@ socket.on('person joined', function(data){
   socket.on('chat message', function(data){
     $('#messages').append($('<li>').text( data.username + ': ' + data.message));
   });
+
+  $('#end-chat-button').click(function() {
+    $('#page-layout').html($('#end-chat-template').html());
+    socket.emit('end chat', { roomID: data.roomID });
+  });
+
+  socket.on('person left', function() {
+    $('#page-layout').html($('#end-chat-template').html());
+  })
+
 });
 
 exports.socket = socket;
