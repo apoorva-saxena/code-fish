@@ -106,6 +106,15 @@ io.on('connection', function(socket){
 
     socket.join(roomID, function() {
       socket.emit('new room');
+
+      var helpRequest = {
+        id: roomID,
+        mentee: socket,
+        menteeUsername: data.menteeUsername
+      }
+
+      findRoom(socket, roomID).helpRequest = helpRequest;
+
       socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
     });
 

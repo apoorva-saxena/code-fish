@@ -6,15 +6,17 @@ var socket = io();
 var currentUser;
 
 $('#page-layout').html($('#homepage-template').html());
+
 socket.on('current user', function(data) {
   currentUser = data.user;
   $('#help-button').click(function() {
     if (currentUser) {
       $('#page-layout').html($('#new-help-request-template').html());
-
-    $('#help-request-form').submit(function(e) {
+      $('#help-request-form').submit(function(e) {
       e.preventDefault();
-      socket.emit('host room', { requestDescription: $('#request-description').val() });
+      socket.emit('host room', { requestDescription: $('#request-description').val(),
+                                 menteeUsername: currentUser.username
+                               });
       $('#page-layout').html($('#loading-template').html());
     });
   } else {
@@ -23,8 +25,9 @@ socket.on('current user', function(data) {
   });
   $('body').on('click', '.join-button', function() {
     if (data.user) {
-      socket.emit('join room', {roomID: $(this).text()});
-      $('#page-layout').html($('#chat-template').html());
+      socket.emit('join room', { roomID: $(this).text(),
+                                  mentorUsername: currentUser.username
+                                });
     } else {
       console.log('Please sign in to join room');
     }
@@ -49,22 +52,25 @@ socket.on('new room', function(){
   $('#page-layout').html($('#loading-template').html());
 });
 
-
-
 socket.on('person joined', function(data){
   $('#page-layout').html($('#chat-template').html());
   $('#chatbox').submit(function(e){
     e.preventDefault();
-    socket.emit('chat message', { roomID: data.roomID, message: $('#m').val(), username: currentUser.username});
+    socket.emit('chat message', { roomID: data.roomID,
+                                  message: $('#m').val(),
+                                  username: currentUser.username
+                                });
     $('#m').val('');
   });
 
   socket.on('chat message', function(data){
-    $('#messages').append($('<li>').text( data.username + ': ' + data.message));
+    $('#messages').append($('<li>').text(data.username + ': ' + data.message));
   });
 
   $('#end-chat-button').click(function() {
-    socket.emit('end chat', { roomID: data.roomID, username: currentUser.username});
+    socket.emit('end chat', { roomID: data.roomID,
+                              username: currentUser.username
+                            });
   });
 
   socket.on('person left', function(data) {
