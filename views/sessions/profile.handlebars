@@ -1,0 +1,27 @@
+
+<br>
+<br>
+hello
+<br>
+<br>
+<div id="image">
+  {{#if user.image}}
+  <img src="/img/{{user.image}}" alt="smiley.gif" style="width:150px;height:150px;">
+  {{else}}
+  <img src="http://www.soulmarket.net/wp-content/uploads/2015/02/blank-profile.png" style="width:150px;height:150px;">
+  {{/if}}
+</div>
+First Name : {{user.firstname}}
+<br>
+Last Name : {{user.lastname}}
+<br>
+Email : {{user.email}}
+<br>
+Username : {{user.username}}
+<br>
+Short Bio : {{user.bio}}
+<br>
+<br>
+<br>
+
+<a href='/users/{{user.id}}/edit'>Edit Profile</a>
