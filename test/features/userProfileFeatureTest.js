@@ -51,7 +51,7 @@ describe('User profile', function() {
         it('has My profile button', function() {
             console.log("0000000000000000000000001");
             console.log(browser.html());
-            expect(browser.text('.navigation')).to.contain('My profile');
+            expect(browser.text('.navigation')).to.contain('View profile');
         });
 
     });
