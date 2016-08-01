@@ -68,7 +68,7 @@ router.get('/destroy', function(req, res) {
 });
 
 //change to /profile/:_id
-router.get('/profile', loggedIn, function(req, res, next) {
+router.get('/profile/:_id', loggedIn, function(req, res, next) {
     User.findById({
         _id: req.user._id
     }, function(err, user) {
@@ -82,7 +82,7 @@ router.get('/profile', loggedIn, function(req, res, next) {
 });
 
 //change to /edit-profile/:_id
-router.get('/edit-profile', loggedIn, function(req, res, next) {
+router.get('/edit-profile/:_id', loggedIn, function(req, res, next) {
     res.render('sessions/edit-profile');
 });
 
@@ -101,7 +101,7 @@ router.post('/edit-profile', upload.single('image'), function(req, res, next) {
         user.save(function(err) {
             if (err) return next(err);
             req.flash('success', 'Successfully edited your profile');
-            return res.redirect('/sessions/profile');
+            return res.redirect('/sessions/profile/:_id');
         });
     });
 });

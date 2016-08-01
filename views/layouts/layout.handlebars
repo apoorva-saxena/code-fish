@@ -11,7 +11,7 @@
         {{#if user}}
         <a href='/'>Homepage</a>
         <a href='/sessions/destroy'>Sign out</a>
-        <a href='/sessions/profile'>View Profile</a>
+        <a href='/sessions/profile/{{user.id}}'>View Profile</a>
         {{else}}
         <a href='/users/new'>Sign up</a>
         <a href='/sessions/new'>Sign in</a>
