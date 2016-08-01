@@ -29,6 +29,7 @@ var db = mongoose.connection;
 var routes = require('./routes/index');
 var sessions = require('./routes/sessions');
 var users = require('./routes/users');
+// var profiles = require('./routes/profiles');
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
@@ -66,12 +67,13 @@ app.use(function (req, res, next) {
 app.use('/', routes);
 app.use('/users', users);
 app.use('/sessions', sessions);
+// app.use('/profiles', profiles);
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
 // if (app.get('env') === 'development') {
 //   app.use(function(err, req, res, next) {

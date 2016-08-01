@@ -1,0 +1,28 @@
+<h2>Edit Profile</h2>
+
+
+<div>
+  <form method="post" action="/users/{{user._id}}/edit" enctype="multipart/form-data">
+    <input type="file" name="image" id="fileToUpload">
+        <br>
+    <label for="firstname">
+      First Name:
+      <input type="text" name="firstname" placeholder="First Name">
+    </label>
+    <br>
+    <br>
+    <label for="Last Name">
+      Last Name:
+      <input type="text" name="lastname" placeholder="Last Name">
+    </label>
+    <br>
+    <br>
+    <label for="bio">
+      Short bio:
+      <textarea name="bio" rows="4" cols="50"placeholder="Please enter a short bio about yourself">  </textarea>
+    </label>
+    <br>
+    <br>
+    <input type="submit" value="Update profile">
+  </form>
+</div>
