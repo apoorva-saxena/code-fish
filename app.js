@@ -122,7 +122,7 @@ io.on('connection', function(socket){
   });
 
   socket.on('end chat', function(data) {
-    socket.broadchast.to(data.roomID).emit('person left', data)
+    socket.broadcast.to(data.roomID).emit('person left', data)
     io.sockets.in(data.roomID).leave(data.roomID);
   });
 
