@@ -2,13 +2,6 @@
 
 var socket = io();
 
-// var currentUser = function (){
-//   socket.on('current user', function(data) {
-//     if (data.user) {
-//       return (data.user);
-//     }
-//   });
-// };
 
 var currentUser;
 
@@ -63,12 +56,12 @@ socket.on('person joined', function(data){
   $('#content').html($('#chat-template').html());
   $('#chatbox').submit(function(e){
     e.preventDefault();
-    socket.emit('chat message', { roomID: data.roomID, message: $('#m').val(), user: currentUser.username});
+    socket.emit('chat message', { roomID: data.roomID, message: $('#m').val(), username: currentUser.username});
     $('#m').val('');
   });
 
   socket.on('chat message', function(data){
-    $('#messages').append($('<li>').text( data.user + ': ' + data.message));
+    $('#messages').append($('<li>').text( data.username + ': ' + data.message));
   });
 });
 
