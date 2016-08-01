@@ -126,7 +126,7 @@ io.on('connection', function(socket){
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
 
     findRoom(socket, data.roomID).helpRequest.mentorUsername = data.mentorUsername;
-    findRoom(socket, data.roomID).helpRequest.mentor = data.socket;
+    findRoom(socket, data.roomID).helpRequest.mentor = socket;
   });
 
   socket.on('chat message', function(data) {
@@ -134,7 +134,13 @@ io.on('connection', function(socket){
   });
 
   socket.on('end chat', function(data) {
-    socket.broadcast.to(data.roomID).emit('person left', data)
+    var menteeSocket = findRoom(socket, data.roomID).helpRequest.mentee;
+    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentor;
+    var menteeUsername = findRoom(socket, data.roomID).helpRequest.menteeUsername;
+    var mentorUsername = findRoom(socket, data.roomID).helpRequest.mentorUsername;
+
+    io.to(mentorSocket.id).emit('mentee left', { menteeUsername : menteeUsername });
+    io.to(menteeSocket.id).emit('mentor left', { mentorUsername : mentorUsername });
     io.sockets.in(data.roomID).leave(data.roomID);
   });
 

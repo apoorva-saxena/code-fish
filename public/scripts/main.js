@@ -68,15 +68,18 @@ socket.on('person joined', function(data){
   });
 
   $('#end-chat-button').click(function() {
-    socket.emit('end chat', { roomID: data.roomID,
-                              username: currentUser.username
-                            });
+    socket.emit('end chat', { roomID: data.roomID });
   });
 
-  socket.on('person left', function(data) {
+  socket.on('mentee left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
-    $('#other-username').text(data.username);
-  })
+    $('#other-username').text(data.menteeUsername);
+  });
+
+  socket.on('mentor left', function(data) {
+    $('#page-layout').html($('#end-chat-template').html());
+    $('#other-username').text(data.mentorUsername);
+  });
 
 });
 
