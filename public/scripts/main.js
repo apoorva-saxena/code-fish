@@ -18,7 +18,9 @@ socket.on('current user', function(data) {
       $('#page-layout').html($('#loading-template').html());
     });
   } else {
-  console.log('Please sign in');
+    $(function() {
+      $('#help-button').popupTooltip('bottom','Please sign in');
+    });
    }
   });
   $('body').on('click', '.join-button', function() {
@@ -26,7 +28,9 @@ socket.on('current user', function(data) {
       socket.emit('join room', {roomID: $(this).text()});
       $('#page-layout').html($('#chat-template').html());
     } else {
-      console.log('Please sign in to join room');
+      $(function() {
+        $('.join-button').popupTooltip('bottom','Please sign in');
+      });
     }
 
   });
