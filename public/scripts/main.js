@@ -29,7 +29,7 @@ socket.on('current user', function(data) {
       $('body').html($('#chat-template').html());
     } else {
       $(function() {
-        $('.join-button').popupTooltip('bottom','Please sign in to chat');
+        $('.join-button').popupTooltip('bottom','Please sign in ');
       });
     }
 
