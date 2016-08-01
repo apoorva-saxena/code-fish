@@ -26,7 +26,7 @@ socket.on('current user', function(data) {
   $('body').on('click', '.join-button', function() {
     if (data.user) {
       socket.emit('join room', {roomID: $(this).text()});
-      $('body').html($('#chat-template').html());
+      $('#page-layout').html($('#chat-template').html());
     } else {
       $(function() {
         $('.join-button').popupTooltip('bottom','Please sign in');
