@@ -77,7 +77,7 @@ a:hover {
 
 .form-wrapper
 input[type="text"],
-input[type="email"], 
+input[type="email"],
 input[type="password"] {
   border: 1px solid #b9b9b9;
   border-radius: 8px;
@@ -340,7 +340,7 @@ button:hover {
 	position: relative;
 	bottom: 0;
 	width: 100%;
-	background-color: #E9EAEC; 
+	background-color: #E9EAEC;
 }
 
 #chatbox button {
@@ -377,6 +377,18 @@ input[type="text-area"] {
 
 }
 
+.username {
+	color: green;
+}
+
+.current-user-message {
+	background: #E0FFFF;
+}
+
+.responding-user-message {
+	background: #FFF;
+}
+
 
 #messages li {
 	font-size: 26px;
@@ -386,14 +398,3 @@ input[type="text-area"] {
 
 
 }
-
-#messages li:nth-child(even) {
-	background: #eee;
-}
-
-
-
-
-
-
-
