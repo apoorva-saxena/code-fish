@@ -336,6 +336,11 @@ button:hover {
 	padding: 20px;
 }
 
+.typing {
+	font-size: 18px;
+	color: gray;
+}
+
 #chatbox {
 	position: relative;
 	bottom: 0;

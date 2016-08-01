@@ -121,6 +121,10 @@ io.on('connection', function(socket){
     io.to(data.roomID).emit('chat message', data);
   });
 
+  socket.on('typing', function (data) {
+     socket.broadcast.emit('typing', data);
+   });
+
 });
 
 //helper methods
