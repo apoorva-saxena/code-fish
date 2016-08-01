@@ -33,7 +33,7 @@ describe('User visits login page', function() {
 
       browser.fill('username', 'hello');
       browser.fill('password', 'hello');
-      browser.pressButton('Sign in', done);
+      browser.pressButton('Sign In', done);
     });
 
 
@@ -56,7 +56,7 @@ describe('User visits login page', function() {
 
       browser.fill('username', 'wrongusername')
       .fill('password', 'test123')
-      .pressButton('Sign in', done);
+      .pressButton('Sign In', done);
     });
 
     it('throw error if email and password does not match', function(){
