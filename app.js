@@ -120,10 +120,13 @@ io.on('connection', function(socket){
 
   });
 
-  socket.on('join room', function(data){
+  socket.on('join room', function(data){ 
     socket.join(data.roomID);
-    io.to(data.roomID).emit('person joined', {roomID: data.roomID});
+    io.in(data.roomID).emit('person joined', {roomID: data.roomID});
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
+
+    findRoom(socket, data.roomID).helpRequest.mentorUsername = data.mentorUsername;
+    findRoom(socket, data.roomID).helpRequest.mentor = data.socket;
   });
 
   socket.on('chat message', function(data) {
