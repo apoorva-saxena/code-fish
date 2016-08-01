@@ -1,6 +1,6 @@
 /*NAV-BAR*/
 
-html, body {
+html, body, #page-layout {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
@@ -309,40 +309,90 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	padding-top: 0px;
-	justify-content: center;
-	height: 100%;
 	width: 100%;
-	position: absolute;
+	height: 80%;
+	justify-content: center;
+	background-color: #E9EAEC;
 }
 
 #chat-wrapper {
+  width: 80%;
+  margin: auto;
+  background-color: white;
+  border: 1px solid #517DE7;
+  border-radius: 12px;
+  text-align: center;
+  overflow: hidden;
+}
+
+#chatbox-header {
 	position: relative;
-	background-color: white;
-	margin: 10%;
-	height: 80%;
-	border: 1px solid #bdbdbd;
-	border-radius: 8px;
+	top: 0;
+	background-color: #517DE7;
+	text-align: center;
+	color: white;
+	font-size: 32px;
+	width: 100%;
+	padding: 20px;
 }
 
 #chatbox {
-	background: #000;
-	padding: 15px; 
-	/*position: fixed;
-	bottom: 0;*/
+	position: relative;
+	bottom: 0;
 	width: 100%;
+	background-color: #E9EAEC; 
+}
+
+#chatbox button {
+	text-align: center;
+	font-size: 26px;
+	padding: 10px;
+	border-radius: 8px;
+	background-color: #e7bb51;
+	color: white;
+}
+
+#chatbox button:hover {
+	background-color: #cf9b1d;
+}
+
+#chatbox
+input[type="text-area"] {
+	border: 1px solid #b9b9b9;
+  background-color: white;
+  font-size: 26px;
+  height: 32px;
+  margin: 30px;
+  outline: 0;
+  padding: 10px;
+  width: 80%;
+}
+
+#messages {
+	list-style-type: none;
+	padding: 0;
+	min-height: 700px;
+	position: relative;
+	width: 100%;
+
+}
+
+
+#messages li {
+	font-size: 26px;
+	text-align: left;
+	margin: 10px 0px;
+	padding: 10px 0px 10px 20px;
+
+
+}
+
+#messages li:nth-child(even) {
+	background: #eee;
 }
 
 
 
-
-
-/** { margin: 0; padding: 0; box-sizing: border-box; }
-.chatbox-input { border: 0; padding: 10px; width: 65%; margin-right: 5%; }
-#chatbox-button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 20px; }
-#messages { list-style-type: none; margin: 10; padding: 10; }
-#messages li { padding: 5px 10px; }
-#messages li:nth-child(odd) { background: #eee; }
-*/
 
 
 
