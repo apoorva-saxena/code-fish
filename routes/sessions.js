@@ -4,7 +4,10 @@ var User = require('../models/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var connect = require('connect');
+var GitHubStrategy = require('passport-github').Strategy;
 
+var GITHUB_CLIENT_ID = "f15bb76b68279c20ce4c";
+var GITHUB_CLIENT_SECRET = "16b4ee54f1043591636fae42d1aa604a1590db0a";
 
 
 
@@ -29,6 +32,28 @@ passport.use(new LocalStrategy(
             });
         });
     }));
+
+
+passport.use(new GitHubStrategy({
+  clientID: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/github/callback"
+},
+function(accessToken, refreshToken, profile, done) {
+  // asynchronous verification, for effect...
+  process.nextTick(function () {
+    console.log(profile);
+    var newUser = new User({
+      username: profile.displayName,
+      githubid: profile.id
+    });
+    newUser.save();
+
+    return done(null, profile);
+  });
+}
+));
+
 
 
 passport.serializeUser(function(user, done) {
