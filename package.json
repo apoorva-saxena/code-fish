@@ -6,6 +6,7 @@
     "start": "node ./bin/www",
     "test": "nyc --require babel-register mocha test/features/*.js"
   },
+
   "dependencies": {
     "bcryptjs": "^2.3.0",
     "body-parser": "~1.15.1",
@@ -24,6 +25,7 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.3.0"
   },
+
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
@@ -39,5 +41,3 @@
     "nyc": "^5.0.0"
   }
 }
-
-

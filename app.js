@@ -51,12 +51,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
-
+var currentUser;
 app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
   res.locals.error = req.flash('error');
   res.locals.user = req.user || null;
+  currentUser = req.user;
   next();
 });
 
@@ -93,7 +94,10 @@ app.use(function(req, res, next) {
 
 io.on('connection', function(socket){
 
+
+  socket.emit('current user', {user: currentUser});
   socket.emit('update available rooms', {rooms: filteredRooms(socket)});
+
 
   socket.on('host room', function(data) {
     var roomID = 'Topic: ' + data.requestDescription;

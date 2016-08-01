@@ -23,7 +23,7 @@ describe('User visits signup page', function() {
 
   describe('Should see the signup page', function() {
     it('Should see sign up', function() {
-      browser.assert.text('h2', 'Sign up');
+      browser.assert.text('h2', 'Sign up to get help now!');
     });
   });
 
