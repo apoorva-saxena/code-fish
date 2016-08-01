@@ -38,21 +38,32 @@ passport.use(new GitHubStrategy({
   clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
   callbackURL: "http://localhost:3000/auth/github/callback"
-},
-function(accessToken, refreshToken, profile, done) {
-  // asynchronous verification, for effect...
-  process.nextTick(function () {
-    console.log(profile);
-    var newUser = new User({
-      username: profile.displayName,
-      githubid: profile.id
-    });
-    newUser.save();
+}, function(accessToken, refreshToken, profile, done) {
+       User.findOne({
+           'githubId': profile.id
+       })
+       .then(function (user) {
+           if (!user) {
+               var newUser = {
+                   username: profile.displayName || profile.username,
+                   githubId: profile.id
+               };
 
-    return done(null, profile);
-  });
-}
-));
+               if (profile._json.avatar_url) {
+                   newUser.avatar_url = profile._json.avatar_url;
+               }
+               user = new User(newUser);
+               return user.save();
+           }
+           return user;
+       })
+       .then(function (user) {
+           done(null, user);
+       })
+       .catch(function (err) {
+           return done(err);
+       });
+   }));
 
 
 
