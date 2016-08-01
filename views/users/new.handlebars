@@ -1,24 +1,23 @@
-<h2>Sign up</h2>
+<div class="form-container">
 
-<div>
-  <form method="post" action="/users/new">
-    <label for="username">
-      Username:
+  <div class="form-wrapper">
+
+    <h2>Sign up to get help now!</h2>
+
+    <form method="post" action="/users/new">
+      
       <input type="text" name="username" placeholder="Username">
-    </label>
-    <label for="email">
-      Email:
+    
       <input type="email" name="email" placeholder="Email">
-    </label>
-    <label for="password">
-      Password:
+    
       <input type="password" name="password" placeholder="Password">
-    </label>
-    <label for="passwordconfirmation">
-      Confirm password:
-      <input type="password" name="passwordconfirmation" placeholder="Password">
-    </label>
-    <input type="submit" value="Sign Up">
+    
+      <input type="password" name="passwordconfirmation" placeholder="Re-enter password">
+    
+      <input type="submit" value="Sign Up">
+      
+    </form>
 
-  </form>
+  </div>
+
 </div>

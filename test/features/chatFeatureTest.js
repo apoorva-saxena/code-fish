@@ -36,12 +36,12 @@ describe('chat feature', function() {
   describe('page load', function() {
 
     it('has no requests to start with', function() {
-      expect(browser1.text('.bottom-bar')).to.contain('Currently no requests');
+      expect(browser1.text('#homepage-container')).to.contain('Currently no requests');
     });
 
     it('allows user to send a request for help', function() {
-      browser1.pressButton('Ask for help');
-      expect(browser1.text('.main')).to.contain('What do you need help with');
+      browser1.pressButton('GET HELP NOW');
+      expect(browser1.text('#page-layout')).to.contain('What do you need help with');
     });
 
   });
@@ -49,15 +49,15 @@ describe('chat feature', function() {
   describe('help request sent', function() {
 
     beforeEach(function(done){
-      browser1.pressButton('Ask for help');
+      browser1.pressButton('GET HELP NOW');
       browser1.fill('description', 'Javascript testing');
       browser1.pressButton('Submit', done);
     });
 
     it('shows waiting for someone message when help request made', function(done) {
       setTimeout(function() {
-        expect(browser1.text('.main')).to.contain('Waiting for someone');
-        expect(browser2.text('.bottom-bar')).to.contain('Javascript testing');
+        expect(browser1.text('#page-layout')).to.contain('Waiting for someone');
+        expect(browser2.text('#homepage-container')).to.contain('Javascript testing');
         done();
       },200);
     });

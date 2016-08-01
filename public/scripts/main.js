@@ -2,14 +2,14 @@
 
 var socket = io();
 
-$('#content').html($('#intro-template').html());
+$('#page-layout').html($('#homepage-template').html());
 
 $('#help-button').click(function() {
-  $('#content').html($('#new-help-request-template').html());
+  $('#page-layout').html($('#new-help-request-template').html());
   $('#help-request-form').submit(function(e) {
     e.preventDefault();
     socket.emit('host room', { requestDescription: $('#request-description').val() });
-    $('#content').html($('#loading-template').html());
+    $('#page-layout').html($('#loading-template').html());
   });
 });
 
@@ -21,23 +21,21 @@ socket.on('update available rooms', function(data) {
     }
   }
   else {
-    $('#join-rooms').html('<p>Currently no requests</p>');
+    $('#join-rooms').html('<h4>There are currently no live requests</h4>');
   }
 });
 
 socket.on('new room', function(){
-  $('#content').html($('#loading-template').html());
+  $('#page-layout').html($('#loading-template').html());
 });
 
 $('body').on('click', '.join-button', function() {
   socket.emit('join room', {roomID: $(this).text()});
-  $('.bottom-bar').remove();
-  $('#content').html($('#chat-template').html());
+  $('#page-layout').html($('#chat-template').html());
 });
 
 socket.on('person joined', function(data){
-  $('.bottom-bar').remove();
-  $('#content').html($('#chat-template').html());
+  $('#page-layout').html($('#chat-template').html());
   $('#chatbox').submit(function(e){
     e.preventDefault();
     socket.emit('chat message', { roomID: data.roomID, message: $('#m').val()} );
