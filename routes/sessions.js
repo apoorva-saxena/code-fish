@@ -67,6 +67,7 @@ router.get('/destroy', function(req, res) {
     res.redirect('/');
 });
 
+//change to /profile/:_id
 router.get('/profile', loggedIn, function(req, res, next) {
     User.findById({
         _id: req.user._id
@@ -80,6 +81,7 @@ router.get('/profile', loggedIn, function(req, res, next) {
     });
 });
 
+//change to /edit-profile/:_id
 router.get('/edit-profile', loggedIn, function(req, res, next) {
     res.render('sessions/edit-profile');
 });
