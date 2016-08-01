@@ -65,11 +65,12 @@ socket.on('person joined', function(data){
 
   $('#end-chat-button').click(function() {
     $('#page-layout').html($('#end-chat-template').html());
-    socket.emit('end chat', { roomID: data.roomID });
+    socket.emit('end chat', { roomID: data.roomID, username: currentUser.username});
   });
 
-  socket.on('person left', function() {
+  socket.on('person left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
+    $('#other-username').text(data.username);
   })
 
 });
