@@ -4,7 +4,6 @@ var socket = io();
 
 
 var currentUser;
-var user2;
 
 $('#page-layout').html($('#homepage-template').html());
 socket.on('current user', function(data) {
