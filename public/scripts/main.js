@@ -64,7 +64,11 @@ socket.on('person joined', function(data){
   });
 
   socket.on('chat message', function(data){
-    $('#messages').append($('<li>').text( data.username + ': ' + data.message));
+    if (data.username === currentUser.username) {
+      $('#messages').append($('<li class="current-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+    } else {
+      $('#messages').append($('<li class="responding-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+    }
   });
 });
 
