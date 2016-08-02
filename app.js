@@ -31,6 +31,7 @@ var db = mongoose.connection;
 var routes = require('./routes/index');
 var sessions = require('./routes/sessions');
 var users = require('./routes/users');
+// var profiles = require('./routes/profiles');
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
@@ -87,12 +88,13 @@ app.get('/auth/github/callback',
 app.use('/', routes);
 app.use('/users', users);
 app.use('/sessions', sessions);
+// app.use('/profiles', profiles);
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
 // if (app.get('env') === 'development') {
 //   app.use(function(err, req, res, next) {
@@ -125,6 +127,15 @@ io.on('connection', function(socket){
 
     socket.join(roomID, function() {
       socket.emit('new room');
+
+      var helpRequest = {
+        id: roomID,
+        mentee: socket,
+        menteeUsername: data.menteeUsername
+      };
+
+      findRoom(socket, roomID).helpRequest = helpRequest;
+
       socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
     });
 
@@ -134,12 +145,31 @@ io.on('connection', function(socket){
     socket.join(data.roomID);
     io.to(data.roomID).emit('person joined', {roomID: data.roomID});
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
+
+    findRoom(socket, data.roomID).helpRequest.mentorUsername = data.mentorUsername;
+    findRoom(socket, data.roomID).helpRequest.mentor = socket;
   });
 
   socket.on('chat message', function(data) {
     io.to(data.roomID).emit('chat message', data);
-
   });
+
+  socket.on('end chat', function(data) {
+    var menteeSocket = findRoom(socket, data.roomID).helpRequest.mentee;
+    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentor;
+    var menteeUsername = findRoom(socket, data.roomID).helpRequest.menteeUsername;
+    var mentorUsername = findRoom(socket, data.roomID).helpRequest.mentorUsername;
+
+    io.to(mentorSocket.id).emit('mentee left', { menteeUsername : menteeUsername });
+    io.to(menteeSocket.id).emit('mentor left', { mentorUsername : mentorUsername });
+    menteeSocket.leave(data.roomID);
+    mentorSocket.leave(data.roomID);
+  });
+
+  socket.on('typing', function (data) {
+    console.log(data.roomID);
+    socket.broadcast.to(data.roomID).emit('typing', data.message);
+   });
 
 });
 

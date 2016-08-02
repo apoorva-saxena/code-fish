@@ -10,7 +10,6 @@ var GITHUB_CLIENT_ID = "f15bb76b68279c20ce4c";
 var GITHUB_CLIENT_SECRET = "16b4ee54f1043591636fae42d1aa604a1590db0a";
 
 
-
 router.get('/new', function(req, res, next) {
     res.render('sessions/new');
 });
@@ -20,14 +19,18 @@ passport.use(new LocalStrategy(
         User.getUserByUsername(username, function(err, user) {
             if (err) throw err;
             if (!user) {
-                return done(null, false, { message: 'Unknown User' });
+                return done(null, false, {
+                    message: 'Unknown User'
+                });
             }
             User.comparePassword(password, user.password, function(err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
                     return done(null, user);
                 } else {
-                    return done(null, false, { message: 'Invalid password' });
+                    return done(null, false, {
+                        message: 'Invalid password'
+                    });
                 }
             });
         });
@@ -37,7 +40,7 @@ passport.use(new LocalStrategy(
 passport.use(new GitHubStrategy({
   clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/github/callback"
+  callbackURL: "http://192.168.49.48:3000/auth/github/callback"
 }, function(accessToken, refreshToken, profile, done) {
        User.findOne({
            'githubId': profile.id
@@ -50,7 +53,7 @@ passport.use(new GitHubStrategy({
                };
 
                if (profile._json.avatar_url) {
-                   newUser.avatar_url = profile._json.avatar_url;
+                   newUser.image = profile._json.avatar_url;
                }
                user = new User(newUser);
                return user.save();
@@ -68,11 +71,11 @@ passport.use(new GitHubStrategy({
 
 
 passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
-    User.getUserById(id, function(err, user) {
+    User.findById(id, function(err, user) {
         done(err, user);
     });
 });
@@ -84,12 +87,11 @@ router.post('/new',
         failureFlash: true
     }));
 
-router.get('/destroy', function(req, res){
+router.get('/destroy', function(req, res) {
     req.logout();
     req.flash('success_msg', 'Successfully signed out');
     res.redirect('/');
 });
-
 
 
 module.exports = router;
