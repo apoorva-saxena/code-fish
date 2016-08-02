@@ -26,13 +26,24 @@ Kudos : {{user.kudos}}
 <div id="map"> Map </div>
 
 <script>
-function
-  var map;
+var geocoder = require('geocoder');
+
+
   function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
+    var myLatLng = 'London';
+    console.log(geocoder.geocode("London"));
+    var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 0, lng: 0},
       zoom: 2
     });
+
+    var marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      title: 'Hello World!'
+    });
+
+
   }
 </script>
 
