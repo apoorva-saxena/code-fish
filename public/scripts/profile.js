@@ -1,12 +1,14 @@
-(function(exports) {
 
+(function(exports) {
 var currentUser;
 var socket = io();
 socket.on('current user', function(data) {
 currentUser = data.user;
 console.log(currentUser);
+var citiesContacted = currentUser.citiesContacted;
+console.log(citiesContacted);
 });
-var city = "London";
+
 function initMap()
 {
   geocoder = new google.maps.Geocoder();
@@ -16,7 +18,11 @@ function initMap()
       zoom: 2,
       center: { lat: 0, lon:0}
   });
-  codeAddress(city);
+  for(var i = 0; i < citiesContacted.length; i++)
+{
+  codeAddress(citiesContacted[i]);
+}
+
 }
 
 function codeAddress(address)
@@ -37,5 +43,5 @@ function codeAddress(address)
    }
   });
 }
-exports.socket = socket;
+exports.initMap = initMap;
 })(this);
