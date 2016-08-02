@@ -3,6 +3,7 @@
 var socket = io();
 var currentUser;
 var timeout;
+var User = require('../models/user');
 
 $('#page-layout').html($('#homepage-template').html());
 
@@ -87,7 +88,7 @@ socket.on('person joined', function(data){
       $('.typing').html("");
     }
   });
-  
+
   function timeoutFunction() {
     typing = false;
     socket.emit('typing', {roomID: data.roomID, message: false});
@@ -96,20 +97,26 @@ socket.on('person joined', function(data){
   $('#end-chat-button').click(function() {
     socket.emit('end chat', { roomID: data.roomID });
   });
-  
+
   socket.on('mentee left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentee.username);
+    console.log(data.mentee.kudos);
     $('.kudos-image').click(function() {
-      
+      User.update(
+        { _id: data.mentee._id},
+        {$inc: { data.mentee.kudos: 1}}
+      );
+      console.log(data.mentee.kudos);
     });
+
   });
 
   socket.on('mentor left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentor.username);
     $('.kudos-image').on('click', function() {
-      
+
     });
   });
 
