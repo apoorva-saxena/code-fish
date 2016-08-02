@@ -31,6 +31,7 @@ router.post('/new', function(req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
     var passwordconfirmation = req.body.passwordconfirmation;
+    var kudos = 0;
 
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
@@ -48,7 +49,8 @@ router.post('/new', function(req, res, next) {
         var newUser = new User({
             username: username,
             email: email,
-            password: password
+            password: password,
+            kudos: kudos
         });
         User.createUser(newUser, function(err, user) {
             if (err) throw err;
