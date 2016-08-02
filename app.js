@@ -161,8 +161,8 @@ io.on('connection', function(socket){
     var mentee = findRoom(socket, data.roomID).helpRequest.mentee;
     var mentor = findRoom(socket, data.roomID).helpRequest.mentor;
 
-    io.to(mentorSocket.id).emit('mentee left', { mentee: mentee });
-    io.to(menteeSocket.id).emit('mentor left', { mentor: mentor });
+    io.to(mentorSocket.id).emit('mentee left', { mentee: mentee, mentor: mentor });
+    io.to(menteeSocket.id).emit('mentor left', { mentor: mentor, mentee: mentee });
     menteeSocket.leave(data.roomID);
     mentorSocket.leave(data.roomID);
   });
@@ -184,6 +184,24 @@ io.on('connection', function(socket){
       if (err) { return (err) };
       user.kudos += 1;
       user.save();
+    });
+  });
+
+  socket.on('update cities contacted for mentor', function(data) {
+    User.findOne({ _id: data.mentor._id }, function(err, user) {
+      if (err) { return (err) };
+      user.citiesContacted.push(data.menteeCity);
+      user.save();
+      console.log(user);
+    });
+  });
+
+  socket.on('update cities contacted for mentee', function(data) {
+    User.findOne({ _id: data.mentee._id }, function(err, user) {
+      if (err) { return (err) };
+      user.citiesContacted.push(data.mentorCity);
+      user.save();
+      console.log(user);
     });
   });
 

@@ -100,17 +100,17 @@ socket.on('person joined', function(data){
   socket.on('mentee left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentee.username);
+    socket.emit('update cities contacted for mentor', { mentor: data.mentor, menteeCity: data.mentee.city } );
     $('.kudos-image').on('click', function() {
       socket.emit('update mentee kudos', data );
       $('#page-layout').html($('#thank-you-template').html());
     });
-   
-
   });
 
   socket.on('mentor left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentor.username);
+    socket.emit('update cities contacted for mentee', { mentee: data.mentee, mentorCity: data.mentor.city } );
     $('.kudos-image').on('click', function() {
       socket.emit('update mentor kudos', data );
       $('#page-layout').html($('#thank-you-template').html());
