@@ -1,8 +1,8 @@
 <div id="image">
   {{#if user.image}}
-  <img src="/img/{{user.image}}" alt="smiley.gif" style="width:150px;height:150px;">
+  <img class="img-circle" src="/img/{{user.image}}" alt="profile" style="width:150px;height:150px;">
   {{else}}
-  <img src="http://www.soulmarket.net/wp-content/uploads/2015/02/blank-profile.png" style="width:150px;height:150px;">
+  <img class="img-circle" src="http://www.soulmarket.net/wp-content/uploads/2015/02/blank-profile.png" style="width:150px;height:150px;">
   {{/if}}
 </div>
 First Name : {{user.firstname}}
