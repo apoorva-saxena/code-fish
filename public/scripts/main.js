@@ -4,6 +4,7 @@ var socket = io();
 
 
 var currentUser;
+var timeout;
 
 $('#page-layout').html($('#homepage-template').html());
 
@@ -20,7 +21,9 @@ socket.on('current user', function(data) {
       $('#page-layout').html($('#loading-template').html());
     });
   } else {
-  console.log('Please sign in');
+    $(function() {
+      $('#help-button').popupTooltip('bottom','Please sign in');
+    });
    }
   });
   $('body').on('click', '.join-button', function() {
@@ -29,7 +32,9 @@ socket.on('current user', function(data) {
                                   mentorUsername: currentUser.username
                                 });
     } else {
-      console.log('Please sign in to join room');
+      $(function() {
+        $('.join-button').popupTooltip('bottom','Please sign in');
+      });
     }
 
   });
@@ -64,8 +69,6 @@ socket.on('person joined', function(data){
   });
 
   socket.on('chat message', function(data){
-    $('#messages').append($('<li>').text(data.username + ': ' + data.message));
-  });
 
   $('#end-chat-button').click(function() {
     socket.emit('end chat', { roomID: data.roomID });
@@ -79,6 +82,35 @@ socket.on('person joined', function(data){
   socket.on('mentor left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentorUsername);
+  });
+
+    if (data.username === currentUser.username) {
+      $('#messages').append($('<li class="current-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+    } else {
+      $('#messages').append($('<li class="responding-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+    }
+  });
+
+  function timeoutFunction() {
+    typing = false;
+    socket.emit('typing', {roomID: data.roomID, message: false});
+  }
+
+
+  $('.chatbox-input').keyup(function() {
+    typing = true;
+    socket.emit('typing', {roomID: data.roomID, message: 'typing...'});
+    clearTimeout(timeout);
+    timeout = setTimeout(timeoutFunction, 1000);
+  });
+
+
+  socket.on('typing', function(data) {
+    if (data) {
+      $('.typing').html(data);
+    } else {
+      $('.typing').html("");
+    }
   });
 
 });

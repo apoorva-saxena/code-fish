@@ -58,6 +58,7 @@
 </script>
 
 <script id="chat-template" type="text/template">
+
   <div id="chat-container">
 
     <div id="chat-wrapper">
@@ -65,6 +66,8 @@
       <div id="chatbox-header">LIVE CHAT</div>
 
       <ul id="messages"></ul>
+
+      <div class="typing"> </div>
 
       <form id="chatbox" action="">
         <input type="text-area" class="chatbox-input" id="m" name="chat-input" autocomplete="off" />
@@ -81,9 +84,11 @@
     Would you like to give <span id="other-username"></span> kudos?
     <img id="kudos-image" src="./images/kudos.png" />
   </div>
+
 </script>
 
 <script id="end-chat-template" type="text/template"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="/scripts/main.js"></script>
+<script src="/scripts/jquery.popuptooltip.js"></script>

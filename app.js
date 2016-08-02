@@ -111,7 +111,7 @@ io.on('connection', function(socket){
         id: roomID,
         mentee: socket,
         menteeUsername: data.menteeUsername
-      }
+      };
 
       findRoom(socket, roomID).helpRequest = helpRequest;
 
@@ -120,7 +120,7 @@ io.on('connection', function(socket){
 
   });
 
-  socket.on('join room', function(data){ 
+  socket.on('join room', function(data){
     socket.join(data.roomID);
     io.to(data.roomID).emit('person joined', {roomID: data.roomID});
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
@@ -144,6 +144,11 @@ io.on('connection', function(socket){
     menteeSocket.leave(data.roomID);
     mentorSocket.leave(data.roomID);
   });
+
+  socket.on('typing', function (data) {
+    console.log(data.roomID);
+    socket.broadcast.to(data.roomID).emit('typing', data.message);
+   });
 
 });
 
