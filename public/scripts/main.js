@@ -100,8 +100,8 @@ socket.on('person joined', function(data){
   socket.on('mentee left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentee.username);
-    $('.kudos-image').on('click', function() {
- 
+    $('.kudos-image').click(function() {
+      
     });
   });
 

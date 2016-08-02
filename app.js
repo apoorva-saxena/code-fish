@@ -16,6 +16,7 @@ var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
 var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
+var User = require('./models/user');
 
 
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
@@ -169,6 +170,10 @@ io.on('connection', function(socket){
   socket.on('typing', function (data) {
     socket.broadcast.to(data.roomID).emit('typing', data.message);
    });
+
+  // socket.on('update mentee kudos', function(data) {
+  //   User.update({ _id: data.mentee._id }, { $set: { kudos: 2 }});
+  // });
 
 });
 
