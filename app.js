@@ -13,8 +13,10 @@ var exphbs = require('express-handlebars');
 var app = express();
 var config = require('./_config');
 var passport = require('passport');
+var GitHubStrategy = require('passport-github').Strategy;
 var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
+
 
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
   if(err) {
@@ -61,6 +63,25 @@ app.use(function (req, res, next) {
   currentUser = req.user;
   next();
 });
+
+
+app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'user:email' ] }),
+  function(req, res){
+    // The request will be redirected to GitHub for authentication, so this
+    // function will not be called.
+  });
+
+// GET /auth/github/callback
+//   Use passport.authenticate() as route middleware to authenticate the
+//   request.  If authentication fails, the user will be redirected back to the
+//   login page.  Otherwise, the primary route function will be called,
+//   which, in this example, will redirect the user to the home page.
+app.get('/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 
 
