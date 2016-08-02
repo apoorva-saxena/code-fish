@@ -22,3 +22,20 @@ Kudos : {{user.kudos}}
 <br>
 
 <a href='/users/{{user.id}}/edit'>Edit Profile</a>
+
+<div id="map"> Map </div>
+
+<script>
+function
+  var map;
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 0, lng: 0},
+      zoom: 2
+    });
+  }
+</script>
+
+<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc4yJPEuJFKB9POuUBh6RSvZ4_A11QYa0&callback=initMap">
+    </script>
