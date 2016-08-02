@@ -576,7 +576,6 @@ input[type="text-area"] {
 	min-height: 700px;
 	position: relative;
 	width: 100%;
-
 }
 
 .username {
@@ -597,6 +596,19 @@ input[type="text-area"] {
 	text-align: left;
 	margin: 10px 0px;
 	padding: 10px 0px 10px 20px;
+}
 
 
+#end-chat-button {
+	text-align: center;
+	font-size: 26px;
+	padding: 10px;
+	border-radius: 8px;
+	background-color: #C6353D;
+	color: white;
+}
+
+#kudos-image {
+	height: 30%;
+	width: 30%;
 }
