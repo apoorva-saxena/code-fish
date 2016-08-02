@@ -51,12 +51,20 @@ router.post('/new', function(req, res, next) {
             password: password
         });
         User.createUser(newUser, function(err, user) {
-            if (err) throw err;
-
+            if (err) {
+              throw err;
+            }
+            else {
+              req.login(user, function(err){
+                if ( ! err ){
+                   res.redirect('/');
+               } else {
+                   throw err;
+               }
+             });
+            }
         });
-        req.flash('success_msg', 'You are registered and can now log in');
-        res.redirect('/');
-    }
+      }
 });
 
 router.get('/:_id', loggedIn, function(req, res, next) {
