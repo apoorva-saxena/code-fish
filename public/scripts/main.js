@@ -76,13 +76,13 @@ socket.on('person joined', function(data){
 
   function timeoutFunction() {
     typing = false;
-    socket.emit("typing", false);
+    socket.emit('typing', {roomID: data.roomID, message: false});
   }
 
 
   $('.chatbox-input').keyup(function() {
     typing = true;
-    socket.emit('typing', 'typing...');
+    socket.emit('typing', {roomID: data.roomID, message: 'typing...'});
     clearTimeout(timeout);
     timeout = setTimeout(timeoutFunction, 1000);
   });
