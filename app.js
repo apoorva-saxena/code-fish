@@ -18,6 +18,10 @@ var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
 
 
+var socks = [];
+var body = "'sup";
+
+
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
   if(err) {
     console.log('Error connecting to the database. ' + err);
@@ -83,6 +87,10 @@ app.get('/auth/github/callback',
     res.redirect('/');
   });
 
+app.get('/code', function(req, res, next) {
+  res.render('code');
+});
+
 
 
 app.use('/', routes);
@@ -116,6 +124,24 @@ app.use('/sessions', sessions);
 
 
 io.on('connection', function(socket){
+
+  socks.push(socket);
+  socket.emit('refresh', {body: body});
+
+  socket.on('refresh', function (body_) {
+    console.log('new body');
+    body = body_;
+  });
+
+  socket.on('change', function (op) {
+  console.log(op);
+  if (op.origin == '+input' || op.origin == 'paste' || op.origin == '+delete') {
+    socks.forEach(function (sock) {
+      if (sock != socket)
+        sock.emit('change', op);
+    });
+  }
+});
 
 
   socket.emit('current user', {user: currentUser});
