@@ -19,7 +19,7 @@ var io = require('socket.io').listen(http);
 
 
 var socks = [];
-var body = "'sup";
+var body = "";
 
 
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
@@ -35,7 +35,6 @@ var db = mongoose.connection;
 var routes = require('./routes/index');
 var sessions = require('./routes/sessions');
 var users = require('./routes/users');
-// var profiles = require('./routes/profiles');
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
@@ -72,56 +71,17 @@ app.use(function (req, res, next) {
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }),
   function(req, res){
-    // The request will be redirected to GitHub for authentication, so this
-    // function will not be called.
   });
 
-// GET /auth/github/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function will be called,
-//   which, in this example, will redirect the user to the home page.
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/');
   });
 
-app.get('/code', function(req, res, next) {
-  res.render('code');
-});
-
-
-
 app.use('/', routes);
 app.use('/users', users);
 app.use('/sessions', sessions);
-// app.use('/profiles', profiles);
-
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-
-// if (app.get('env') === 'development') {
-//   app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//       message: err.message,
-//       error: err
-//     });
-//   });
-// }
-
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: {}
-//   });
-// });
-
 
 io.on('connection', function(socket){
 
