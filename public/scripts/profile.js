@@ -1,28 +1,29 @@
-
 (function(exports) {
+
+function initMap()
+{
 var currentUser;
 var socket = io();
 socket.on('current user', function(data) {
 currentUser = data.user;
 console.log(currentUser);
+
 var citiesContacted = currentUser.citiesContacted;
 console.log(citiesContacted);
-});
 
-function initMap()
-{
   geocoder = new google.maps.Geocoder();
-
 
   map = new google.maps.Map(document.getElementById('map'), {
       zoom: 2,
-      center: { lat: 0, lon:0}
+      center: { lat: 0, lng:0}
   });
   for(var i = 0; i < citiesContacted.length; i++)
-{
-  codeAddress(citiesContacted[i]);
-}
-
+  {
+    console.log('calling for:')
+    console.log(citiesContacted[i]);
+    codeAddress(citiesContacted[i]);
+  }
+});
 }
 
 function codeAddress(address)
@@ -31,6 +32,7 @@ function codeAddress(address)
   {
     if (status == google.maps.GeocoderStatus.OK)
     {
+
       map.setCenter(results[0].geometry.location);//center the map over the result
       //place a marker at the location
       var marker = new google.maps.Marker(
@@ -43,5 +45,6 @@ function codeAddress(address)
    }
   });
 }
+
 exports.initMap = initMap;
 })(this);
