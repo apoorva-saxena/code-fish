@@ -122,7 +122,8 @@ io.on('connection', function(socket){
   });
 
   socket.on('typing', function (data) {
-     socket.broadcast.emit('typing', data);
+    console.log(data.roomID);
+    socket.broadcast.to(data.roomID).emit('typing', data.message);
    });
 
 });
