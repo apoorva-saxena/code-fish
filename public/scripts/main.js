@@ -3,7 +3,6 @@
 var socket = io();
 var currentUser;
 var timeout;
-var User = require('../models/user');
 
 $('#page-layout').html($('#homepage-template').html());
 
@@ -101,14 +100,11 @@ socket.on('person joined', function(data){
   socket.on('mentee left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentee.username);
-    console.log(data.mentee.kudos);
-    $('.kudos-image').click(function() {
-      User.update(
-        { _id: data.mentee._id},
-        {$inc: { data.mentee.kudos: 1}}
-      );
-      console.log(data.mentee.kudos);
+    $('.kudos-image').on('click', function() {
+      socket.emit('update mentee kudos', data );
+      $('#page-layout').html($('#thank-you-template').html());
     });
+   
 
   });
 
@@ -116,7 +112,8 @@ socket.on('person joined', function(data){
     $('#page-layout').html($('#end-chat-template').html());
     $('#other-username').text(data.mentor.username);
     $('.kudos-image').on('click', function() {
-
+      socket.emit('update mentor kudos', data );
+      $('#page-layout').html($('#thank-you-template').html());
     });
   });
 

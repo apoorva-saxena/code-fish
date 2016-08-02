@@ -171,9 +171,21 @@ io.on('connection', function(socket){
     socket.broadcast.to(data.roomID).emit('typing', data.message);
    });
 
-  // socket.on('update mentee kudos', function(data) {
-  //   User.update({ _id: data.mentee._id }, { $set: { kudos: 2 }});
-  // });
+  socket.on('update mentee kudos', function(data) {
+    User.findOne({ _id: data.mentee._id }, function(err, user) {
+      if (err) { return (err) };
+      user.kudos += 1;
+      user.save();
+    });
+  });
+
+  socket.on('update mentor kudos', function(data) {
+    User.findOne({ _id: data.mentor._id }, function(err, user) {
+      if (err) { return (err) };
+      user.kudos += 1;
+      user.save();
+    });
+  });
 
 });
 
