@@ -130,8 +130,8 @@ io.on('connection', function(socket){
 
       var helpRequest = {
         id: roomID,
-        mentee: socket,
-        menteeUsername: data.menteeUsername
+        menteeSocket: socket,
+        mentee: data.mentee
       };
 
       findRoom(socket, roomID).helpRequest = helpRequest;
@@ -146,8 +146,8 @@ io.on('connection', function(socket){
     io.to(data.roomID).emit('person joined', {roomID: data.roomID});
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
 
-    findRoom(socket, data.roomID).helpRequest.mentorUsername = data.mentorUsername;
-    findRoom(socket, data.roomID).helpRequest.mentor = socket;
+    findRoom(socket, data.roomID).helpRequest.mentor = data.mentor;
+    findRoom(socket, data.roomID).helpRequest.mentorSocket = socket;
   });
 
   socket.on('chat message', function(data) {
@@ -155,19 +155,18 @@ io.on('connection', function(socket){
   });
 
   socket.on('end chat', function(data) {
-    var menteeSocket = findRoom(socket, data.roomID).helpRequest.mentee;
-    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentor;
-    var menteeUsername = findRoom(socket, data.roomID).helpRequest.menteeUsername;
-    var mentorUsername = findRoom(socket, data.roomID).helpRequest.mentorUsername;
+    var menteeSocket = findRoom(socket, data.roomID).helpRequest.menteeSocket;
+    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentorSocket;
+    var mentee = findRoom(socket, data.roomID).helpRequest.mentee;
+    var mentor = findRoom(socket, data.roomID).helpRequest.mentor;
 
-    io.to(mentorSocket.id).emit('mentee left', { menteeUsername : menteeUsername });
-    io.to(menteeSocket.id).emit('mentor left', { mentorUsername : mentorUsername });
+    io.to(mentorSocket.id).emit('mentee left', { mentee: mentee });
+    io.to(menteeSocket.id).emit('mentor left', { mentor: mentor });
     menteeSocket.leave(data.roomID);
     mentorSocket.leave(data.roomID);
   });
 
   socket.on('typing', function (data) {
-    console.log(data.roomID);
     socket.broadcast.to(data.roomID).emit('typing', data.message);
    });
 

@@ -14,7 +14,7 @@ socket.on('current user', function(data) {
       $('#help-request-form').submit(function(e) {
         e.preventDefault();
         socket.emit('host room', { requestDescription: $('#request-description').val(),
-                                   menteeUsername: currentUser.username
+                                   mentee: currentUser
                                   });
         $('#page-layout').html($('#loading-template').html());
       });
@@ -26,7 +26,7 @@ socket.on('current user', function(data) {
   $('body').on('click', '.join-button', function() {
     if (data.user) {
       socket.emit('join room', { roomID: $(this).text(),
-                                  mentorUsername: currentUser.username
+                                  mentor: currentUser
                                 });
     }
     else {
@@ -59,17 +59,17 @@ socket.on('person joined', function(data){
     e.preventDefault();
     socket.emit('chat message', { roomID: data.roomID,
                                   message: $('#m').val(),
-                                  username: currentUser.username
+                                  user: currentUser
                                 });
     $('#m').val('');
   });
 
   socket.on('chat message', function(data){
-    if (data.username === currentUser.username) {
-      $('#messages').append($('<li class="current-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+    if (data.user.username === currentUser.username) {
+      $('#messages').append($('<li class="current-user-message">').html( '<span class="username">' + data.user.username + '</span>: ' + data.message));
     }
     else {
-      $('#messages').append($('<li class="responding-user-message">').html( '<span class="username">' + data.username + '</span>: ' + data.message));
+      $('#messages').append($('<li class="responding-user-message">').html( '<span class="username">' + data.user.username + '</span>: ' + data.message));
     }
   });
 
@@ -99,17 +99,17 @@ socket.on('person joined', function(data){
   
   socket.on('mentee left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
-    $('#other-username').text(data.menteeUsername);
+    $('#other-username').text(data.mentee.username);
     $('.kudos-image').on('click', function() {
-     alert('I was clicked!');
+ 
     });
   });
 
   socket.on('mentor left', function(data) {
     $('#page-layout').html($('#end-chat-template').html());
-    $('#other-username').text(data.mentorUsername);
+    $('#other-username').text(data.mentor.username);
     $('.kudos-image').on('click', function() {
-      kudos++ 
+      
     });
   });
 
