@@ -87,8 +87,11 @@ router.post('/:_id/edit', upload.single('image'), function(req, res, next) {
         if (req.body.bio) user.bio = req.body.bio;
         if (req.body.firstname) user.firstname = req.body.firstname;
         if (req.body.lastname) user.lastname = req.body.lastname;
-        if (req.file.filename) user.image = req.file.filename;
-
+        if (!req.file){
+          user.image = user.image;
+        } else {
+          user.image = req.file.filename;
+        }
         user.save(function(err) {
             if (err) return next(err);
             req.flash('success', 'Successfully edited your profile');
