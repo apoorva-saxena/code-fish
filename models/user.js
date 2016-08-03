@@ -10,7 +10,6 @@ var UserSchema = mongoose.Schema({
     firstname: String,
     lastname: String,
     image: String,
-    avatar: String
     kudos: Number,
     city: String,
     citiesContacted: [String]
