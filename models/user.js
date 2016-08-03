@@ -9,7 +9,11 @@ var UserSchema = mongoose.Schema({
     githubid: String,
     firstname: String,
     lastname: String,
-    image: String
+    image: String,
+    avatar: String,
+    kudos: Number,
+    city: String,
+    citiesContacted: [String]
   }, {collection: 'users'});
 
 var User = module.exports = mongoose.model('User', UserSchema);

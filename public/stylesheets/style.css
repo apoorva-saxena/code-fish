@@ -613,6 +613,9 @@ input[type="text-area"] {
 	width: 30%;
 }
 
+.img-circle {
+    border-radius: 50%;
+}
 .repl-container
 {
 	margin: 0;
@@ -621,8 +624,12 @@ input[type="text-area"] {
 	height: 50%;
 }
 
-
 .CodeMirror, .CodeMirror-scroll
 {
 	height: 100%;
 }
+
+#map {
+			 height: 700px;
+			 width: 1000px;
+		 }
