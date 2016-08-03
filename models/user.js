@@ -10,7 +10,9 @@ var UserSchema = mongoose.Schema({
     firstname: String,
     lastname: String,
     image: String,
-    kudos: Number
+    kudos: Number,
+    city: String,
+    citiesContacted: [String]
   }, {collection: 'users'});
 
 var User = module.exports = mongoose.model('User', UserSchema);

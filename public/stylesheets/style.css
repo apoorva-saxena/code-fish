@@ -612,3 +612,8 @@ input[type="text-area"] {
 	height: 30%;
 	width: 30%;
 }
+
+#map {
+			 height: 700px;
+			 width: 1000px;
+		 }
