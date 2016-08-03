@@ -1,3 +1,4 @@
+
 <div id="image">
   {{#if user.image}}
   <img class="img-circle" src="/img/{{user.image}}" alt="profile" style="width:150px;height:150px;">
@@ -13,9 +14,20 @@ Email : {{user.email}}
 <br>
 Username : {{user.username}}
 <br>
+City : {{user.city}}
+<br>
 Short Bio : {{user.bio}}
 <br>
+Kudos : {{user.kudos}}
 <br>
 <br>
-
 <a href='/users/{{user.id}}/edit'>Edit Profile</a>
+
+<div id="map"> Map </div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/scripts/profile.js"></script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc4yJPEuJFKB9POuUBh6RSvZ4_A11QYa0&callback=initMap">
+</script>

@@ -616,3 +616,20 @@ input[type="text-area"] {
 .img-circle {
     border-radius: 50%;
 }
+.repl-container
+{
+	margin: 0;
+	padding: 0;
+	max-width:80%;
+	height: 50%;
+}
+
+.CodeMirror, .CodeMirror-scroll
+{
+	height: 100%;
+}
+
+#map {
+			 height: 700px;
+			 width: 1000px;
+		 }
