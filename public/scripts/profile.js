@@ -5,9 +5,7 @@
     var socket = io();
     socket.on('current user', function(data) {
       currentUser = data.user;
-      console.log(currentUser);
       var citiesContacted = currentUser.citiesContacted;
-      console.log(citiesContacted);
 
       geocoder = new google.maps.Geocoder();
 
@@ -31,9 +29,7 @@
       });
     
       for(var i = 0; i < citiesContacted.length; i++) {
-      console.log('calling for:');
-      console.log(citiesContacted[i]);
-      codeAddress(citiesContacted[i]);
+        codeAddress(citiesContacted[i]);
       }
     });
   }
