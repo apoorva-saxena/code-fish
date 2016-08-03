@@ -71,11 +71,9 @@ socket.on('person joined', function(data){
     editor.setValue(data.body);
   });
   socket.on('change', function (data) {
-    console.log(data);
     editor.replaceRange(data.text, data.from, data.to);
   });
   editor.on('change', function (i, op) {
-    console.log(op);
     socket.emit('change', op);
     socket.emit('refresh', editor.getValue());
   });
