@@ -29,7 +29,7 @@
   }
 ]
       });
-    
+
       for(var i = 0; i < citiesContacted.length; i++) {
       console.log('calling for:');
       console.log(citiesContacted[i]);
@@ -42,8 +42,10 @@
     geocoder.geocode( {address:address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         map.setCenter(results[0].geometry.location);
+         var image = '../images/pearl.png';
         var marker = new google.maps.Marker({ map: map,
-                                              position: results[0].geometry.location
+                                              position: results[0].geometry.location,
+                                              icon: image
                                             });
       }
     });
