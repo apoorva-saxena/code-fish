@@ -40,7 +40,7 @@ passport.use(new LocalStrategy(
 passport.use(new GitHubStrategy({
   clientID: GITHUB_CLIENT_ID,
   clientSecret: GITHUB_CLIENT_SECRET,
-  callbackURL: "http://192.168.49.48:3000/auth/github/callback"
+  callbackURL: "http://192.168.49.59:3000/auth/github/callback"
 }, function(accessToken, refreshToken, profile, done) {
        User.findOne({
            'githubId': profile.id
@@ -53,7 +53,7 @@ passport.use(new GitHubStrategy({
                };
 
                if (profile._json.avatar_url) {
-                   newUser.image = profile._json.avatar_url;
+                 newUser.avatar = new Buffer(profile._json.avatar_url, 'binary');
                }
                user = new User(newUser);
                return user.save();
