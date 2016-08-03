@@ -613,6 +613,9 @@ input[type="text-area"] {
 	width: 30%;
 }
 
+.img-circle {
+    border-radius: 50%;
+}
 .repl-container
 {
 	margin: 0;
