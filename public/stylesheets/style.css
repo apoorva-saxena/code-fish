@@ -1,3 +1,51 @@
 body {
-	padding-top: 65px;
+	padding-top: 30px;
+}
+
+
+.img-responsive {
+	width: 100%
+}
+
+.container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#homepage-image-text {
+	position: absolute;
+	width: 100%;
+	top:40% ;
+	text-align: center;
+	color: white;
+	font-size: 220%;
+}
+
+#help-button-container {
+	position: absolute;
+	width: 100%;
+	top:50% ;
+	text-align: center;
+	color: white;
+	font-size: 220%;
+}
+
+
+@media all and (min-width: 960px) {
+	#homepage-image-text {
+      font-size: 280%;
+    }
+}
+
+@media all and (max-width: 959px) and (min-width: 600px) {
+		#homepage-image-text {
+      font-size: 180%;
+    }
+}
+
+@media all and (max-width: 599px) and (min-width: 320px) {
+	#homepage-image-text {
+		font-size: 120%;
+	}
+
 }
