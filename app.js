@@ -16,6 +16,11 @@ var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
 var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
+var User = require('./models/user');
+
+
+var socks = [];
+var body = "";
 
 
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
@@ -31,7 +36,6 @@ var db = mongoose.connection;
 var routes = require('./routes/index');
 var sessions = require('./routes/sessions');
 var users = require('./routes/users');
-// var profiles = require('./routes/profiles');
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
@@ -68,54 +72,35 @@ app.use(function (req, res, next) {
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }),
   function(req, res){
-    // The request will be redirected to GitHub for authentication, so this
-    // function will not be called.
   });
 
-// GET /auth/github/callback
-//   Use passport.authenticate() as route middleware to authenticate the
-//   request.  If authentication fails, the user will be redirected back to the
-//   login page.  Otherwise, the primary route function will be called,
-//   which, in this example, will redirect the user to the home page.
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/');
   });
 
-
-
 app.use('/', routes);
 app.use('/users', users);
 app.use('/sessions', sessions);
-// app.use('/profiles', profiles);
-
-// app.use(function(req, res, next) {
-//   var err = new Error('Not Found');
-//   err.status = 404;
-//   next(err);
-// });
-
-// if (app.get('env') === 'development') {
-//   app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//       message: err.message,
-//       error: err
-//     });
-//   });
-// }
-
-// app.use(function(err, req, res, next) {
-//   res.status(err.status || 500);
-//   res.render('error', {
-//     message: err.message,
-//     error: {}
-//   });
-// });
-
 
 io.on('connection', function(socket){
+
+  socks.push(socket);
+  socket.emit('refresh', {body: body});
+
+  socket.on('refresh', function (body_) {
+    body = body_;
+  });
+
+  socket.on('change', function (op) {
+  if (op.origin == '+input' || op.origin == 'paste' || op.origin == '+delete') {
+    socks.forEach(function (sock) {
+      if (sock != socket)
+        sock.emit('change', op);
+    });
+  }
+});
 
 
   socket.emit('current user', {user: currentUser});
@@ -130,8 +115,8 @@ io.on('connection', function(socket){
 
       var helpRequest = {
         id: roomID,
-        mentee: socket,
-        menteeUsername: data.menteeUsername
+        menteeSocket: socket,
+        mentee: data.mentee
       };
 
       findRoom(socket, roomID).helpRequest = helpRequest;
@@ -146,8 +131,8 @@ io.on('connection', function(socket){
     io.to(data.roomID).emit('person joined', {roomID: data.roomID});
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
 
-    findRoom(socket, data.roomID).helpRequest.mentorUsername = data.mentorUsername;
-    findRoom(socket, data.roomID).helpRequest.mentor = socket;
+    findRoom(socket, data.roomID).helpRequest.mentor = data.mentor;
+    findRoom(socket, data.roomID).helpRequest.mentorSocket = socket;
   });
 
   socket.on('chat message', function(data) {
@@ -155,21 +140,54 @@ io.on('connection', function(socket){
   });
 
   socket.on('end chat', function(data) {
-    var menteeSocket = findRoom(socket, data.roomID).helpRequest.mentee;
-    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentor;
-    var menteeUsername = findRoom(socket, data.roomID).helpRequest.menteeUsername;
-    var mentorUsername = findRoom(socket, data.roomID).helpRequest.mentorUsername;
+    var menteeSocket = findRoom(socket, data.roomID).helpRequest.menteeSocket;
+    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentorSocket;
+    var mentee = findRoom(socket, data.roomID).helpRequest.mentee;
+    var mentor = findRoom(socket, data.roomID).helpRequest.mentor;
 
-    io.to(mentorSocket.id).emit('mentee left', { menteeUsername : menteeUsername });
-    io.to(menteeSocket.id).emit('mentor left', { mentorUsername : mentorUsername });
+    io.to(mentorSocket.id).emit('mentee left', { mentee: mentee, mentor: mentor });
+    io.to(menteeSocket.id).emit('mentor left', { mentor: mentor, mentee: mentee });
     menteeSocket.leave(data.roomID);
     mentorSocket.leave(data.roomID);
   });
 
   socket.on('typing', function (data) {
-    console.log(data.roomID);
     socket.broadcast.to(data.roomID).emit('typing', data.message);
    });
+
+  socket.on('update mentee kudos', function(data) {
+    User.findOne({ _id: data.mentee._id }, function(err, user) {
+      if (err) { return (err) };
+      user.kudos += 1;
+      user.save();
+    });
+  });
+
+  socket.on('update mentor kudos', function(data) {
+    User.findOne({ _id: data.mentor._id }, function(err, user) {
+      if (err) { return (err) };
+      user.kudos += 1;
+      user.save();
+    });
+  });
+
+  socket.on('update cities contacted for mentor', function(data) {
+    User.findOne({ _id: data.mentor._id }, function(err, user) {
+      if (err) { return (err) };
+      user.citiesContacted.push(data.menteeCity);
+      user.save();
+      console.log(user);
+    });
+  });
+
+  socket.on('update cities contacted for mentee', function(data) {
+    User.findOne({ _id: data.mentee._id }, function(err, user) {
+      if (err) { return (err) };
+      user.citiesContacted.push(data.mentorCity);
+      user.save();
+      console.log(user);
+    });
+  });
 
 });
 
