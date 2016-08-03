@@ -16,6 +16,7 @@ var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
 var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
+var User = require('./models/user');
 
 
 var socks = [];
@@ -114,8 +115,8 @@ io.on('connection', function(socket){
 
       var helpRequest = {
         id: roomID,
-        mentee: socket,
-        menteeUsername: data.menteeUsername
+        menteeSocket: socket,
+        mentee: data.mentee
       };
 
       findRoom(socket, roomID).helpRequest = helpRequest;
@@ -130,8 +131,8 @@ io.on('connection', function(socket){
     io.to(data.roomID).emit('person joined', {roomID: data.roomID});
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
 
-    findRoom(socket, data.roomID).helpRequest.mentorUsername = data.mentorUsername;
-    findRoom(socket, data.roomID).helpRequest.mentor = socket;
+    findRoom(socket, data.roomID).helpRequest.mentor = data.mentor;
+    findRoom(socket, data.roomID).helpRequest.mentorSocket = socket;
   });
 
   socket.on('chat message', function(data) {
@@ -139,13 +140,13 @@ io.on('connection', function(socket){
   });
 
   socket.on('end chat', function(data) {
-    var menteeSocket = findRoom(socket, data.roomID).helpRequest.mentee;
-    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentor;
-    var menteeUsername = findRoom(socket, data.roomID).helpRequest.menteeUsername;
-    var mentorUsername = findRoom(socket, data.roomID).helpRequest.mentorUsername;
+    var menteeSocket = findRoom(socket, data.roomID).helpRequest.menteeSocket;
+    var mentorSocket = findRoom(socket, data.roomID).helpRequest.mentorSocket;
+    var mentee = findRoom(socket, data.roomID).helpRequest.mentee;
+    var mentor = findRoom(socket, data.roomID).helpRequest.mentor;
 
-    io.to(mentorSocket.id).emit('mentee left', { menteeUsername : menteeUsername });
-    io.to(menteeSocket.id).emit('mentor left', { mentorUsername : mentorUsername });
+    io.to(mentorSocket.id).emit('mentee left', { mentee: mentee, mentor: mentor });
+    io.to(menteeSocket.id).emit('mentor left', { mentor: mentor, mentee: mentee });
     menteeSocket.leave(data.roomID);
     mentorSocket.leave(data.roomID);
   });
@@ -153,6 +154,40 @@ io.on('connection', function(socket){
   socket.on('typing', function (data) {
     socket.broadcast.to(data.roomID).emit('typing', data.message);
    });
+
+  socket.on('update mentee kudos', function(data) {
+    User.findOne({ _id: data.mentee._id }, function(err, user) {
+      if (err) { return (err) };
+      user.kudos += 1;
+      user.save();
+    });
+  });
+
+  socket.on('update mentor kudos', function(data) {
+    User.findOne({ _id: data.mentor._id }, function(err, user) {
+      if (err) { return (err) };
+      user.kudos += 1;
+      user.save();
+    });
+  });
+
+  socket.on('update cities contacted for mentor', function(data) {
+    User.findOne({ _id: data.mentor._id }, function(err, user) {
+      if (err) { return (err) };
+      user.citiesContacted.push(data.menteeCity);
+      user.save();
+      console.log(user);
+    });
+  });
+
+  socket.on('update cities contacted for mentee', function(data) {
+    User.findOne({ _id: data.mentee._id }, function(err, user) {
+      if (err) { return (err) };
+      user.citiesContacted.push(data.mentorCity);
+      user.save();
+      console.log(user);
+    });
+  });
 
 });
 

@@ -31,6 +31,7 @@ router.post('/new', function(req, res, next) {
     var email = req.body.email;
     var password = req.body.password;
     var passwordconfirmation = req.body.passwordconfirmation;
+    var kudos = 0;
 
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
@@ -48,15 +49,25 @@ router.post('/new', function(req, res, next) {
         var newUser = new User({
             username: username,
             email: email,
-            password: password
+            password: password,
+            kudos: kudos,
+            
         });
         User.createUser(newUser, function(err, user) {
-            if (err) throw err;
-
+            if (err) {
+              throw err;
+            }
+            else {
+              req.login(user, function(err){
+                if ( ! err ){
+                   res.redirect('/');
+               } else {
+                   throw err;
+               }
+             });
+            }
         });
-        req.flash('success_msg', 'You are registered and can now log in');
-        res.redirect('/');
-    }
+      }
 });
 
 router.get('/:_id', loggedIn, function(req, res, next) {
@@ -87,6 +98,7 @@ router.post('/:_id/edit', upload.single('image'), function(req, res, next) {
         if (req.body.bio) user.bio = req.body.bio;
         if (req.body.firstname) user.firstname = req.body.firstname;
         if (req.body.lastname) user.lastname = req.body.lastname;
+        if (req.body.city) user.city = req.body.city;
         if (req.file.filename) user.image = req.file.filename;
 
         user.save(function(err) {

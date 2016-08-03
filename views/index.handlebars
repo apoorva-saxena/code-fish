@@ -57,9 +57,6 @@
   </div>
 </script>
 
-
-
-
 <script id="chat-template" type="text/template">
 <div id="repl-container">
   <textarea id="textit"></textarea>
@@ -87,12 +84,19 @@
 <script id="end-chat-template" type="text/template">
   <div>
     Would you like to give <span id="other-username"></span> kudos?
-    <img id="kudos-image" src="./images/kudos.png" />
+    <img class="kudos-image" src="./images/kudos.png" />
   </div>
-
 </script>
 
-<script id="end-chat-template" type="text/template"></script>
+<script id="thank-you-template" type="text/template">
+  <div>
+    Thank you!
+    <br>
+    <a href='/'>Return to HomePage</a>
+  </div>
+</script>
+
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="/scripts/main.js"></script>
