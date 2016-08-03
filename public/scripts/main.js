@@ -61,10 +61,9 @@ socket.on('new room', function(){
 
 socket.on('person joined', function(data){
 
-
   $('#page-layout').html($('#chat-template').html());
   var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
-    mode: 'ruby',
+    mode: data.languageSelected,
     lineNumbers: true,
     theme: "ambiance"
   });

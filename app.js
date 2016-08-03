@@ -20,6 +20,7 @@ var io = require('socket.io').listen(http);
 
 var socks = [];
 var body = "";
+var languageSelected = "";
 
 
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
@@ -108,13 +109,14 @@ io.on('connection', function(socket){
 
   socket.on('host room', function(data) {
     var roomID = 'Topic: ' + data.requestDescription;
-    var language = data.languages;
+    languageSelected = data.languages;
 
     socket.join(roomID, function() {
       socket.emit('new room');
 
       var helpRequest = {
         id: roomID,
+        language: languageSelected,
         mentee: socket,
         menteeUsername: data.menteeUsername
       };
@@ -128,7 +130,7 @@ io.on('connection', function(socket){
 
   socket.on('join room', function(data){
     socket.join(data.roomID);
-    io.to(data.roomID).emit('person joined', {roomID: data.roomID});
+    io.to(data.roomID).emit('person joined', {roomID: data.roomID, languageSelected: languageSelected});
     socket.broadcast.emit('update available rooms', {rooms: filteredRooms(socket)});
 
     findRoom(socket, data.roomID).helpRequest.mentorUsername = data.mentorUsername;
