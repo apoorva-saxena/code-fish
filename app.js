@@ -89,12 +89,10 @@ io.on('connection', function(socket){
   socket.emit('refresh', {body: body});
 
   socket.on('refresh', function (body_) {
-    console.log('new body');
     body = body_;
   });
 
   socket.on('change', function (op) {
-  console.log(op);
   if (op.origin == '+input' || op.origin == 'paste' || op.origin == '+delete') {
     socks.forEach(function (sock) {
       if (sock != socket)
@@ -153,7 +151,6 @@ io.on('connection', function(socket){
   });
 
   socket.on('typing', function (data) {
-    console.log(data.roomID);
     socket.broadcast.to(data.roomID).emit('typing', data.message);
    });
 
