@@ -1,5 +1,7 @@
 (function(exports) {
 
+window.onload = function (e) {
+
 var socket = io();
 var currentUser;
 var timeout;
@@ -137,6 +139,6 @@ socket.on('person joined', function(data){
 
 
 });
-
+}
 exports.socket = socket;
 })(this);
