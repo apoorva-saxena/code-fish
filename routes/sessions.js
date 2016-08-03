@@ -53,8 +53,7 @@ passport.use(new GitHubStrategy({
                };
 
                if (profile._json.avatar_url) {
-                   newUser.avatar = new Buffer(profile._json.avatar_url, 'binary');
-                  //  new Buffer(profile._json.avatar_url);
+                   newUser.image = profile._json.avatar_url;
                }
                user = new User(newUser);
                return user.save();
