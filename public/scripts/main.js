@@ -54,6 +54,22 @@ socket.on('new room', function(){
 socket.on('person joined', function(data){
 
   $('#page-layout').html($('#chat-template').html());
+  var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
+    mode: 'javascript',
+    lineNumbers: true,
+    theme: "ambiance"
+  });
+
+  socket.on('refresh', function (data) {
+    editor.setValue(data.body);
+  });
+  socket.on('change', function (data) {
+    editor.replaceRange(data.text, data.from, data.to);
+  });
+  editor.on('change', function (i, op) {
+    socket.emit('change', op);
+    socket.emit('refresh', editor.getValue());
+  });
 
   $('#chatbox').submit(function(e){
     e.preventDefault();
