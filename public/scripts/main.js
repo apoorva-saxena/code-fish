@@ -11,15 +11,17 @@ socket.on('current user', function(data) {
   $('#help-button').click(function() {
     if (currentUser) {
       $('#page-layout').html($('#new-help-request-template').html());
+
       $('#help-request-form').submit(function(e) {
-        e.preventDefault();
-        socket.emit('host room', { requestDescription: $('#request-description').val(),
-                                   mentee: currentUser
-                                  });
-        $('#page-layout').html($('#loading-template').html());
-      });
-    }
-    else {
+
+      e.preventDefault();
+      socket.emit('host room', { requestDescription: $('#request-description').val(),
+                                languages: $('#languages').val(),
+                                 menteeUsername: currentUser.username
+                               });
+      $('#page-layout').html($('#loading-template').html());
+    });
+  } else {
       $('#help-button').popupTooltip('bottom','Please sign in');
     }
   });
@@ -55,7 +57,7 @@ socket.on('person joined', function(data){
 
   $('#page-layout').html($('#chat-template').html());
   var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
-    mode: 'javascript',
+    mode: data.languageSelected,
     lineNumbers: true,
     theme: "ambiance"
   });
