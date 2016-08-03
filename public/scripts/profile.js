@@ -13,7 +13,21 @@
 
       map = new google.maps.Map(document.getElementById('map'), {
         zoom: 2,
-        center: { lat: 0, lng:0}
+        center: { lat: 0, lng:0},
+        styles: [
+  {
+    "featureType": "water",
+    "stylers": [
+      { "color": "#517DE7" }
+    ]
+  },
+   {
+    "featureType": "landscape",
+    "stylers": [
+      { "color": "#e7bb51" }
+    ]
+  }
+]
       });
     
       for(var i = 0; i < citiesContacted.length; i++) {
