@@ -108,6 +108,7 @@ io.on('connection', function(socket){
 
   socket.on('host room', function(data) {
     var roomID = 'Topic: ' + data.requestDescription;
+    var language = data.languages;
 
     socket.join(roomID, function() {
       socket.emit('new room');
