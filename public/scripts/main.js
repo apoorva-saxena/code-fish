@@ -5,7 +5,7 @@ var currentUser;
 var timeout;
 
 
-var imgAr = ['fish1.png','fish2.png','fish3.png','fish4.png'];
+var imgAr = ['fish1.png','fish2.png','fish3.png','fish5.png','fish6.png','fish7.png','fish4.png'];
 
 function getRandomImage(imgAr, path) {
     path = path || './images/fish/'; // default path here
@@ -53,13 +53,13 @@ socket.on('update available rooms', function(data) {
   if (data.rooms.length > 0) {
     $('#join-rooms-full').append('<div class="row">');
     for (var i = 0 ; i < data.rooms.length ; i++) {
-      $('#join-rooms-full').append('<div class="col-xs-6 col-md-3"><a href="#" class="thumbnail"><img src=' + getRandomImage(imgAr) +'></a> <div class="caption"> <button class="btn btn-secondary" id="join-button">' + data.rooms[i] + '</button></div></div>');
+      $('#join-rooms-full').append('<div class="col-xs-4 col-md-3"><a href="#" class="thumbnail"><img src=' + getRandomImage(imgAr) +'></a> <div class="caption"> <button class="btn btn-secondary" id="join-button">' + data.rooms[i] + '</button></div></div>');
 
     }
     $('#join-rooms-full').append('</div>');
   }
   else {
-    $('#join-rooms-empty').html('<h4 id=empty-requests-text>There are no live requests</h4> <img src="./images/fish.png" />');
+    $('#join-rooms-empty').html('<h4 id=empty-requests-text>There are no live requests</h4> <img id="empty-fish-img" src="./images/fishbone.png" />');
   }
 });
 

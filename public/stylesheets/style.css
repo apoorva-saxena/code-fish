@@ -117,22 +117,30 @@ html, body .container-fluid {
 }
 
 #join-rooms-empty {
-	height: 600px;
+	height: 210px;
 	text-align: center;
 }
 
 .homepage-requests {
 	padding-top: 3%;
 	background-color: #C3C5DD;
-	height: 30%;
+	height: 20%;
 		border-bottom: 2px solid #fff;
 }
 
 #empty-requests-text {
-	padding-top:3% ;
 	font-size: 180%;
 }
 
 .thumbnail {
 	background-color: #CDE7F0;
+	padding-bottom: -10%;
+}
+
+#empty-fish-img {
+	max-height: 20vw;
+}
+#join-button {
+	width: 100%;
+	margin-top: -8%;
 }
