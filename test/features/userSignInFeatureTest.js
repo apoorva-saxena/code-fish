@@ -17,7 +17,7 @@ describe('User visits login page', function() {
         .fill('password', 'testpassword')
         .fill('passwordconfirmation', 'testpassword')
         .pressButton('Sign Up', function() {
-          expect(browser2.html()).to.contain('SIGN OUT');
+          expect(browser2.html()).to.contain('Sign Out');
           done();
         });
       });
@@ -27,8 +27,8 @@ describe('User visits login page', function() {
   describe("User can sign out", function(){
     it('user signs in when signed up', function(done){
       browser2.visit('/', function() {
-        browser2.clickLink('SIGN OUT', function() {
-          expect(browser2.html()).to.contain('SIGN IN');
+        browser2.clickLink('Sign Out', function() {
+          expect(browser2.html()).to.contain('Sign In');
           done();
         });
       });
@@ -39,10 +39,10 @@ describe('User visits login page', function() {
 
     it('fails with invalid username', function(done){
       browser2.visit('/', function() {
-        browser2.clickLink('SIGN IN', function() {
+        browser2.clickLink('Sign In', function() {
           browser2.fill('username', 'testusernamesqsq')
           .fill('password', 'testpassword')
-          .pressButton('Sign In', function() {
+          .pressButton('Sign in', function() {
             expect(browser2.html()).to.contain('Unknown User');
             done();
           });
@@ -52,10 +52,10 @@ describe('User visits login page', function() {
 
     it('fails with invalid password', function(done){
       browser2.visit('/', function() {
-        browser2.clickLink('SIGN IN', function() {
+        browser2.clickLink('Sign In', function() {
           browser2.fill('username', 'testusername2')
           .fill('password', 'fish')
-          .pressButton('Sign In', function() {
+          .pressButton('Sign in', function() {
             expect(browser2.html()).to.contain('Invalid password');
             done();
           });
@@ -66,11 +66,11 @@ describe('User visits login page', function() {
 
     it('user signs in when signed up', function(done){
       browser2.visit('/', function() {
-        browser2.clickLink('SIGN IN', function() {
+        browser2.clickLink('Sign In', function() {
           browser2.fill('username', 'testusername2')
           .fill('password', 'testpassword')
-          .pressButton('Sign In', function() {
-            expect(browser2.html()).to.contain('SIGN OUT');
+          .pressButton('Sign in', function() {
+            expect(browser2.html()).to.contain('Sign Out');
             done();
           });
         });

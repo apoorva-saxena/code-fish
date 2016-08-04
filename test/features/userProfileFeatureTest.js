@@ -22,7 +22,7 @@ describe('User profile', function() {
     describe('User not signed in', function() {
         it('has no My profile button', function(done) {
           browser.visit('/', function() {
-            expect(browser.text('.navigation')).to.not.contain('View profile');
+            expect(browser.text('.navigation')).to.not.contain('My Profile');
             done();
             });
         });
@@ -36,7 +36,7 @@ describe('User profile', function() {
             browser.fill('password', 'testpassword');
             browser.fill('passwordconfirmation', 'testpassword');
             browser.pressButton('Sign Up', function() {
-              expect(browser.html()).to.contain('MY PROFILE');
+              expect(browser.html()).to.contain('My Profile');
               done();
             });
           });

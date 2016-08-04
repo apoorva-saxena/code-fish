@@ -13,7 +13,7 @@ describe('User visits signup page', function() {
   describe('Should see the signup page', function() {
     it('Should see sign up', function(done) {
       browser.visit('/users/new', function() {
-        expect(browser.html()).to.contain('Sign up to get help now!');
+        expect(browser.html()).to.contain('Password Confirmation');
         done();
       });
     });
@@ -27,7 +27,7 @@ describe('User visits signup page', function() {
       .fill('password', 'testpassword')
       .fill('passwordconfirmation', 'testpassword')
       .pressButton('Sign Up', function() {
-        expect(browser.html()).to.contain('SIGN OUT');
+        expect(browser.html()).to.contain('Sign Out');
         done();
       });
     });

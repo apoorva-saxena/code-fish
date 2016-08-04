@@ -34,9 +34,11 @@ describe('Chat features', function() {
     });
     //
     it('can click ask for help and go to create room page', function(done){
+      browser.wait(function() {
       browser.pressButton('Cast a line').then(function() {
         expect(browser.html()).to.contain('I would like help with...');
       }).then(done, done);
+      });
     });
   });
 
@@ -44,16 +46,18 @@ describe('Chat features', function() {
 
     it('can fill in issue and go to wait page', function(done){
       browser.fill('description', 'Ruby help');
-      browser.pressButton('Submit', function() {
-        browser.assert.text('#loading-image-text', 'Waiting for a Code Coach to respond to your request...');
+      browser.pressButton('Fish for help', function() {
+        browser.assert.text('#loading-image-text', 'Waiting for someone to respond to your request...');
         done();
       });
     });
 
     it('second user can see the chat room', function(done) {
-      browser2.visit('/', function() {
-        browser2.assert.text('#join-rooms', 'Topic: Ruby help');
-        done();
+        browser2.visit('/', function() {
+          browser2.wait(function() {
+            expect(browser2.html()).to.contain('Topic: Ruby help');
+          done();
+        });
       });
     });
   });
