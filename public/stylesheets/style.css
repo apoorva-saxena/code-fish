@@ -1,11 +1,155 @@
+/*CHAT-TEMPLATE*/
+
+.live-chat-bar {
+	margin-top: 200px;
+}
+
 body {
-	padding-top: 65px;
-	
-}
-
-.container {
+	padding-top: 30px;
 
 }
+
+h2 {
+	font-family: monospace;
+}
+
+h3 {
+	font-family: monospace;
+}
+
+html, body .container-fluid {
+	height: 100%;
+	font-family: monospace;
+}
+
+.img-container {
+	max-height: 500px;
+	overflow: hidden;
+	position: relative
+}
+
+.img-responsive {
+	width: 100%;
+	opacity: 0.9;
+	background-size: contain;
+}
+
+.container-fluid {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+#homepage-image-text {
+	background-color: white;
+	opacity: 0.7;
+	position: absolute;
+	width: 100%;
+	top:40% ;
+	text-align: center;
+	color: black;
+	font-size: 220%;
+}
+
+#help-button-container {
+	position: absolute;
+	width: 100%;
+	top:50% ;
+	text-align: center;
+	color: white;
+	font-size: 220%;
+}
+
+#help-button {
+	margin-top: 5%;
+	font-family: monospace;
+	font-size: 3vw;
+	width: 30%;
+	border: 2px black;
+	background-color: black;
+	opacity: 0.8;
+	white-space: normal
+}
+
+#code-coach-text {
+	text-align: center;
+	font-family: monospace;
+	padding-top: 1%;
+
+}
+
+#homepage-breaker {
+	background-color: #6D71AB;
+
+}
+
+
+@media all and (min-width: 1080px) {
+	#homepage-image-text {
+      font-size: 280%;
+    }
+	#code-coach-text {
+		  font-size: 280%;
+	}
+}
+
+@media all and (max-width: 1079px) and (min-width: 649px) {
+		#homepage-image-text {
+      font-size: 180%;
+    }
+		#code-coach-text {
+			  font-size: 180%;
+		}
+}
+
+@media all and (max-width: 650px) and (min-width: 320px) {
+	#homepage-image-text {
+		font-size: 120%;
+	}
+
+	#code-coach-text {
+			font-size: 90%;
+	}
+
+}
+
+.btn-primary:hover {
+  color: white;
+}
+
+#homepage-bottom {
+	background-color: #6D71AB;
+	height: 40%;
+}
+
+#join-rooms-empty {
+	height: 210px;
+	text-align: center;
+}
+
+.homepage-requests {
+	padding-top: 3%;
+	background-color: #C3C5DD;
+	height: 20%;
+		border-bottom: 2px solid #fff;
+}
+
+#empty-requests-text {
+	font-size: 180%;
+}
+
+.thumbnail {
+	background-color: #CDE7F0;
+	padding-bottom: -10%;
+}
+
+#empty-fish-img {
+	max-height: 20vw;
+}
+#join-button {
+	width: 100%;
+	margin-top: -8%;
+}
+
 
 
 #map {
@@ -13,16 +157,290 @@ body {
  	width: 80%;
 }
 
-
-.image-container {
-	text-align: right;
+#help-form-image-text {
+	position: absolute;
+	width: 100%;
+	top:20% ;
+	text-align: center;
+	color: black;
+	font-size: 230%;
 }
 
-.profile-container {
-	margin-top: 40px;
+
+#request-form-wrapper {
+	position: absolute;
+	top: 30%;
+	text-align: center;
+	width: 100%;
+}
+
+#request-form-wrapper
+input[type="text-area"] {
+  text-align: center;
+	border: 0;
+  border-bottom: 1px solid black;
+  outline: 0;
+  font-size: 32px;
+  height: 50px;
+  width: 40%;
+}
+
+#request-form-wrapper
+button {
+	text-align: center;
+	font-size: 32px;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #64c5aa;
+	color: white;
+	margin: 70px;
+}
+
+#request-form-wrapper
+button:hover {
+	background-color: #549da3;
+}
+
+
+@media all and (min-width: 960px) {
+	#help-form-image-text {
+    font-size: 280%;
+
+  }
+  #request-form-wrapper {
+    font-size: 280%;
+  }
+  #request-form-wrapper
+  input[type="text-area"] {
+    font-size: 85%;
+  }
+  #request-form-wrapper
+  button {
+    font-size: 32px;
+    padding: 20px;
+    margin: 60px;
+  }
+}
+
+@media all and (max-width: 959px) and (min-width: 600px) {
+		#help-form-image-text {
+      font-size: 180%;
+    }
+    #request-form-wrapper {
+      font-size: 180%;
+    }
+    #request-form-wrapper
+    input[type="text-area"] {
+      font-size: 80%;
+    }
+    #request-form-wrapper
+    button {
+    	font-size: 70%;
+    	padding: 10px;
+    	margin: 20px;
+    }
+    .img-responsive {
+      padding: 50px;
+    }
+
 }
 
 #pearl-image {
 	height: 50px;
 	width: 50px;
+}
+
+@media all and (max-width: 599px) and (min-width: 320px) {
+
+	#help-form-image-text {
+		font-size: 120%;
+	}
+  #request-form-wrapper {
+    font-size: 120%;
+  }
+  #request-form-wrapper
+  input[type="text-area"] {
+    font-size: 70%;
+  }
+  #request-form-wrapper
+  button {
+  	font-size: 32px;
+  	padding: 20px;
+  	margin: 120 px;
+  }
+
+  #request-form-wrapper
+  select {
+    text-align: center;
+    padding: 0px;
+    border-radius: 8px;
+    margin: 120 px;
+  }
+
+  .img-responsive {
+    padding: 40px;
+  }
+}
+
+
+/*LOADING-TEMPLATE*/
+
+#loading-container {
+	padding-top: 0px;
+	justify-content: center;
+	height: 80%;
+}
+
+#loading-image-text {
+	font-size: 300%;
+	color: black;
+	text-align: center;
+	margin-top: 200px;
+	height: 50%
+}
+
+#loading-image-container {
+	text-align: center;
+
+}
+
+#loading-image {
+	margin-top: 200px;
+	width: 50%;
+	height: auto;
+}
+
+#live-chat-button {
+	text-align: center;
+	font-size: 16px;
+	padding: 10px;
+	background-color: #64c5aa;
+	color: white;
+	width: 100%;
+}
+
+#chat-wrapper {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #549da3;
+}
+
+#messages {
+	list-style-type: none;
+	padding: 0;
+	height: 200px;
+	width: 100%;
+	overflow: scroll;
+}
+
+#messages li {
+	font-size: 12px;
+	text-align: left;
+	padding: 5px;
+}
+
+.username {
+	color: #3c7666;
+	font-style: italic;
+}
+
+.typing {
+	text-align: center;
+	font-size: 14px;
+	color: #549da3;
+	font-style: italic;
+}
+
+.current-user-message {
+	background: #e0f3ee;
+}
+
+#chatbox {
+	width: 100%;
+	background-color: #d3d3d3;
+}
+
+#chatbox
+input[type="text-area"] {
+	border: 1px solid #b9b9b9;
+  background-color: white;
+  font-size: 12px;
+  height: 32px;
+  margin: 30px;
+  outline: 0;
+  padding: 10px;
+  width: 80%;
+}
+
+#chatbox button {
+	text-align: center;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 8px;
+	color: white;
+	background-color: #64c5aa;
+}
+
+#chatbox button:hover {
+	background-color: #468976;
+}
+
+#end-chat-button {
+	margin-top: 10px;
+	text-align: center;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 12px;
+	background-color: #ee8873;
+	color: white;
+	width: 100%;
+}
+
+#end-chat-button:hover {
+	background-color: #e85637;
+}
+
+.repl-container {
+	margin: 0;
+	padding: 0;
+}
+
+.CodeMirror, .CodeMirror-scroll {
+	height: auto;
+}
+
+/*END-CHAT-TEMPLATE*/
+
+.pearl-container {
+	margin-top: 200px;
+	text-align: center;
+	font-size: 30px;
+}
+
+.pearl-image-container {
+	margin-top: 150px;
+	text-align: center;
+}
+
+.kudos-image {
+	height: 300px;
+	width: auto;
+}
+
+/*THANK-YOU-TEMPLATE*/
+
+.thank-you-container {
+	margin-top: 250px;
+	text-align: center;
+	font-size: 18px;
+}
+
+.final-logo-image-container {
+	text-align: center;
+	margin-top: 100px;
+}
+
+.final-logo-image {
+	height: 150px;
+	width: auto;
 }
