@@ -1,8 +1,8 @@
 /*CHAT-TEMPLATE*/
+
 .live-chat-bar {
 	margin-top: 200px; 
 }
-
 
 #live-chat-button {
 	text-align: center;
@@ -103,3 +103,39 @@ input[type="text-area"] {
 	height: auto;
 }
 
+/*END-CHAT-TEMPLATE*/
+
+.pearl-container {
+	margin-top: 200px;
+	text-align: center;
+	font-size: 30px;
+}
+
+.pearl-image-container {
+	margin-top: 150px;
+	text-align: center;
+}
+
+.kudos-image {
+	height: 300px;
+	width: auto;
+}
+
+/*THANK-YOU-TEMPLATE*/
+
+.thank-you-container {
+	margin-top: 250px;
+	text-align: center;
+	font-size: 18px;
+}
+
+.final-logo-image-container {
+	text-align: center;
+	margin-top: 100px;
+}
+
+.final-logo-image {
+	height: 150px;
+	width: auto;
+	
+}
