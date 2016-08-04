@@ -1,47 +1,44 @@
-<div class="container">
+<div class="container" id="profile-layout">
       <div class="row">
       <div class="col-md-4  toppad  pull-right col-md-offset-3 ">
            <a href='/users/{{user.id}}/edit'>Edit Profile</a>
-
-
        <br>
-
       </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-
-
           <div class="panel panel-info">
             <div class="panel-heading">
               <h3 class="panel-title">{{user.username}}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center">     {{#if user.image}}
+                <div class="col-md-3 col-lg-3" align="center">
+                  {{#if user.image}}
                       <img class="img-circle" src="/img/{{user.image}}" alt="profile.gif" style="width:100px;height:100px;">
                     {{else}}
                     {{#if user.avatar}}
-                      <img class="img-circle" src="{{user.avatar}}" alt="profile.gif" style="width:100px;height:100px;" class="img-circle img-responsive>
+                      <img class="img-circle" src="{{user.avatar}}" alt="profile.gif" style="width:100px;height:100px;" class="img-circle img-responsive">
                     {{else}}
-                      <img class="img-circle" src="http://www.soulmarket.net/wp-content/uploads/2015/02/blank-profile.png" style="width:100px;height:100px;" class="img-circle img-responsive>
+                      <img class="img-circle" src="http://www.soulmarket.net/wp-content/uploads/2015/02/blank-profile.png" style="width:100px;height:100px;" class="img-circle img-responsive">
                     {{/if}}
                     {{/if}} </div>
-                <div class=" col-md-9 col-lg-9 ">
+                    <br>
+                <div class=" col-md-9 col-lg-9" align="center">
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td><strong>First Name:</strong></td>
-                        <td>{{user.firstname}}</td>
+                        <td class="text-center"><strong>First Name:</strong></td>
+                        <td class="text-center">{{user.firstname}}</td>
                       </tr>
                       <tr>
-                        <td><strong>Last Name:</strong></td>
-                        <td>{{user.lastname}}</td>
+                        <td class="text-center"><strong>Last Name:</strong></td>
+                        <td class="text-center">{{user.lastname}}</td>
                       </tr>
                       <tr>
-                        <td><strong>Email:<strong></td>
-                        <td>{{user.email}}</td>
+                        <td class="text-center"><strong>Email:<strong></td>
+                        <td class="text-center">{{user.email}}</td>
                       </tr>
                       <tr>
-                        <td><strong>City:<strong></td>
+                        <td class="text-center"><strong>City:<strong></td>
                         <td>{{user.city}}</td>
                       </tr>
 
@@ -50,7 +47,7 @@
                         <td>{{user.bio}}</td>
                       </tr>
 
-                        <td>  <img id="pearl-image" src="../images/pearl.png" /></td>
+                        <td>  <img id="pearl-image" src="../images/oyster.png" /></td>
                         <td style="font-size:28px";>{{user.kudos}}<br>
                         </td>
 

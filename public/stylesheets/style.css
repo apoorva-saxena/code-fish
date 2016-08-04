@@ -444,3 +444,9 @@ input[type="text-area"] {
 	height: 150px;
 	width: auto;
 }
+
+/*Profile page*/
+
+#profile-layout {
+	padding-top: 90px;
+}
