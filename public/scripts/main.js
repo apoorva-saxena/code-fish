@@ -4,6 +4,17 @@ var socket = io();
 var currentUser;
 var timeout;
 
+
+var imgAr = ['fish1.png','fish2.png','fish3.png','fish5.png','fish6.png','fish7.png','fish4.png'];
+
+function getRandomImage(imgAr, path) {
+    path = path || './images/fish/'; // default path here
+    var num = Math.floor( Math.random() * imgAr.length );
+    var img = imgAr[ num ];
+    var imgStr =  path + img;
+    return imgStr;
+}
+
 $('#page-layout').html($('#homepage-template').html());
 
 socket.on('current user', function(data) {
@@ -25,7 +36,7 @@ socket.on('current user', function(data) {
       $('#help-button').popupTooltip('bottom','Please sign in');
     }
   });
-  $('body').on('click', '.join-button', function() {
+  $('body').on('click', '#join-button', function() {
     if (data.user) {
       socket.emit('join room', { roomID: $(this).text(),
                                   mentor: currentUser
@@ -34,18 +45,21 @@ socket.on('current user', function(data) {
     else {
         $('.join-button').popupTooltip('bottom','Please sign in');
     }
-  });
+});
 });
 
 socket.on('update available rooms', function(data) {
-  $('#join-rooms').empty();
+  $('#join-rooms-full').empty();
   if (data.rooms.length > 0) {
+    $('#join-rooms-full').append('<div class="row">');
     for (var i = 0 ; i < data.rooms.length ; i++) {
-      $('#join-rooms').append('<button class="join-button">' + data.rooms[i] + '</button>');
+      $('#join-rooms-full').append('<div class="col-xs-4 col-md-3"><a href="#" class="thumbnail"><img src=' + getRandomImage(imgAr) +'></a> <div class="caption"> <button class="btn btn-secondary" id="join-button">' + data.rooms[i] + '</button></div></div>');
+
     }
+    $('#join-rooms-full').append('</div>');
   }
   else {
-    $('#join-rooms').html('<h4>There are currently no live requests</h4>');
+    $('#join-rooms-empty').html('<h4 id=empty-requests-text>There are no live requests</h4> <img id="empty-fish-img" src="./images/fishbone.png" />');
   }
 });
 
