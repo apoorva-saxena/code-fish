@@ -23,7 +23,6 @@ var socks = [];
 var body = "";
 var languageSelected = "";
 
-
 mongoose.connect(config.mongoURI[app.settings.env], function(err, res) {
   if(err) {
     console.log('Error connecting to the database. ' + err);

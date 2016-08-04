@@ -23,7 +23,8 @@
     "multer": "^1.1.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^1.4.8"
   },
   "devDependencies": {
     "babel-core": "^6.3.17",
@@ -35,7 +36,9 @@
     "nyc": "^5.0.0",
     "serve-favicon": "~2.3.0",
     "sinon": "^1.17.5",
-    "socket.io": "^1.4.8",
-    "zombie": "^4.2.1"
+    "zombie": "^4.2.1",
+    "babel-core": "^6.3.17",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.3.13"
   }
 }

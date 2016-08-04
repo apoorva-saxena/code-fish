@@ -1,33 +1,50 @@
+<div class="container-fluid">
 <div id="page-layout"></div>
-
+</div>
 <script id="homepage-template" type="text/template">
-  <div id="homepage-container">
+      <div class="img-container">
+      <img class="img-responsive" id="homepage-pic" src="./images/homepage-image.jpg" />
 
-    <div id="homepage-panel1">
-      <img id="homepage-pic" src="./images/desk1.jpg" />
       <span id="homepage-image-text">Get 1:1 live help from coders across the globe</span>
       <div id="help-button-container">
-        <button id="help-button">Get help now</button>
+        <button id="help-button" class="btn btn-secondary">Cast a line</button>
       </div>
+      </div>
+    <div class="container-fluid" id="homepage-bottom">
+    <div class="row">
+    <div class="col-md-12" id="homepage-breaker">
+      <p id="code-coach-text">People currently fishing for help</p>
     </div>
+  </div>
 
-    <div id="homepage-panel2">
-      <h2>Want to be a Code Coach?</h2>
-      <h3>Accept any of the live requests below to start helping someone learning to code...</h3>
-      <div id="join-rooms"></div>
+    <div class="row homepage-requests">
+      <div id="join-rooms-full"></div>
+    <div id="join-rooms-empty"></div>
+
+    <div class="row homepage-weeds">
+      <div class="col-xs-4 col-md-4">
+        <img src='./images/seaweed.png'></a>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <img src='./images/seaweed.png'></a>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <img src='./images/seaweed.png'></a>
+      </div>
+          </div>
     </div>
+  </div>
 
-    <div id="homepage-panel3">
-      <img id='logo-footer' src='/images/logoV5.png' />
-    </div>
-
+  </div>
   </div>
 </script>
 
 <script id="new-help-request-template" type="text/template">
+  <div class="col-md-12">
+  <div class="row">
     <div id="help-form-container">
 
-      <img id="help-form-pic" src="./images/computer.jpg" />
+      <img class="img-responsive" id="help-form-pic" src="./images/computer.jpg" />
 
       <span id="help-form-image-text">I would like help with...</span>
 
@@ -35,54 +52,68 @@
         <form id="help-request-form" action="">
           <input id="request-description" type="text-area" name="description" placeholder="e.g. Promises in Javascript" />
           <div>
-            <select id="languages" name="languages">
+            <select class="selectpicker" data-style="btn-info" id="languages" name="languages">
                          <option value="ruby">Ruby</option>
                          <option value="javascript">Javascript</option>
                          <option value="htmlmixed">HTML Mixed</option>
                          <option value="css">CSS</option>
                          <option value="clike">Clike</option>
                          <option value="clojure">Clojure</option>
-                 </select>
-            <button>Submit</button>
+            </select>
+            <button>Fish for help</button>
           </div>
         </form>
       </div>
+    </div>
+    </div>
 
     </div>
 </script>
 
 <script id="loading-template" type="text/template">
+
+  <div class="col-md-12">
+  <div class="row">
+
   <div id="loading-container">
 
     <div id="loading-image-text">
-      Waiting for a Code Coach to respond to your request...</div>
+      Waiting for someone to respond to your request...</div>
     </div>
 
     <div id="loading-image-container">
-      <img id="loading-image" src="./images/timer.png" />
+      <img id="loading-image" src="./images/waiting.png" />
     </div>
-
+  </div>
+  </div>
   </div>
 </script>
 
 <script id="chat-template" type="text/template">
-<div id="repl-container">
-  <textarea id="textit"></textarea>
-</div>
-  <div id="chat-container">
+  <div class="container">
 
-    <div id="chat-wrapper">
+    <div class="col-sm-12 col-md-12 col-xs-12 live-chat-bar">
+      <button id="live-chat-button">Live Chat</button>
+    </div>
 
-      <div id="chatbox-header">LIVE CHAT</div>
+    <div class="col-sm-12 col-md-12 col-xs-12 repl-container">
+      <textarea id="textit"></textarea>
+    </div>
 
-      <ul id="messages"></ul>
+    <div class="col-sm-12 col-md-12 col-xs-12">
 
-      <div class="typing"> </div>
+      <div id="chat-wrapper">
+        <ul id="messages"></ul>
+        <div class="typing"></div>
+        <form id="chatbox" action="">
+          <input type="text-area" class="chatbox-input" id="m" name="chat-input" autocomplete="off" />
+          <button>Send</button>
+        </form>
+      </div>
 
-      <form id="chatbox" action="">
-        <input type="text-area" class="chatbox-input" id="m" name="chat-input" autocomplete="off" />
-        <button>Send</button>
-      </form>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-xs-12">
       <button id="end-chat-button">End Chat</button>
     </div>
 
@@ -90,22 +121,35 @@
 </script>
 
 <script id="end-chat-template" type="text/template">
-  <div>
-    Would you like to give <span id="other-username"></span> kudos?
-    <img class="kudos-image" src="./images/kudos.png" />
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 col-md-2 col-xs-2"></div>
+      <div class="col-sm-8 col-md-8 col-xs-8 pearl-container">
+        Would you like to give <span id="other-username"></span> a pearl from the bottom of the ocean?
+      </div>
+    <div class="col-sm-2 col-md-2 col-xs-2"></div>
+    <div class="col-sm-12 col-md-12 col-xs-12 pearl-image-container">
+        <img class="kudos-image" src="./images/oyster.png" />
+    </div>
   </div>
 </script>
 
 <script id="thank-you-template" type="text/template">
-  <div>
-    Thank you!
-    <br>
-    <a href='/'>Return to HomePage</a>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2 col-md-2 col-xs-2"></div>
+      <div class="col-sm-8 col-md-8 col-xs-8 thank-you-container">
+        Thank you for using CodeFish!
+      </div>
+      <div class="col-sm-2 col-md-2 col-xs-2"></div>
+    <div class="col-sm-12 col-md-12 col-xs-12 final-logo-image-container">
+      <a href='/'><img class="final-logo-image" src="./images/logo.png" /></a>
+    </div>
   </div>
 </script>
 
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <script src="/scripts/main.js"></script>
 <script src="/scripts/jquery.popuptooltip.js"></script>

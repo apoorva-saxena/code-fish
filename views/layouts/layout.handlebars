@@ -3,9 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>CodeCoach</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
     <link rel='stylesheet' href='/stylesheets/codemirror.css' />
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
     <link rel="stylesheet" href="http://codemirror.net/theme/ambiance.css">
     <script src="http://codemirror.net/lib/codemirror.js"></script>
@@ -13,48 +22,85 @@
     <script src="http://codemirror.net/mode/xml/xml.js"></script>
     <script src="http://codemirror.net/mode/markdown/markdown.js"></script>
     <script src="http://codemirror.net/mode/gfm/gfm.js"></script>
-
-    <!-- Code block highlighting modes -->
     <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
     <script src="http://codemirror.net/mode/css/css.js"></script>
     <script src="http://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
     <script src="http://codemirror.net/mode/clike/clike.js"></script>
     <script src="http://codemirror.net/mode/clojure/clojure.js"></script>
     <script src="http://codemirror.net/mode/ruby/ruby.js"></script>
+
   </head>
   <body>
 
-    <ul id='nav-bar'>
-      <li class='nav-content-left'><a href='/'><img id='logo-header' src='/images/logoV5.png' /></a></li>
-      {{#if user}}
-      <li class='nav-content-right'><a href='/sessions/destroy'>SIGN OUT</a></li>
-      <li class='nav-content-right'><a href='/users/{{user.id}}'>MY PROFILE</a></li>
-      {{else}}
-      <li class='nav-content-right'><a href='/users/new'>SIGN UP</a></li>
-      <li class='nav-content-right'><a href='/sessions/new'>SIGN IN</a></li>
-      <li class='nav-content-right'><a href='/auth/github'> GITHUB SIGN IN</a></li>
+       <!-- Fixed navbar -->
+       <nav class="navbar navbar-default navbar-fixed-top">
+         <div class="container">
+           <div class="navbar-header">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+             </button>
+             <a href=""><img class="navbar-brand" src="/images/logo.png"></img></a>
+           </div>
+           <div id="navbar" class="navbar-collapse collapse">
 
-      {{/if}}
-    </ul>
+             </ul>
+             <ul class="nav navbar-nav navbar-right">
+               {{#if user}}
+               <li><a href='/sessions/destroy'>Sign Out</a></li>
+               <li><a href='/users/{{user.id}}'>My Profile</a></li>
+               {{else}}
+               <li><a href="/users/new/">Sign Up</a></li>
+               <li><a href='/sessions/new'>Sign In</a></li>
+               <li><a href='/auth/github'>Github Sign In</a></li>
+               {{/if}}
+             </ul>
+           </div><!--/.nav-collapse -->
+         </div>
+       </nav>
 
-    <div class='flash_msg'>
-      {{#if success_msg}}
-      {{{success_msg}}}<br>
-      {{/if}}
-      {{#if error_msg}}
-      {{{error_msg}}}<br>
-      {{/if}}
-      {{#if error}}
-      {{{error}}}<br>
-      {{/if}}
-      {{#if errors}}
-        {{#each errors}}
-          {{msg}}<br>
-        {{/each}}
-      {{/if}}
-    </div>
+
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+       <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+       <script src="../../dist/js/bootstrap.min.js"></script>
+       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+       <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
 
       {{{body}}}
 
+      <div class="container">
+      <div class="errors">
+            {{#if success_msg}}
+               <div class='alert alert-success fade in'>
+                 <a href="#" class="close" data-dismiss="alert">x</a>
+            {{{success_msg}}}<br>
+               </div>
+            {{/if}}
+
+
+            {{#if error_msg}}
+         <div class='alert alert-danger fade in'>
+            {{{error_msg}}}<br>
+         </div>
+            {{/if}}
+            {{#if error}}
+            <div class='alert alert-danger fade in'>
+            {{{error}}}<br>
+            </div>
+            {{/if}}
+            {{#if errors}}
+            <div class='alert alert-danger fade in'>
+              {{#each errors}}
+                {{msg}}<br>
+              {{/each}}
+           </div>
+            {{/if}}
+       </div>
+     </div>
+
   </body>
+
 </html>

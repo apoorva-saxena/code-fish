@@ -30,11 +30,11 @@ describe('Chat features', function() {
   describe('can click ask for help',function() {
     //
     it('has an ask for help button', function(){
-      expect(browser.html()).to.contain('<button id="help-button">Get help now</button>');
+      expect(browser.html()).to.contain('Cast a line');
     });
     //
     it('can click ask for help and go to create room page', function(done){
-      browser.pressButton('Get help now').then(function() {
+      browser.pressButton('Cast a line').then(function() {
         expect(browser.html()).to.contain('I would like help with...');
       }).then(done, done);
     });

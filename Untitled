@@ -1,0 +1,23 @@
+<div class="form-container">
+
+  <div class="form-wrapper">
+
+    <h2>Sign up to get help now!</h2>
+
+    <form method="post" action="/users/new">
+
+      <input type="text" name="username" placeholder="Username">
+
+      <input type="email" name="email" placeholder="Email">
+
+      <input type="password" name="password" placeholder="Password">
+
+      <input type="password" name="passwordconfirmation" placeholder="Re-enter password">
+
+      <input type="submit" value="Sign Up">
+
+    </form>
+
+  </div>
+
+</div>
