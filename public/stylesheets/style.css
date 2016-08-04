@@ -42,7 +42,6 @@ html, body .container-fluid {
 	text-align: center;
 	color: black;
 	font-size: 220%;
-	font-family: monospace;
 }
 
 #help-button-container {
@@ -143,4 +142,153 @@ html, body .container-fluid {
 #join-button {
 	width: 100%;
 	margin-top: -8%;
+}
+
+
+
+#help-form-image-text {
+	position: absolute;
+	width: 100%;
+	top:20% ;
+	text-align: center;
+	color: black;
+	font-size: 230%;
+}
+
+
+#request-form-wrapper {
+	position: absolute;
+	top: 30%;
+	text-align: center;
+	width: 100%;
+}
+
+#request-form-wrapper
+input[type="text-area"] {
+  text-align: center;
+	border: 0;
+  border-bottom: 1px solid black;
+  outline: 0;
+  font-size: 32px;
+  height: 50px;
+  width: 40%;
+}
+
+#request-form-wrapper
+button {
+	text-align: center;
+	font-size: 32px;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #64c5aa;
+	color: white;
+	margin: 70px;
+}
+
+#request-form-wrapper
+button:hover {
+	background-color: #549da3;
+}
+
+
+@media all and (min-width: 960px) {
+	#help-form-image-text {
+    font-size: 280%;
+
+  }
+  #request-form-wrapper {
+    font-size: 280%;
+  }
+  #request-form-wrapper
+  input[type="text-area"] {
+    font-size: 85%;
+  }
+  #request-form-wrapper
+  button {
+    font-size: 32px;
+    padding: 20px;
+    margin: 60px;
+  }
+}
+
+@media all and (max-width: 959px) and (min-width: 600px) {
+		#help-form-image-text {
+      font-size: 180%;
+    }
+    #request-form-wrapper {
+      font-size: 180%;
+    }
+    #request-form-wrapper
+    input[type="text-area"] {
+      font-size: 80%;
+    }
+    #request-form-wrapper
+    button {
+    	font-size: 70%;
+    	padding: 10px;
+    	margin: 20px;
+    }
+    .img-responsive {
+      padding: 50px;
+    }
+
+}
+
+@media all and (max-width: 599px) and (min-width: 320px) {
+	#help-form-image-text {
+		font-size: 120%;
+	}
+  #request-form-wrapper {
+    font-size: 120%;
+  }
+  #request-form-wrapper
+  input[type="text-area"] {
+    font-size: 70%;
+  }
+  #request-form-wrapper
+  button {
+  	font-size: 32px;
+  	padding: 20px;
+  	margin: 120 px;
+  }
+
+  #request-form-wrapper
+  select {
+    text-align: center;
+    padding: 0px;
+    border-radius: 8px;
+    margin: 120 px;
+  }
+
+  .img-responsive {
+    padding: 40px;
+  }
+}
+
+
+/*LOADING-TEMPLATE*/
+
+#loading-container {
+	padding-top: 0px;
+	justify-content: center;
+	height: 80%;
+}
+
+#loading-image-text {
+	font-size: 300%;
+	color: black;
+	text-align: center;
+	margin-top: 200px;
+	height: 50%
+}
+
+#loading-image-container {
+	text-align: center;
+
+}
+
+#loading-image {
+	margin-top: 200px;
+	width: 50%;
+	height: auto;
 }
