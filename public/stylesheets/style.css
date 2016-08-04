@@ -450,3 +450,10 @@ input[type="text-area"] {
 #profile-layout {
 	padding-top: 90px;
 }
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #6D71AB;
+    color: white;
+
+}
