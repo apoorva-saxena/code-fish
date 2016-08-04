@@ -12,7 +12,7 @@
       geocoder = new google.maps.Geocoder();
 
       map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 2,
+        zoom: 1,
         center: { lat: 0, lng:0},
         styles: [
   {

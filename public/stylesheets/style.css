@@ -1,3 +1,8 @@
+/*CHAT-TEMPLATE*/
+.live-chat-bar {
+	margin-top: 200px;
+}
+
 body {
 	padding-top: 30px;
 
@@ -290,5 +295,105 @@ button:hover {
 #loading-image {
 	margin-top: 200px;
 	width: 50%;
+	height: auto;
+}
+
+
+#live-chat-button {
+	text-align: center;
+	font-size: 16px;
+	padding: 10px;
+	background-color: #64c5aa;
+	color: white;
+	width: 100%;
+}
+
+#chat-wrapper {
+  width: 100%;
+  background-color: white;
+  border: 1px solid #549da3;
+}
+
+#messages {
+	list-style-type: none;
+	padding: 0;
+	height: 200px;
+	width: 100%;
+	overflow: scroll;
+}
+
+#messages li {
+	font-size: 12px;
+	text-align: left;
+	padding: 5px;
+}
+
+.username {
+	color: #3c7666;
+	font-style: italic;
+}
+
+.typing {
+	text-align: center;
+	font-size: 14px;
+	color: #549da3;
+	font-style: italic;
+}
+
+.current-user-message {
+	background: #e0f3ee;
+}
+
+#chatbox {
+	width: 100%;
+	background-color: #d3d3d3;
+}
+
+#chatbox
+input[type="text-area"] {
+	border: 1px solid #b9b9b9;
+  background-color: white;
+  font-size: 12px;
+  height: 32px;
+  margin: 30px;
+  outline: 0;
+  padding: 10px;
+  width: 80%;
+}
+
+#chatbox button {
+	text-align: center;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 8px;
+	color: white;
+	background-color: #64c5aa;
+}
+
+#chatbox button:hover {
+	background-color: #468976;
+}
+
+#end-chat-button {
+	margin-top: 10px;
+	text-align: center;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 12px;
+	background-color: #ee8873;
+	color: white;
+	width: 100%;
+}
+
+#end-chat-button:hover {
+	background-color: #e85637;
+}
+
+.repl-container {
+	margin: 0;
+	padding: 0;
+}
+
+.CodeMirror, .CodeMirror-scroll {
 	height: auto;
 }
