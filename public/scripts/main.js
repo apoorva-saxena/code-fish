@@ -52,6 +52,7 @@ socket.on('current user', function(data) {
 
 socket.on('update available rooms', function(data) {
   $('#join-rooms-full').empty();
+  $('#join-rooms-empty').empty();
   if (data.rooms.length > 0) {
     $('#join-rooms-full').append('<div class="row">');
     for (var i = 0 ; i < data.rooms.length ; i++) {
@@ -59,8 +60,7 @@ socket.on('update available rooms', function(data) {
 
     }
     $('#join-rooms-full').append('</div>');
-  }
-  else {
+  } else {
     $('#join-rooms-empty').html('<h4 id=empty-requests-text>There are no live requests</h4> <img id="empty-fish-img" src="./images/fishbone.png" />');
   }
 });

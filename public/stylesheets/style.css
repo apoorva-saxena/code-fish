@@ -6,6 +6,7 @@
 
 body {
 	padding-top: 30px;
+	background-color: 
 
 }
 
@@ -74,14 +75,25 @@ html, body .container-fluid {
 	text-align: center;
 	font-family: monospace;
 	padding-top: 1%;
+	white-space: nowrap;
+
 
 }
 
 #homepage-breaker {
 	background-color: #6D71AB;
-
+	width: 100%;
 }
 
+.container {
+	overflow: hidden;
+}
+
+.row .thumbnail {
+    border:0;
+    box-shadow:0;
+    border-radius:0;
+}
 
 @media all and (min-width: 1080px) {
 	#homepage-image-text {
@@ -92,7 +104,7 @@ html, body .container-fluid {
 	}
 }
 
-@media all and (max-width: 1079px) and (min-width: 649px) {
+@media all and (max-width: 1079px) and (min-width: 800px) {
 		#homepage-image-text {
       font-size: 180%;
     }
@@ -101,7 +113,7 @@ html, body .container-fluid {
 		}
 }
 
-@media all and (max-width: 650px) and (min-width: 320px) {
+@media all and (max-width: 799px) and (min-width: 320px) {
 	#homepage-image-text {
 		font-size: 120%;
 	}
@@ -118,11 +130,11 @@ html, body .container-fluid {
 
 #homepage-bottom {
 	background-color: #6D71AB;
-	height: 40%;
+	height: 60%;
 }
 
 #join-rooms-empty {
-	height: 210px;
+	height: 510px;
 	text-align: center;
 }
 
@@ -148,13 +160,30 @@ html, body .container-fluid {
 #join-button {
 	width: 100%;
 	margin-top: -8%;
+	word-wrap:break-word;
+	white-space: normal;
 }
 
+.navbar-brand {
+height: 60px;
+}
+
+.navbar-right {
+	padding-top: 5px;
+}
 
 
 #map {
  	height: 300px;
  	width: 80%;
+ 	margin-bottom: 50px;
+}
+
+#breaker-fish {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 8px;
 }
 
 #help-form-image-text {
@@ -445,6 +474,7 @@ input[type="text-area"] {
 	width: auto;
 }
 
+
 /*Profile page*/
 
 #profile-layout {
@@ -467,4 +497,61 @@ input[type="text-area"] {
 
 html, body .container-fluid {
 	font-family: monospace;
+}
+
+/*SIGNUP/SIGNIN*/
+
+.form-wrapper {
+	margin-top: 150px;
+	border: 1px black solid;
+  background-color: white;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.form-wrapper h2 {
+	font-size: 26px;
+}
+
+.form-wrapper
+input[type="text"],
+input[type="email"], 
+input[type="password"] {
+  border: 1px solid #b9b9b9;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 16px;
+  height: 45px;
+  margin: 20px;
+  outline: 0;
+  padding: 10px;
+  width: 80%;
+}
+
+.form-wrapper
+input[type="submit"] {
+  padding: 10px;
+  color: white;
+  background-color: #6D71AB;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 8px;
+  width: 80%;
+  margin: 20px;
+  margin-bottom: 60px;
+}
+
+.form-wrapper
+input[type="submit"]:hover {
+	background-color: #46486E;
+}
+
+.background {
+	height: 1100px;
+  background-image: url(../images/background.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
 }
