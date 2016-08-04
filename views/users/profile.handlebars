@@ -1,57 +1,54 @@
-<div class="container">
+<div class="container" id="profile-layout">
       <div class="row">
       <div class="col-md-4  toppad  pull-right col-md-offset-3 ">
-           <a href='/users/{{user.id}}/edit'>Edit Profile</a>
-
-
+           <a href='/users/{{user.id}}/edit' style="font-family: monospace;">Edit Profile</a>
        <br>
-
       </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-
-
           <div class="panel panel-info">
             <div class="panel-heading">
               <h3 class="panel-title">{{user.username}}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center">     {{#if user.image}}
+                <div class="col-md-3 col-lg-3" align="center">
+                  {{#if user.image}}
                       <img class="img-circle" src="/img/{{user.image}}" alt="profile.gif" style="width:100px;height:100px;">
                     {{else}}
                     {{#if user.avatar}}
-                      <img class="img-circle" src="{{user.avatar}}" alt="profile.gif" style="width:100px;height:100px;" class="img-circle img-responsive>
+                      <img class="img-circle" src="{{user.avatar}}" alt="profile.gif" style="width:100px;height:100px;" class="img-circle img-responsive">
                     {{else}}
-                      <img class="img-circle" src="http://www.soulmarket.net/wp-content/uploads/2015/02/blank-profile.png" style="width:100px;height:100px;" class="img-circle img-responsive>
+                      <img class="img-circle" src="http://www.soulmarket.net/wp-content/uploads/2015/02/blank-profile.png" style="width:100px;height:100px;" class="img-circle img-responsive">
                     {{/if}}
                     {{/if}} </div>
-                <div class=" col-md-9 col-lg-9 ">
+                    <br>
+                <div class=" col-md-9 col-lg-9" align="center">
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
-                        <td><strong>First Name:</strong></td>
-                        <td>{{user.firstname}}</td>
+                        <td class="text-center"  style="font-family: monospace;"><strong>First Name:</strong></td>
+                        <td class="text-center"  style="font-family: monospace;">{{user.firstname}}</td>
                       </tr>
                       <tr>
-                        <td><strong>Last Name:</strong></td>
-                        <td>{{user.lastname}}</td>
+                        <td class="text-center"  style="font-family: monospace;"><strong>Last Name:</strong></td>
+                        <td class="text-center"  style="font-family: monospace;">{{user.lastname}}</td>
                       </tr>
                       <tr>
-                        <td><strong>Email:<strong></td>
-                        <td>{{user.email}}</td>
+                        <td class="text-center"  style="font-family: monospace;"><strong>Email:<strong></td>
+                        <td class="text-center"  style="font-family: monospace;">{{user.email}}</td>
                       </tr>
                       <tr>
-                        <td><strong>City:<strong></td>
-                        <td>{{user.city}}</td>
+                        <td class="text-center"  style="font-family: monospace;"><strong>City:<strong></td>
+                        <td class="text-center"  style="font-family: monospace;">{{user.city}}</td>
                       </tr>
 
                         <tr>
-                        <td><strong>Bio:<strong></td>
-                        <td>{{user.bio}}</td>
+                        <td class="text-center"  style="font-family: monospace;"><strong>Bio:<strong></td>
+                        <td class="text-center"  style="font-family: monospace;">{{user.bio}}</td>
                       </tr>
 
-                        <td>  <img id="pearl-image" src="../images/pearl.png" /></td>
-                        <td style="font-size:28px";>{{user.kudos}}<br>
+                        <td class="text-center">  <img id="pearl-image" src="../images/oyster.png" /></td>
+                        <td class="text-center" style="font-size:28px; font-family: monospace;">{{user.kudos}}<br>
                         </td>
 
                       </tr>
@@ -72,7 +69,10 @@
           </div>
         </div>
       </div>
+
     </div>
+    <br>
+    <div id="map-text"> Where in the world you've CodeFished...</div>
     <div class="center-block" id="map"> Map </div>
 
     <script src="/socket.io/socket.io.js"></script>
