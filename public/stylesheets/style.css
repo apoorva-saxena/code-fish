@@ -2,6 +2,7 @@
 
 .live-chat-bar {
 	margin-top: 200px;
+	padding: 0;
 }
 
 body {
@@ -324,8 +325,9 @@ button:hover {
 	font-size: 300%;
 	color: black;
 	text-align: center;
-	margin-top: 200px;
+	margin: 200px 80px 10px 80px;
 	height: 50%
+
 }
 
 #loading-image-container {
@@ -389,6 +391,10 @@ button:hover {
 	background-color: #d3d3d3;
 }
 
+.chat-container {
+	padding: 0;
+}
+
 #chatbox
 input[type="text-area"] {
 	border: 1px solid #b9b9b9;
@@ -435,7 +441,7 @@ input[type="text-area"] {
 }
 
 .CodeMirror, .CodeMirror-scroll {
-	height: auto;
+	
 }
 
 /*END-CHAT-TEMPLATE*/
