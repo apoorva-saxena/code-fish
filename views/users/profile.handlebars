@@ -1,7 +1,7 @@
 <div class="container">
       <div class="row">
       <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-           <a href='/users/{{user.id}}/edit'>    Edit Profile</a>
+           <a href='/users/{{user.id}}/edit'>Edit Profile</a>
 
 
        <br>
@@ -51,10 +51,11 @@
                       </tr>
 
                         <td>  <img id="pearl-image" src="../images/pearl.png" /></td>
-                        <td>{{user.kudos}}<br>
+                        <td style="font-size:28px";>{{user.kudos}}<br>
                         </td>
 
                       </tr>
+
 
                     </tbody>
                   </table>
@@ -72,3 +73,10 @@
         </div>
       </div>
     </div>
+    <div class="center-block" id="map"> Map </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/scripts/profile.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc4yJPEuJFKB9POuUBh6RSvZ4_A11QYa0&callback=initMap">
+    </script>
