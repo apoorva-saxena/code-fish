@@ -1,5 +1,7 @@
 (function(exports) {
 
+
+
 var socket = io();
 var currentUser;
 var timeout;
