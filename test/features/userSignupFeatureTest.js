@@ -17,7 +17,6 @@ describe('User visits signup page', function() {
   });
   afterEach(function(done) {
     mongoose.connection.db.dropDatabase();
-    server.close();
     done();
   });
 
@@ -38,7 +37,7 @@ describe('User visits signup page', function() {
     });
 
     it('successful when all details entered correctly', function() {
-      browser.assert.text('div.flash_msg', 'You are registered and can now log in');
+      browser.assert.text('div.flash_msg', '');
     });
 
   });
