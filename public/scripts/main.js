@@ -28,7 +28,7 @@ socket.on('current user', function(data) {
       e.preventDefault();
       socket.emit('host room', { requestDescription: $('#request-description').val(),
                                 languages: $('#languages').val(),
-                                 menteeUsername: currentUser.username
+                                 mentee: currentUser
                                });
       $('#page-layout').html($('#loading-template').html());
     });
