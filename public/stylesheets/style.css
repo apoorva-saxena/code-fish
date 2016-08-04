@@ -6,6 +6,7 @@
 
 body {
 	padding-top: 30px;
+	background-color: 
 
 }
 
@@ -471,3 +472,61 @@ input[type="text-area"] {
 	height: 150px;
 	width: auto;
 }
+
+/*SIGNUP/SIGNIN*/
+
+.form-wrapper {
+	margin-top: 150px;
+	border: 1px black solid;
+  background-color: white;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.form-wrapper h2 {
+	font-size: 26px;
+}
+
+.form-wrapper
+input[type="text"],
+input[type="email"], 
+input[type="password"] {
+  border: 1px solid #b9b9b9;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 16px;
+  height: 45px;
+  margin: 20px;
+  outline: 0;
+  padding: 10px;
+  width: 80%;
+}
+
+.form-wrapper
+input[type="submit"] {
+  padding: 10px;
+  color: white;
+  background-color: #6D71AB;
+  font-size: 18px;
+  text-align: center;
+  border-radius: 8px;
+  width: 80%;
+  margin: 20px;
+  margin-bottom: 60px;
+}
+
+.form-wrapper
+input[type="submit"]:hover {
+	background-color: #46486E;
+}
+
+.background {
+	height: 1100px;
+  background-image: url(../images/background.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+}
+
