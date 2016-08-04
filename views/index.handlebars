@@ -27,9 +27,11 @@
 </script>
 
 <script id="new-help-request-template" type="text/template">
+  <div class="col-md-12">
+  <div class="row">
     <div id="help-form-container">
 
-      <img id="help-form-pic" src="./images/computer.jpg" />
+      <img class="img-responsive" id="help-form-pic" src="./images/computer.jpg" />
 
       <span id="help-form-image-text">I would like help with...</span>
 
@@ -37,18 +39,20 @@
         <form id="help-request-form" action="">
           <input id="request-description" type="text-area" name="description" placeholder="e.g. Promises in Javascript" />
           <div>
-            <select id="languages" name="languages">
+            <select class="selectpicker" data-style="btn-info" id="languages" name="languages">
                          <option value="ruby">Ruby</option>
                          <option value="javascript">Javascript</option>
                          <option value="htmlmixed">HTML Mixed</option>
                          <option value="css">CSS</option>
                          <option value="clike">Clike</option>
                          <option value="clojure">Clojure</option>
-                 </select>
-            <button>Submit</button>
+            </select>
+            <button>Fish for help</button>
           </div>
         </form>
       </div>
+    </div>
+    </div>
 
     </div>
 </script>
