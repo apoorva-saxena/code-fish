@@ -152,6 +152,11 @@ html, body .container-fluid {
 
 
 
+#map {
+ 	height: 300px;
+ 	width: 80%;
+}
+
 #help-form-image-text {
 	position: absolute;
 	width: 100%;
@@ -240,7 +245,13 @@ button:hover {
 
 }
 
+#pearl-image {
+	height: 50px;
+	width: 50px;
+}
+
 @media all and (max-width: 599px) and (min-width: 320px) {
+
 	#help-form-image-text {
 		font-size: 120%;
 	}
@@ -432,5 +443,4 @@ input[type="text-area"] {
 .final-logo-image {
 	height: 150px;
 	width: auto;
-
 }
