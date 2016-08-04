@@ -1,28 +1,41 @@
 <div class="container-fluid">
-
 <div id="page-layout"></div>
 </div>
 <script id="homepage-template" type="text/template">
-    <div class="col-md-12">
-    <div class="row">
+      <div class="img-container">
       <img class="img-responsive" id="homepage-pic" src="./images/homepage-image.jpg" />
+
       <span id="homepage-image-text">Get 1:1 live help from coders across the globe</span>
       <div id="help-button-container">
-        <button id="help-button">Get help now</button>
+        <button id="help-button" class="btn btn-secondary">Get help now</button>
       </div>
+      </div>
+    <div class="container-fluid" id="homepage-bottom">
+    <div class="row">
+    <div class="col-md-12" id="homepage-breaker">
+      <p id="code-coach-text">People currently fishing for help</p>
     </div>
-    </div>
+  </div>
 
-    <div id="homepage-panel2">
-      <h2>Want to be a Code Coach?</h2>
-      <h3>Accept any of the live requests below to start helping someone learning to code...</h3>
-      <div id="join-rooms"></div>
-    </div>
+    <div class="row homepage-requests">
+      <div id="join-rooms-full"></div>
+    <div id="join-rooms-empty"></div>
 
-    <div id="homepage-panel3">
-      <img id='logo-footer' src='/images/logoV5.png' />
+    <div class="row homepage-weeds">
+      <div class="col-xs-4 col-md-4">
+        <img src='./images/seaweed.png'></a>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <img src='./images/seaweed.png'></a>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <img src='./images/seaweed.png'></a>
+      </div>
+          </div>
     </div>
+  </div>
 
+  </div>
   </div>
 </script>
 
