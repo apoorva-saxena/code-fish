@@ -13,7 +13,7 @@ describe('User visits signup page', function() {
   describe('Should see the signup page', function() {
     it('Should see sign up', function(done) {
       browser.visit('/users/new', function() {
-        expect(browser.html()).to.contain('Password Confirmation');
+        expect(browser.html()).to.contain('Sign Up');
         done();
       });
     });

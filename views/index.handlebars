@@ -1,54 +1,36 @@
 <div class="container-fluid">
-<div id="page-layout"></div>
+  <div id="page-layout"></div>
 </div>
+
 <script id="homepage-template" type="text/template">
-      <div class="img-container">
-      <img class="img-responsive" id="homepage-pic" src="./images/homepage-image.jpg" />
-
-      <span id="homepage-image-text">Get 1:1 live help from coders across the globe</span>
-      <div id="help-button-container">
-        <button id="help-button" class="btn btn-secondary">Cast a line</button>
-      </div>
-      </div>
-    <div class="container-fluid" id="homepage-bottom">
+  <div class="img-container">
+    <img class="img-responsive" id="homepage-pic" src="./images/homepage-image.jpg" />
+    <span id="homepage-image-text">Get 1:1 live help from coders across the globe</span>
+    <div id="help-button-container">
+      <button id="help-button" class="btn btn-secondary">Cast a line</button>
+    </div>
+  </div>
+  
+  <div class="container-fluid" id="homepage-bottom">
     <div class="row">
-    <div class="col-md-12" id="homepage-breaker">
-      <p id="code-coach-text">People currently fishing for help</p>
+      <div class="col-md-12" id="homepage-breaker">
+        <p id="code-coach-text">People currently fishing for help</p>
     </div>
   </div>
 
-    <div class="row homepage-requests">
-      <div id="join-rooms-full"></div>
+  <div class="row homepage-requests">
+    <div id="join-rooms-full"></div>
     <div id="join-rooms-empty"></div>
-
-    <div class="row homepage-weeds">
-      <div class="col-xs-4 col-md-4">
-        <img src='./images/seaweed.png'></a>
-      </div>
-      <div class="col-xs-4 col-md-4">
-        <img src='./images/seaweed.png'></a>
-      </div>
-      <div class="col-xs-4 col-md-4">
-        <img src='./images/seaweed.png'></a>
-      </div>
-          </div>
-    </div>
-  </div>
-
-  </div>
   </div>
 </script>
 
 <script id="new-help-request-template" type="text/template">
   <div class="col-md-12">
-  <div class="row">
-    <div id="help-form-container">
-
-      <img class="img-responsive" id="help-form-pic" src="./images/computer.jpg" />
-
-      <span id="help-form-image-text">I would like help with...</span>
-
-      <div id="request-form-wrapper">
+    <div class="row">
+      <div id="help-form-container">
+        <img class="img-responsive" id="help-form-pic" src="./images/computer.jpg" />
+        <span id="help-form-image-text">I would like help with...</span>
+        <div id="request-form-wrapper">
         <form id="help-request-form" action="">
           <input id="request-description" type="text-area" name="description" placeholder="e.g. Promises in Javascript" />
           <div>
@@ -63,29 +45,24 @@
             <button>Fish for help</button>
           </div>
         </form>
+        </div>
       </div>
     </div>
-    </div>
-
-    </div>
+  </div>
 </script>
 
 <script id="loading-template" type="text/template">
-
   <div class="col-md-12">
-  <div class="row">
-
-  <div id="loading-container">
-
-    <div id="loading-image-text">
-      Waiting for someone to respond to your request...</div>
+    <div class="row">
+      <div id="loading-container">
+        <div id="loading-image-text">
+          Waiting for someone to respond to your request...</div>
+        </div>
+        <div id="loading-image-container">
+          <img id="loading-image" src="./images/waiting.png" />
+        </div>
+      </div>
     </div>
-
-    <div id="loading-image-container">
-      <img id="loading-image" src="./images/waiting.png" />
-    </div>
-  </div>
-  </div>
   </div>
 </script>
 
