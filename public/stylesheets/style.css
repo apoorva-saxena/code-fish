@@ -175,3 +175,31 @@ button:hover {
     padding: 40px;
   }
 }
+
+
+/*LOADING-TEMPLATE*/
+
+#loading-container {
+	padding-top: 0px;
+	justify-content: center;
+	height: 80%;
+}
+
+#loading-image-text {
+	font-size: 300%;
+	color: black;
+	text-align: center;
+	margin-top: 200px;
+	height: 50%
+}
+
+#loading-image-container {
+	text-align: center;
+
+}
+
+#loading-image {
+	margin-top: 200px;
+	width: 50%;
+	height: auto;
+}
