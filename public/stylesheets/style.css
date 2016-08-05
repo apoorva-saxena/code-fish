@@ -7,7 +7,7 @@
 
 body {
 	padding-top: 30px;
-	background-color: 
+	background-color:
 
 }
 
@@ -270,7 +270,9 @@ button:hover {
     	margin: 20px;
     }
     .img-responsive {
-      padding: 50px;
+      width: 100%;
+    	opacity: 0.9;
+    	background-size: contain;
     }
 
 }
@@ -308,7 +310,9 @@ button:hover {
   }
 
   .img-responsive {
-    padding: 40px;
+    width: 100%;
+  	opacity: 0.9;
+  	background-size: contain;
   }
 }
 
@@ -441,7 +445,7 @@ input[type="text-area"] {
 }
 
 .CodeMirror, .CodeMirror-scroll {
-	
+
 }
 
 /*END-CHAT-TEMPLATE*/
@@ -521,7 +525,7 @@ html, body .container-fluid {
 
 .form-wrapper
 input[type="text"],
-input[type="email"], 
+input[type="email"],
 input[type="password"] {
   border: 1px solid #b9b9b9;
   border-radius: 8px;
