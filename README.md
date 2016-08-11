@@ -1,8 +1,10 @@
-# The Global Code Network
+# CodeFish
+
+https://code-fish.herokuapp.com/
 
 [![Build Status](https://travis-ci.org/riyapabari/GlobalCodeNetwork.svg?branch=9-chat-room)](https://travis-ci.org/riyapabari/GlobalCodeNetwork)
 
-Final Project at Makers Academy.
+Final Project at Makers Academy. CodeFish is a web app designed to enable anyone learning to code to get 1:1 live help from coders across the globe. In short, it's pretty much a live version of Stack Overflow.
 
 ## Team
 
@@ -11,6 +13,23 @@ Final Project at Makers Academy.
 - Toby Muir-Little
 - Carlos Hernandez
 - Toby Wilkins
+
+## Set Up
+
+```
+$ brew install mongodb
+$ clone this repo locally
+$ npm install
+$ mongod in another tab
+$ npm start
+$ open http://localhost:3000
+```
+
+## Screenshots
+
+![Main screen](http://i.imgur.com/lsCu67Y.png)
+![Main screen](http://i.imgur.com/EJScA18.png)
+![Main screen](http://i.imgur.com/gko5u2g.png)
 
 ## User Stories
 
