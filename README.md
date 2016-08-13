@@ -2,7 +2,6 @@
 
 https://code-fish.herokuapp.com/
 
-[![Build Status](https://travis-ci.org/riyapabari/GlobalCodeNetwork.svg?branch=9-chat-room)](https://travis-ci.org/riyapabari/GlobalCodeNetwork)
 
 Final Project at Makers Academy. CodeFish is a web app designed to enable anyone learning to code to get 1:1 live help from coders across the globe. In short, it's pretty much a live version of Stack Overflow.
 
